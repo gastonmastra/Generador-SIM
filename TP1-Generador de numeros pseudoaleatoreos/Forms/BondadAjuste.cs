@@ -17,6 +17,8 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         double C;
         int N;
         int cantIntervalos = 0;
+        List<double> listaNrosAleat;
+        List<double> listaIntervalos;
 
 
         public BondadAjuste()
@@ -35,8 +37,23 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             }
             N = Convert.ToInt32(txtN.Text);
 
-            List<double> listaNrosAleat = generarNrosAleatorios(N);
+            listaNrosAleat = generarNrosAleatorios(N);
             setearTablaFrecuencias(listaNrosAleat);
+            llenarTabla();
+            generarHistograma();
+        }
+
+        private void llenarTabla()
+        {
+            int[] contadoresFo = new int[listaIntervalos.Count];
+            for (int i = 0; i < listaNrosAleat.Count; i++)
+            {
+                if (listaNrosAleat[])
+            }
+        }
+
+        private void generarHistograma()
+        {
 
         }
 
@@ -69,8 +86,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
 
         private void setearTablaFrecuencias(List<double> listaAleatorios)
         {
-            List<double> listaIntervalos = generarIntervalos();
-
+            listaIntervalos = generarIntervalos();
         }
 
         private List<double> generarIntervalos()
