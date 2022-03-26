@@ -44,10 +44,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.nextX = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iRnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSiguiente = new System.Windows.Forms.Button();
-            this.txtG = new System.Windows.Forms.MaskedTextBox();
-            this.txtK = new System.Windows.Forms.MaskedTextBox();
-            this.txtC = new System.Windows.Forms.MaskedTextBox();
-            this.txtX0 = new System.Windows.Forms.MaskedTextBox();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.txtG = new System.Windows.Forms.TextBox();
+            this.txtC = new System.Windows.Forms.TextBox();
+            this.txtK = new System.Windows.Forms.TextBox();
+            this.txtX0 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).BeginInit();
             this.SuspendLayout();
             // 
@@ -190,51 +191,54 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.btnSiguiente.UseVisualStyleBackColor = true;
             this.btnSiguiente.Click += new System.EventHandler(this.calcularSiguiente);
             // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(330, 403);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(71, 23);
+            this.btnLimpiar.TabIndex = 20;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
             // txtG
             // 
             this.txtG.Location = new System.Drawing.Point(177, 6);
-            this.txtG.Mask = "9999999999";
             this.txtG.Name = "txtG";
             this.txtG.Size = new System.Drawing.Size(56, 20);
-            this.txtG.TabIndex = 16;
-            this.txtG.ValidatingType = typeof(int);
-            // 
-            // txtK
-            // 
-            this.txtK.Location = new System.Drawing.Point(301, 6);
-            this.txtK.Mask = "9999999999";
-            this.txtK.Name = "txtK";
-            this.txtK.Size = new System.Drawing.Size(56, 20);
-            this.txtK.TabIndex = 17;
-            this.txtK.ValidatingType = typeof(int);
+            this.txtG.TabIndex = 21;
             // 
             // txtC
             // 
             this.txtC.Location = new System.Drawing.Point(177, 32);
-            this.txtC.Mask = "9999999999";
             this.txtC.Name = "txtC";
             this.txtC.Size = new System.Drawing.Size(56, 20);
-            this.txtC.TabIndex = 18;
-            this.txtC.ValidatingType = typeof(int);
+            this.txtC.TabIndex = 22;
+            // 
+            // txtK
+            // 
+            this.txtK.Location = new System.Drawing.Point(301, 6);
+            this.txtK.Name = "txtK";
+            this.txtK.Size = new System.Drawing.Size(56, 20);
+            this.txtK.TabIndex = 23;
             // 
             // txtX0
             // 
             this.txtX0.Location = new System.Drawing.Point(301, 32);
-            this.txtX0.Mask = "9999999999";
             this.txtX0.Name = "txtX0";
             this.txtX0.Size = new System.Drawing.Size(56, 20);
-            this.txtX0.TabIndex = 19;
-            this.txtX0.ValidatingType = typeof(int);
+            this.txtX0.TabIndex = 24;
             // 
             // Generador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(422, 413);
+            this.ClientSize = new System.Drawing.Size(422, 438);
             this.Controls.Add(this.txtX0);
-            this.Controls.Add(this.txtC);
             this.Controls.Add(this.txtK);
+            this.Controls.Add(this.txtC);
             this.Controls.Add(this.txtG);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnSiguiente);
             this.Controls.Add(this.dgvTabla);
             this.Controls.Add(this.btnGenerar);
@@ -247,6 +251,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbMetodo);
             this.Name = "Generador";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).EndInit();
@@ -272,10 +277,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
         private System.Windows.Forms.DataGridViewTextBoxColumn nextX;
         private System.Windows.Forms.DataGridViewTextBoxColumn iRnd;
         private System.Windows.Forms.Button btnSiguiente;
-        private System.Windows.Forms.MaskedTextBox txtG;
-        private System.Windows.Forms.MaskedTextBox txtK;
-        private System.Windows.Forms.MaskedTextBox txtC;
-        private System.Windows.Forms.MaskedTextBox txtX0;
+        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.TextBox txtG;
+        private System.Windows.Forms.TextBox txtC;
+        private System.Windows.Forms.TextBox txtK;
+        private System.Windows.Forms.TextBox txtX0;
     }
 }
 

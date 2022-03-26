@@ -59,7 +59,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             // btnGenerador
             // 
             this.btnGenerador.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerador.Location = new System.Drawing.Point(150, 153);
+            this.btnGenerador.Location = new System.Drawing.Point(150, 148);
             this.btnGenerador.Name = "btnGenerador";
             this.btnGenerador.Size = new System.Drawing.Size(233, 87);
             this.btnGenerador.TabIndex = 2;
@@ -76,6 +76,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblHome);
             this.Name = "Home";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Home";
             this.ResumeLayout(false);
             this.PerformLayout();

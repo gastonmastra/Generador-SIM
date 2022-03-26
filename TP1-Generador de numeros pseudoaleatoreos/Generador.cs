@@ -31,18 +31,34 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
 
         private void generarNumeros(object sender, EventArgs e)
         {
-            dgvTabla.Rows.Clear();
-            k = Convert.ToInt32(txtK.Text);
-            g = Convert.ToInt32(txtG.Text);
-            c = Convert.ToInt32(txtC.Text);
-            int x0 = Convert.ToInt32(txtX0.Text);
-
-            xi = x0;
-            for (i = 0; i <= 19; i++)
+            if (cmbMetodo.SelectedIndex == -1)
             {
-                xi = calcularFila(i, k, g, xi, c);
+                MessageBox.Show("Seleccione alguno de los métodos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);    
             }
-            btnSiguiente.Enabled = true;
+            else
+            {
+                if (txtX0.Text == "" | txtC.Text == "" | txtG.Text == "" | txtK.Text == "")
+                {
+                    MessageBox.Show("Asegurese de haber ingresado todas las variables", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                }
+                else
+                {
+                    dgvTabla.Rows.Clear();
+                    k = Convert.ToInt32(txtK.Text);
+                    g = Convert.ToInt32(txtG.Text);
+                    c = Convert.ToInt32(txtC.Text);
+                    int x0 = Convert.ToInt32(txtX0.Text);
+
+                    xi = x0;
+                    for (i = 0; i <= 19; i++)
+                    {
+                        xi = calcularFila(i, k, g, xi, c);
+                    }
+                    btnSiguiente.Enabled = true;
+                }
+            }
+
         }
 
         private double calcularFila(int i, int k, int g, double xi, int c)
@@ -86,6 +102,14 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
         {
             xi = calcularFila(i, k, g, xi, c);
             i = i + 1;
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtC.Text = "";
+            txtG.Text = "";
+            txtX0.Text = "";
+            txtK.Text = "";    
         }
     }
 }

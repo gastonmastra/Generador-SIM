@@ -23,7 +23,18 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
 
         private void realizarPrueba(object sender, EventArgs e)
         {
+            if (cmbK.ToString() == "" || txtN.Text.ToString() == "")
+            {
+                MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             N = Convert.ToInt32(txtN.Text);
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            cmbK.SelectedIndex = -1;
+            txtN.Text = "";
         }
     }
 }
