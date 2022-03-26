@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TP1_Generador_de_numeros_pseudoaleatoreos.Controllers;
 
 namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
 {
     public partial class BondadAjuste : Form
     {
+        ControllerBondadAjuste controlador;
+
         double Fe;
         double Fo;
         double C;
@@ -21,6 +24,13 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         List<double> listaIntervalos;
 
 
+        //Para generador
+        int A;
+        int M;
+        int c;
+        int X0;
+
+
         public BondadAjuste()
         {
             InitializeComponent();
@@ -28,28 +38,88 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
 
         private void realizarPrueba(object sender, EventArgs e)
         {
-            dgvNros.Rows.Clear();
-            dgvBondad.Rows.Clear();
-            if (cmbK.SelectedItem == null|| txtN.Text.ToString() == "")
+            if (cmbMetodo.SelectedItem == null)
             {
-                MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Por favor, seleccione un método para la prueba de bondad de ajuste.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            if (Convert.ToInt32(txtN.Text.ToString()) < 30)
-            {
-                MessageBox.Show("El tamaño de la serie debe ser mayor a 30", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-            N = Convert.ToInt32(txtN.Text);
 
-            listaNrosAleat = generarNrosAleatorios(N);
+            if (cmbMetodo.SelectedItem.ToString() == "Propio del lenguaje")
+            {
+                if (cmbK.SelectedItem == null || txtN.Text.ToString() == "")
+                {
+                    MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                if (Convert.ToInt32(txtN.Text.ToString()) < 30)
+                {
+                    MessageBox.Show("El tamaño de la serie debe ser mayor a 30", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                N = Convert.ToInt32(txtN.Text);
+
+                listaNrosAleat = controlador.realizarPrueba(A, M, c, X0, N, cantIntervalos);
+
+            }
+            else
+            {
+                if (cmbK.SelectedItem == null || txtN.Text.ToString() == "")
+                {
+                    MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                if (Convert.ToInt32(txtN.Text.ToString()) < 30)
+                {
+                    MessageBox.Show("El tamaño de la serie debe ser mayor a 30", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                N = Convert.ToInt32(txtN.Text);
+                if (txtC.Text.ToString() == "" || txtG.Text.ToString() == "" || txtX0.Text.ToString() == "" || txtK.Text.ToString() == "")
+                {
+                    MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                c = Convert.ToInt32(txtC.Text);
+                X0 = Convert.ToInt32(txtX0.Text);
+
+                double xi = X0;
+                for (int i = 0; i <= N; i++)
+                {
+                    xi = calcularFila(xi, i);
+                }
+            }
+
+
+
             calcularIntervalos();
             int[] frecuencias_observadas = calcularFo();
             int[] frecuencias_esperadas = calcularFe();
-            double[] estadisticos = calcularEstadisticoMuestreo(frecuencias_esperadas,frecuencias_observadas);
+            double[] estadisticos = calcularEstadisticoMuestreo(frecuencias_esperadas, frecuencias_observadas);
             double[] estadisticos_acum = estadisticos_acumulados(estadisticos);
-            llenarTablaFrecuencias(listaIntervalos,frecuencias_observadas,frecuencias_esperadas,estadisticos,estadisticos_acum);
+            llenarTablaFrecuencias(listaIntervalos, frecuencias_observadas, frecuencias_esperadas, estadisticos, estadisticos_acum);
             generarHistograma(frecuencias_observadas, frecuencias_esperadas);
+
+        }
+
+        public void cargarListaNrosAleatorios(List<double> lista)
+        {
+            dgvNros.Rows.Clear();
+            dgvBondad.Rows.Clear();
+            for(int i = 0; i < listaNrosAleat.Count; i++)
+            {
+
+            }
+        }
+
+        private double calcularFila(double xi, int i)
+        {
+            double col2 = A * xi + c;
+            double nextX = col2 % M;
+            xi = nextX;
+            double RNDi = Math.Truncate((nextX / M) * 10000) / 10000;
+            dgvNros.Rows.Add(i + 1, RNDi);
+            listaNrosAleat.Add(RNDi);
+            return xi;
         }
 
         private void generarHistograma(int[] frecuencias_observadas,int[] frecuencias_esperadas)
@@ -162,20 +232,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             limpiarCampos();
         }
 
-        private List<double> generarNrosAleatorios(int cant)
-        {
-            List<double> listaAleatorios = new List<double>();
-            Random rm = new Random();
-            for (int i = 0; i < cant; i++)
-            {
-                double nro = Math.Truncate(rm.NextDouble()*10000)/10000;
-                listaAleatorios.Add(nro);
-                dgvNros.Rows.Add(i + 1,nro.ToString());
-            }
-            listaAleatorios.Sort();
-            return listaAleatorios;
-        }
-
         private void calcularIntervalos()
         {
             listaIntervalos = generarIntervalos();
@@ -200,6 +256,36 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         private void cmbK_SelectionChangeCommitted(object sender, EventArgs e)
         {
             cantIntervalos = Convert.ToInt32(cmbK.SelectedItem.ToString());
+        }
+
+        private void calcularM(object sender, EventArgs e)
+        {
+            M = (int)Math.Pow(2, Convert.ToInt32(txtG.Text));
+            txtM.Text = "m: " + M.ToString();
+        }
+
+        private void calcularA(object sender, EventArgs e)
+        {
+            A = 1 + 4 * Convert.ToInt32(txtK.Text);
+            txtA.Text = "a: " + A.ToString();
+        }
+
+        private void validarMetodo(object sender, EventArgs e)
+        {
+
+            if (cmbMetodo.SelectedItem.ToString() == "Mixto (Congruencial lineal)")
+            {
+                gbGenerador.Visible = true;
+            }
+            else
+            {
+                gbGenerador.Visible = false;
+            }
+        }
+
+        private void BondadAjuste_Load(object sender, EventArgs e)
+        {
+            controlador = new ControllerBondadAjuste(this);
         }
     }
 }

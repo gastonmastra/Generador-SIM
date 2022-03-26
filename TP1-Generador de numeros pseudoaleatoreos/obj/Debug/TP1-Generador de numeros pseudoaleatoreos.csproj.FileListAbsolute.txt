@@ -21,3 +21,15 @@ C:\Users\ignac\TPS-SIM\TP1\Generador-SIM\TP1-Generador de numeros pseudoaleatore
 C:\Users\ignac\TPS-SIM\TP1\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1-Generador de numeros pseudoaleatoreos.csproj.CoreCompileInputs.cache
 C:\Users\ignac\TPS-SIM\TP1\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1-Generador de numeros pseudoaleatoreos.exe
 C:\Users\ignac\TPS-SIM\TP1\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1-Generador de numeros pseudoaleatoreos.pdb
+C:\Users\gasti\Desktop\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1-Generador de numeros pseudoaleatoreos.csproj.AssemblyReference.cache
+C:\Users\gasti\Desktop\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1_Generador_de_numeros_pseudoaleatoreos.Forms.BondadAjuste.resources
+C:\Users\gasti\Desktop\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1_Generador_de_numeros_pseudoaleatoreos.Generador.resources
+C:\Users\gasti\Desktop\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1_Generador_de_numeros_pseudoaleatoreos.Forms.Home.resources
+C:\Users\gasti\Desktop\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1_Generador_de_numeros_pseudoaleatoreos.Properties.Resources.resources
+C:\Users\gasti\Desktop\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1-Generador de numeros pseudoaleatoreos.csproj.GenerateResource.cache
+C:\Users\gasti\Desktop\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1-Generador de numeros pseudoaleatoreos.csproj.CoreCompileInputs.cache
+C:\Users\gasti\Desktop\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1-Generador de numeros pseudoaleatoreos.exe
+C:\Users\gasti\Desktop\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1-Generador de numeros pseudoaleatoreos.pdb
+C:\Users\gasti\Desktop\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\bin\Debug\TP1-Generador de numeros pseudoaleatoreos.exe.config
+C:\Users\gasti\Desktop\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\bin\Debug\TP1-Generador de numeros pseudoaleatoreos.exe
+C:\Users\gasti\Desktop\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\bin\Debug\TP1-Generador de numeros pseudoaleatoreos.pdb
