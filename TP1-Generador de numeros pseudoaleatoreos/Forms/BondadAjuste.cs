@@ -16,6 +16,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         double Fo;
         double C;
         int N;
+        int cantIntervalos = 0;
+
+
         public BondadAjuste()
         {
             InitializeComponent();
@@ -23,7 +26,72 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
 
         private void realizarPrueba(object sender, EventArgs e)
         {
+            dgvNros.Rows.Clear();
+            dgvBondad.Rows.Clear();
+            if (cmbK.SelectedItem == null|| txtN.Text.ToString() == "")
+            {
+                MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             N = Convert.ToInt32(txtN.Text);
+
+            List<double> listaNrosAleat = generarNrosAleatorios(N);
+            setearTablaFrecuencias(listaNrosAleat);
+
+        }
+
+        private void limpiarCampos()
+        {
+            dgvNros.Rows.Clear();
+            dgvBondad.Rows.Clear();
+            cmbK.SelectedItem = null;
+            txtN.Text = "";
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            limpiarCampos();
+        }
+
+        private List<double> generarNrosAleatorios(int cant)
+        {
+            List<double> listaAleatorios = new List<double>();
+            Random rm = new Random();
+            for (int i = 0; i < cant; i++)
+            {
+                double nro = Math.Truncate(rm.NextDouble()*10000)/10000;
+                listaAleatorios.Add(nro);
+                dgvNros.Rows.Add(i + 1,nro.ToString());
+            }
+            listaAleatorios.Sort();
+            return listaAleatorios;
+        }
+
+        private void setearTablaFrecuencias(List<double> listaAleatorios)
+        {
+            List<double> listaIntervalos = generarIntervalos(listaAleatorios);
+
+        }
+
+        private List<double> generarIntervalos(List<double> listaAleatorios)
+        {
+            List<double> listaIntervalo = new List<double>();
+            
+            double resta = (listaAleatorios[listaAleatorios.Count-1] - listaAleatorios[0]);
+            double intervalo = Math.Truncate(( resta / cantIntervalos) * 10000) / 10000;
+            double acum = Convert.ToDouble("0,0000");
+            listaIntervalo.Add(listaAleatorios[0]);
+            for (int i = 0; i < cantIntervalos; i++)
+            {
+                listaIntervalo.Add(acum);
+                acum += intervalo;
+            }
+            return listaIntervalo;
+        }
+
+        private void cmbK_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            cantIntervalos = Convert.ToInt32(cmbK.SelectedItem.ToString());
         }
     }
 }

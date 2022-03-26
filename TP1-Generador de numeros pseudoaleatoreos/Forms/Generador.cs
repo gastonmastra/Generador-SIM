@@ -31,6 +31,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
 
         private void generarNumeros(object sender, EventArgs e)
         {
+            if (cmbMetodo.SelectedItem == null || txtC.Text.ToString() == "" || txtG.Text.ToString() == "" || txtX0.Text.ToString() == "" || txtK.Text.ToString() == "")
+            {
+                MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);            
+                return;
+            }
             dgvTabla.Rows.Clear();
             k = Convert.ToInt32(txtK.Text);
             g = Convert.ToInt32(txtG.Text);

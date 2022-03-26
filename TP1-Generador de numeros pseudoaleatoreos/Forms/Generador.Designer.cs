@@ -44,10 +44,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.nextX = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iRnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSiguiente = new System.Windows.Forms.Button();
-            this.txtG = new System.Windows.Forms.MaskedTextBox();
-            this.txtK = new System.Windows.Forms.MaskedTextBox();
-            this.txtC = new System.Windows.Forms.MaskedTextBox();
-            this.txtX0 = new System.Windows.Forms.MaskedTextBox();
+            this.txtG = new System.Windows.Forms.TextBox();
+            this.txtC = new System.Windows.Forms.TextBox();
+            this.txtK = new System.Windows.Forms.TextBox();
+            this.txtX0 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).BeginInit();
             this.SuspendLayout();
             // 
@@ -192,48 +192,40 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             // 
             // txtG
             // 
-            this.txtG.Location = new System.Drawing.Point(177, 6);
-            this.txtG.Mask = "9999999999";
+            this.txtG.Location = new System.Drawing.Point(183, 6);
             this.txtG.Name = "txtG";
-            this.txtG.Size = new System.Drawing.Size(56, 20);
+            this.txtG.Size = new System.Drawing.Size(49, 20);
             this.txtG.TabIndex = 16;
-            this.txtG.ValidatingType = typeof(int);
+            // 
+            // txtC
+            // 
+            this.txtC.Location = new System.Drawing.Point(183, 32);
+            this.txtC.Name = "txtC";
+            this.txtC.Size = new System.Drawing.Size(49, 20);
+            this.txtC.TabIndex = 16;
             // 
             // txtK
             // 
             this.txtK.Location = new System.Drawing.Point(301, 6);
-            this.txtK.Mask = "9999999999";
             this.txtK.Name = "txtK";
-            this.txtK.Size = new System.Drawing.Size(56, 20);
-            this.txtK.TabIndex = 17;
-            this.txtK.ValidatingType = typeof(int);
-            // 
-            // txtC
-            // 
-            this.txtC.Location = new System.Drawing.Point(177, 32);
-            this.txtC.Mask = "9999999999";
-            this.txtC.Name = "txtC";
-            this.txtC.Size = new System.Drawing.Size(56, 20);
-            this.txtC.TabIndex = 18;
-            this.txtC.ValidatingType = typeof(int);
+            this.txtK.Size = new System.Drawing.Size(49, 20);
+            this.txtK.TabIndex = 16;
             // 
             // txtX0
             // 
             this.txtX0.Location = new System.Drawing.Point(301, 32);
-            this.txtX0.Mask = "9999999999";
             this.txtX0.Name = "txtX0";
-            this.txtX0.Size = new System.Drawing.Size(56, 20);
-            this.txtX0.TabIndex = 19;
-            this.txtX0.ValidatingType = typeof(int);
+            this.txtX0.Size = new System.Drawing.Size(49, 20);
+            this.txtX0.TabIndex = 16;
             // 
             // Generador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(422, 413);
+            this.ClientSize = new System.Drawing.Size(418, 413);
             this.Controls.Add(this.txtX0);
-            this.Controls.Add(this.txtC);
             this.Controls.Add(this.txtK);
+            this.Controls.Add(this.txtC);
             this.Controls.Add(this.txtG);
             this.Controls.Add(this.btnSiguiente);
             this.Controls.Add(this.dgvTabla);
@@ -272,10 +264,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
         private System.Windows.Forms.DataGridViewTextBoxColumn nextX;
         private System.Windows.Forms.DataGridViewTextBoxColumn iRnd;
         private System.Windows.Forms.Button btnSiguiente;
-        private System.Windows.Forms.MaskedTextBox txtG;
-        private System.Windows.Forms.MaskedTextBox txtK;
-        private System.Windows.Forms.MaskedTextBox txtC;
-        private System.Windows.Forms.MaskedTextBox txtX0;
+        private System.Windows.Forms.TextBox txtG;
+        private System.Windows.Forms.TextBox txtC;
+        private System.Windows.Forms.TextBox txtK;
+        private System.Windows.Forms.TextBox txtX0;
     }
 }
 
