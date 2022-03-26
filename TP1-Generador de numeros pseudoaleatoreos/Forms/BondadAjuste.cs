@@ -69,22 +69,21 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
 
         private void setearTablaFrecuencias(List<double> listaAleatorios)
         {
-            List<double> listaIntervalos = generarIntervalos(listaAleatorios);
+            List<double> listaIntervalos = generarIntervalos();
 
         }
 
-        private List<double> generarIntervalos(List<double> listaAleatorios)
+        private List<double> generarIntervalos()
         {
             List<double> listaIntervalo = new List<double>();
-            
-            double resta = (listaAleatorios[listaAleatorios.Count-1] - listaAleatorios[0]);
-            double intervalo = Math.Truncate(( resta / cantIntervalos) * 10000) / 10000;
-            double acum = Convert.ToDouble("0,0000");
-            listaIntervalo.Add(listaAleatorios[0]);
+
+            double intervalo = (1 / (double)cantIntervalos);
+            double acum = 0;
             for (int i = 0; i < cantIntervalos; i++)
             {
-                listaIntervalo.Add(acum);
+                listaIntervalo.Add(acum);                
                 acum += intervalo;
+                acum = (Math.Truncate(acum * 10000) / 10000);
             }
             return listaIntervalo;
         }
