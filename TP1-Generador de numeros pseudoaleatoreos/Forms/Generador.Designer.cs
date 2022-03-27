@@ -239,7 +239,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbMetodo);
             this.Name = "Generador";
-            this.Text = "Form1";
+            this.Text = "Generador";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).EndInit();
             this.ResumeLayout(false);

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TP1_Generador_de_numeros_pseudoaleatoreos.Controllers;
 
 namespace TP1_Generador_de_numeros_pseudoaleatoreos
 {
@@ -18,6 +19,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
         int k;
         int c;
         int i;
+        int a = 0;
+        int m;
+
+        ControllerGeneradores controlador;
+
+        double ultxi;
 
         public Generador()
         {
@@ -26,7 +33,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            controlador = new ControllerGeneradores(this);
         }
 
         private void generarNumeros(object sender, EventArgs e)
@@ -43,16 +50,8 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             int x0 = Convert.ToInt32(txtX0.Text);
 
             xi = x0;
-            for (i = 0; i <= 19; i++)
-            {
-                xi = calcularFila(i, k, g, xi, c);
-            }
-            btnSiguiente.Enabled = true;
-        }
 
-        private double calcularFila(int i, int k, int g, double xi, int c)
-        {
-            int a = 0;
+            
             if (cmbMetodo.SelectedItem.ToString() == "Multiplicativo")
             {
                 a = 3 + 8 * k;
@@ -61,18 +60,42 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             {
                 a = 1 + 4 * k;
             }
-            int m = (int)Math.Pow(2, g);
+            m = (int)Math.Pow(2, g);
 
-            txtA.Text = "a: " +  a.ToString();
+            txtA.Text = "a: " + a.ToString();
             txtM.Text = "m: " + m.ToString();
 
-            double col2 = a * xi + c;
-            double nextX = col2 % m;
-            xi = nextX;
-            double RNDi = Math.Truncate((nextX / m) * 10000) / 10000;
-            dgvTabla.Rows.Add(i+1, col2, nextX, RNDi);
-            return xi;
+            ultxi = controlador.generarSerie(k, g, xi, c, a, m);
+            //for (i = 0; i <= 19; i++)
+            //{
+            //    xi = calcularFila(i, k, g, xi, c);
+            //}
+            btnSiguiente.Enabled = true;
         }
+
+        //private double calcularFila(int i, int k, int g, double xi, int c)
+        //{
+        //    int a = 0;
+        //    if (cmbMetodo.SelectedItem.ToString() == "Multiplicativo")
+        //    {
+        //        a = 3 + 8 * k;
+        //    }
+        //    else
+        //    {
+        //        a = 1 + 4 * k;
+        //    }
+        //    int m = (int)Math.Pow(2, g);
+
+        //    txtA.Text = "a: " +  a.ToString();
+        //    txtM.Text = "m: " + m.ToString();
+
+        //    double col2 = a * xi + c;
+        //    double nextX = col2 % m;
+        //    xi = nextX;
+        //    double RNDi = Math.Truncate((nextX / m) * 10000) / 10000;
+        //    dgvTabla.Rows.Add(i+1, col2, nextX, RNDi);
+        //    return xi;
+        //}
 
         private void validarSeleccion(object sender, EventArgs e)
         {
@@ -89,8 +112,14 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
 
         private void calcularSiguiente(object sender, EventArgs e)
         {
-            xi = calcularFila(i, k, g, xi, c);
-            i = i + 1;
+            ultxi = controlador.calcularSiguiente(k, c, a, m, ultxi);
+            //xi = calcularFila(i, k, g, xi, c);
+            //i = i + 1;
+        }
+
+        public void mostrarFila(int il, double col2, double nextXi, double RNDi)
+        {
+            dgvTabla.Rows.Add(il, col2, nextXi, RNDi);
         }
     }
 }
