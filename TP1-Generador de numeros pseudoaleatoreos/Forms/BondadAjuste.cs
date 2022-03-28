@@ -82,6 +82,8 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
 
         public void generarHistograma(int[] frecuencias_observadas,int[] frecuencias_esperadas, List<double> listaIntervalos)
         {
+            histograma.Series["Fe"].Points.Clear();
+            histograma.Series["Fo"].Points.Clear();
             //this.histograma.Series.Add("Frecuencia Observada").ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Column;
             //this.histograma.Series.Add("Frecuencia Esperada").ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.BoxPlot;
 
@@ -103,6 +105,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
 
         public void llenarTablaFrecuencias(List<double> intervalos, int[] contadoresFo, int[] Fe, double[] c, double[] c_acumulado)
         {
+            dgvBondad.Rows.Clear();
             for (int i = 1; i < intervalos.Count; i++)
             {
                 dgvBondad.Rows.Add(
@@ -171,9 +174,13 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             controlador = new ControllerBondadAjuste(this);
         }
 
-        public void MostrarNumero(int i, double nro)
+        public void MostrarNumeros(List<double> nros)
         {
-            dgvNros.Rows.Add(i, nro.ToString());
+            dgvNros.Rows.Clear();
+            for (int i = 0; i < nros.Count; i++)
+            {
+            dgvNros.Rows.Add(i + 1, nros[i].ToString());
+            }
         }
     }
 }

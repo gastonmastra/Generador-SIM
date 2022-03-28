@@ -40,9 +40,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 double nextX = (a * x0 + c) % m;
                 x0 = nextX;
                 double RNDi = Math.Truncate((nextX / m) * 10000) / 10000;
-                interfaz.MostrarNumero(i + 1, RNDi);
                 listaNrosAleatorios.Add(RNDi);
             }
+            interfaz.MostrarNumeros(listaNrosAleatorios);
         }
 
         private void generarNrosAleatorios(int cant)
@@ -53,9 +53,8 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             {
                 double nro = Math.Truncate(rm.NextDouble() * 10000) / 10000;
                 listaNrosAleatorios.Add(nro);
-                interfaz.MostrarNumero(i + 1, nro);
             }
-            listaNrosAleatorios.Sort();
+            interfaz.MostrarNumeros(listaNrosAleatorios);
         }
 
         private void realizarCalculos(int cantIntervalos, int N)
