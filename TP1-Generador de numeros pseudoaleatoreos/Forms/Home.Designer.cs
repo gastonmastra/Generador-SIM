@@ -36,10 +36,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             // 
             // lblHome
             // 
-            this.lblHome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblHome.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHome.AutoSize = true;
             this.lblHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHome.Location = new System.Drawing.Point(212, 18);
+            this.lblHome.Location = new System.Drawing.Point(112, 12);
             this.lblHome.Name = "lblHome";
             this.lblHome.Size = new System.Drawing.Size(104, 39);
             this.lblHome.TabIndex = 0;
@@ -47,35 +49,41 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(150, 60);
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button1.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.button1.Location = new System.Drawing.Point(55, 54);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(233, 87);
+            this.button1.Size = new System.Drawing.Size(218, 48);
             this.button1.TabIndex = 1;
             this.button1.Text = "Prueba de bondad de ajuste";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.abrirPruebaBondad);
             // 
             // btnGenerador
             // 
-            this.btnGenerador.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerador.Location = new System.Drawing.Point(150, 153);
+            this.btnGenerador.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnGenerador.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.btnGenerador.Location = new System.Drawing.Point(55, 108);
             this.btnGenerador.Name = "btnGenerador";
-            this.btnGenerador.Size = new System.Drawing.Size(233, 87);
+            this.btnGenerador.Size = new System.Drawing.Size(218, 48);
             this.btnGenerador.TabIndex = 2;
             this.btnGenerador.Text = "Generador de números pseudoaleatorios";
-            this.btnGenerador.UseVisualStyleBackColor = true;
+            this.btnGenerador.UseVisualStyleBackColor = false;
             this.btnGenerador.Click += new System.EventHandler(this.abrirGeneradorNros);
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(567, 367);
+            this.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.ClientSize = new System.Drawing.Size(342, 187);
             this.Controls.Add(this.btnGenerador);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblHome);
+            this.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Home";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Home";
             this.ResumeLayout(false);
             this.PerformLayout();

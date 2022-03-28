@@ -222,6 +222,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightSeaGreen;
             this.ClientSize = new System.Drawing.Size(418, 413);
             this.Controls.Add(this.txtX0);
             this.Controls.Add(this.txtK);
