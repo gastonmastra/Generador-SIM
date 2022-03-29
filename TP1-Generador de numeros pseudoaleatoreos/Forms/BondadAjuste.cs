@@ -22,8 +22,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         int cantIntervalos = 0;
         List<double> listaNrosAleat;
         List<double> listaIntervalos;
-
-
         //Para generador
         int A;
         int M;
@@ -79,7 +77,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             }
 
         }
-
+        
         public void generarHistograma(int[] frecuencias_observadas,int[] frecuencias_esperadas, List<double> listaIntervalos)
         {
             histograma.Series["Fe"].Points.Clear();
@@ -117,7 +115,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                     );
             }
         }
-
+       
         private void limpiarCampos()
         {
             dgvNros.Rows.Clear();
@@ -126,6 +124,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             txtN.Text = "";
             histograma.Series["Fe"].Points.Clear();
             histograma.Series["Fo"].Points.Clear();
+            txtC.Text = "";
+            txtK.Text = "";
+            txtX0.Text = "";
+            txtG.Text = "";
+            txtA.Text = "";
+            txtM.Text = "";
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -182,5 +186,13 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             dgvNros.Rows.Add(i + 1, nros[i].ToString());
             }
         }
+
+
+   
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        
     }
 }

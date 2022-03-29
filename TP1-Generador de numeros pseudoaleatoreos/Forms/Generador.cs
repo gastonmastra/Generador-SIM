@@ -43,6 +43,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
                 MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);            
                 return;
             }
+
             dgvTabla.Rows.Clear();
             k = Convert.ToInt32(txtK.Text);
             g = Convert.ToInt32(txtG.Text);
@@ -120,6 +121,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
         public void mostrarFila(int il, double col2, double nextXi, double RNDi)
         {
             dgvTabla.Rows.Add(il, col2, nextXi, RNDi);
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

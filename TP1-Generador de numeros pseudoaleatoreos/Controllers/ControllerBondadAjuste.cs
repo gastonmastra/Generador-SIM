@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TP1_Generador_de_numeros_pseudoaleatoreos.Forms;
 
 namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
@@ -12,6 +13,13 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         BondadAjuste interfaz;
         List<double> listaNrosAleatorios;
         List<double> listaIntervalos;
+        double[] arrayChiCuadrado = new double[] {3.84, 5.99, 7.81,
+                                                  9.49, 11.1, 12.6,
+                                                  14.1, 15.5, 16.9,
+                                                  18.3, 19.7, 21.0,
+                                                  22.4, 23.7, 25.0,
+                                                  26.3, 27.6, 28.9,
+                                                  30.1, 31.4 };
         public ControllerBondadAjuste(BondadAjuste interfaz)
         {
             this.interfaz = interfaz;
@@ -66,7 +74,20 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             double[] estadisticos_acum = estadisticos_acumulados(estadisticos);
             interfaz.llenarTablaFrecuencias(listaIntervalos, frecuencias_observadas, frecuencias_esperadas, estadisticos, estadisticos_acum);
             interfaz.generarHistograma(frecuencias_observadas, frecuencias_esperadas, listaIntervalos);
+            int gradosLibertad = cantIntervalos - 1;
 
+            if (estadisticos_acum[cantIntervalos] < arrayChiCuadrado[gradosLibertad])
+            {
+                MessageBox.Show(" Valor calculado: " + estadisticos_acum[cantIntervalos] + " < " + " Valor tabuleado: " + arrayChiCuadrado[gradosLibertad] + "\n " +
+                    "\t La hipotesis no se rechaza");
+
+                                 
+            }
+            else
+            {
+                MessageBox.Show(" Valor calculado: " + estadisticos_acum[cantIntervalos] + " > " + " Valor tabuleado: " + arrayChiCuadrado[gradosLibertad] + "\n " +
+                    "\t La hipotesis se rechaza");
+            }
             //listaNrosAleatorios = this.generarNrosAleatorios(N);
 
             //interfaz.cargarListaNrosAleatorios(listaNrosAleatorios);
@@ -146,6 +167,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             }
             return c_acum;
         }
+
     }
     class GeneradorLenguaje
     {
