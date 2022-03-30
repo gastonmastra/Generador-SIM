@@ -194,5 +194,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.Close();
         }
         
+        public void mostrarResultadoHipotesis(string mensaje, Color color)
+        {
+            lblHipotesis.Text = mensaje;
+            lblHipotesis.Visible = true;
+            lblHipotesis.ForeColor = color;
+        }
     }
 }

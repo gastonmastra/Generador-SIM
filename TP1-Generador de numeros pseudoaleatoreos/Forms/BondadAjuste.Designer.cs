@@ -29,10 +29,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.txtN = new System.Windows.Forms.TextBox();
             this.cmbK = new System.Windows.Forms.ComboBox();
             this.dgvBondad = new System.Windows.Forms.DataGridView();
@@ -65,6 +65,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.cmbMetodo = new System.Windows.Forms.ComboBox();
             this.gbGenerador = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.lblHipotesis = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBondad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNros)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.histograma)).BeginInit();
@@ -106,9 +107,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.fe,
             this.estadisticoMuestra,
             this.cAcum});
-            this.dgvBondad.Location = new System.Drawing.Point(12, 130);
+            this.dgvBondad.Location = new System.Drawing.Point(12, 132);
             this.dgvBondad.Name = "dgvBondad";
-            this.dgvBondad.Size = new System.Drawing.Size(576, 259);
+            this.dgvBondad.Size = new System.Drawing.Size(576, 253);
             this.dgvBondad.TabIndex = 4;
             // 
             // intervalo
@@ -203,7 +204,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 433);
+            this.label1.Location = new System.Drawing.Point(9, 400);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(139, 13);
             this.label1.TabIndex = 6;
@@ -214,22 +215,22 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.histograma.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.histograma.ChartAreas.Add(chartArea1);
-            legend1.Name = "Hola";
-            this.histograma.Legends.Add(legend1);
-            this.histograma.Location = new System.Drawing.Point(12, 449);
+            chartArea9.Name = "ChartArea1";
+            this.histograma.ChartAreas.Add(chartArea9);
+            legend9.Name = "Hola";
+            this.histograma.Legends.Add(legend9);
+            this.histograma.Location = new System.Drawing.Point(12, 416);
             this.histograma.Name = "histograma";
             this.histograma.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Hola";
-            series1.Name = "Fo";
-            series1.XValueMember = "Hola";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Hola";
-            series2.Name = "Fe";
-            this.histograma.Series.Add(series1);
-            this.histograma.Series.Add(series2);
+            series17.ChartArea = "ChartArea1";
+            series17.Legend = "Hola";
+            series17.Name = "Fo";
+            series17.XValueMember = "Hola";
+            series18.ChartArea = "ChartArea1";
+            series18.Legend = "Hola";
+            series18.Name = "Fe";
+            this.histograma.Series.Add(series17);
+            this.histograma.Series.Add(series18);
             this.histograma.Size = new System.Drawing.Size(576, 212);
             this.histograma.TabIndex = 7;
             this.histograma.Text = "chart1";
@@ -387,7 +388,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             // btnVolver
             // 
             this.btnVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnVolver.Location = new System.Drawing.Point(11, 663);
+            this.btnVolver.Location = new System.Drawing.Point(11, 630);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(63, 23);
             this.btnVolver.TabIndex = 19;
@@ -395,12 +396,24 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // lblHipotesis
+            // 
+            this.lblHipotesis.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblHipotesis.Location = new System.Drawing.Point(316, 635);
+            this.lblHipotesis.Name = "lblHipotesis";
+            this.lblHipotesis.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblHipotesis.Size = new System.Drawing.Size(272, 43);
+            this.lblHipotesis.TabIndex = 20;
+            this.lblHipotesis.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblHipotesis.Visible = false;
+            // 
             // BondadAjuste
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSeaGreen;
             this.ClientSize = new System.Drawing.Size(801, 690);
+            this.Controls.Add(this.lblHipotesis);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.gbGenerador);
             this.Controls.Add(this.label9);
@@ -466,5 +479,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn nroAleatorio;
         private System.Windows.Forms.GroupBox gbGenerador;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.Label lblHipotesis;
     }
 }

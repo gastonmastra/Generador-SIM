@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,15 +79,19 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
 
             if (estadisticos_acum[cantIntervalos] < arrayChiCuadrado[gradosLibertad])
             {
-                MessageBox.Show(" Valor calculado: " + estadisticos_acum[cantIntervalos] + " < " + " Valor tabuleado: " + arrayChiCuadrado[gradosLibertad] + "\n " +
-                    "\t La hipotesis no se rechaza");
-
-                                 
+                string mensaje = " Valor calculado: " + estadisticos_acum[cantIntervalos] + " < " + " Valor tabuleado: " + arrayChiCuadrado[gradosLibertad] + "\n " +
+                    "\t La hipotesis no se rechaza";
+                string hex = "#0096c7";
+                Color color = System.Drawing.ColorTranslator.FromHtml(hex);
+                //Color color = Color.BlueViolet;
+                interfaz.mostrarResultadoHipotesis(mensaje, color);
             }
             else
             {
-                MessageBox.Show(" Valor calculado: " + estadisticos_acum[cantIntervalos] + " > " + " Valor tabuleado: " + arrayChiCuadrado[gradosLibertad] + "\n " +
-                    "\t La hipotesis se rechaza");
+                string mensaje = " Valor calculado: " + estadisticos_acum[cantIntervalos] + " > " + " Valor tabuleado: " + arrayChiCuadrado[gradosLibertad] + "\n " +
+                    "\t La hipotesis se rechaza";
+                Color color = Color.DarkRed;
+                interfaz.mostrarResultadoHipotesis(mensaje, color);
             }
             //listaNrosAleatorios = this.generarNrosAleatorios(N);
 
