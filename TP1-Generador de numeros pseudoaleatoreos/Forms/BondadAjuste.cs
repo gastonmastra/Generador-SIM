@@ -82,22 +82,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         {
             histograma.Series["Fe"].Points.Clear();
             histograma.Series["Fo"].Points.Clear();
-            //this.histograma.Series.Add("Frecuencia Observada").ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Column;
-            //this.histograma.Series.Add("Frecuencia Esperada").ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.BoxPlot;
-
-            //foreach (double[] intervalo in this.matriz_resultados)
-            //{
-            //    this.histograma.Series["Frecuencia Observada"].Points.Add(intervalo[2]).AxisLabel = intervalo[0].ToString() + "-" + intervalo[1].ToString();
-            //    this.histograma.Series["Frecuencia Esperada"].Points.Add(intervalo[3]);
-            //}
-
             for (int i = 0; i < listaIntervalos.Count-1; i++)
             //Recorre los intervalos y va agregandolos al grafico junto con las frecuencias
             {
-                //double marcaClase = (listaIntervalos[i + 1] - listaIntervalos[i]) / 2;
                 histograma.Series["Fe"].Points.AddXY(listaIntervalos[i] + " - "+ listaIntervalos[i + 1], frecuencias_esperadas[i]); //Agrega la fe al grafico             
                 histograma.Series["Fo"].Points.AddXY(listaIntervalos[i] + " - " + listaIntervalos[i + 1], frecuencias_observadas[i]);//Agrega la fo al grafico
-
+                histograma.Series["Fe"].AxisLabel = "Frecuencia";
             }
         }
 

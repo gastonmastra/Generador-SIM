@@ -145,6 +145,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTabla.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvTabla.BackgroundColor = System.Drawing.Color.White;
             this.dgvTabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTabla.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iteracion,
@@ -238,7 +239,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(412, 406);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.txtX0);
@@ -259,7 +260,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.MinimumSize = new System.Drawing.Size(428, 445);
             this.Name = "Generador";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Generador";
+            this.Text = "Generador de números pseudo-aleatorios";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).EndInit();
             this.ResumeLayout(false);
