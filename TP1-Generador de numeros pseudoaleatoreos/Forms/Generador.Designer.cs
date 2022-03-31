@@ -157,6 +157,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.dgvTabla.ReadOnly = true;
             this.dgvTabla.Size = new System.Drawing.Size(368, 279);
             this.dgvTabla.TabIndex = 14;
+            this.dgvTabla.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTabla_CellContentClick);
             // 
             // iteracion
             // 

@@ -24,7 +24,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         List<double> listaIntervalos;
         //Para generador
         int A;
-        int M;
+        long M;
         int c;
         double X0;
 
@@ -34,6 +34,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Método que delega la responsabilidad de realizar la prueba en función
+        /// de lo que se haya seleccionado dentro del Combo Box.
+        /// </summary>
         private void realizarPrueba(object sender, EventArgs e)
         {
             //controla que todos los campos esten completos tanto para el mixto como el generado por el lenguaje
@@ -65,12 +69,15 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
 
             N = Convert.ToInt32(txtN.Text);
 
+            //Si se selecciona el Método Mixto se va por esta rama
             if (cmbMetodo.SelectedItem.ToString() == "Mixto (Congruencial lineal)")
             {
                 c = Convert.ToInt32(txtC.Text);
                 X0 = Convert.ToInt32(txtX0.Text);
                 controlador.realizarPruebaMixto(A, M, c, X0, N, cantIntervalos);
             }
+            //Sino se realiza la Prueba de Bondad utilizando como Generador al propio
+            //lenguaje.
             else
             {
                 controlador.realizarPruebaLenguaje(N, cantIntervalos);
@@ -90,7 +97,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 histograma.Series["Fe"].AxisLabel = "Frecuencia";
             }
         }
-
+        /// <summary>
+        /// Método que se encarga de llenar la tabla de frecuencias en base a los 
+        /// datos obtenidos, a partir de la frecuencia observada y esperada obtenidas, y
+        /// las formulas de estadistico de muestra y estadistico acumulado.
+        /// </summary>
         public void llenarTablaFrecuencias(List<double> intervalos, int[] contadoresFo, int[] Fe, double[] c, double[] c_acumulado)
         {
             dgvBondad.Rows.Clear();
@@ -105,7 +116,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                     );
             }
         }
-       
+        /// <summary>
+        /// Método que se encarga de limpiar los campos del formulario.
+        /// </summary>
         private void limpiarCampos()
         {
             dgvNros.Rows.Clear();
@@ -120,6 +133,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             txtG.Text = "";
             txtA.Text = "";
             txtM.Text = "";
+            lblHipotesis.Text = "";
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -131,16 +145,20 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         {
             cantIntervalos = Convert.ToInt32(cmbK.SelectedItem.ToString());
         }
-
+        /// <summary>
+        /// Método que se encarga del calculo de M.
+        /// </summary>
         private void calcularM(object sender, EventArgs e)
         {
             if (txtG.Text != "")
             {
-                M = (int)Math.Pow(2, Convert.ToInt32(txtG.Text));
+                M = (long)Math.Pow(2, Convert.ToInt64(txtG.Text));
                 txtM.Text = "m: " + M.ToString();
             }  
         }
-
+        /// <summary>
+        /// Método que se encarga del calculo de A.
+        /// </summary>
         private void calcularA(object sender, EventArgs e)
         {
             if (txtK.Text != "")
@@ -167,7 +185,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         {
             controlador = new ControllerBondadAjuste(this);
         }
-
+        /// <summary>
+        /// Método que toma la lista de nros pseudo-aleatorios generados por parámetro
+        /// y los agrega uno por uno a un elemento del tipo Data Grid View para que 
+        /// puedan ser visualizados.
+        /// </summary>
         public void MostrarNumeros(List<double> nros)
         {
             dgvNros.Rows.Clear();
@@ -178,7 +200,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         }
 
 
-   
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Close();
