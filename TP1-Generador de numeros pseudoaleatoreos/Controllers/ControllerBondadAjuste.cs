@@ -27,6 +27,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             
         }
 
+        /// <summary>
+        /// Método que delega la responsabilidad de generar los numeros pseudo-aleatorios
+        /// enviandole como parámetro los valores de a, m, c, x0 y N al método 
+        /// generarAleatoriosMixto, y luego realizando los calculos necesarios para establecer
+        /// los intervalos.
+        /// </summary>
         public void realizarPruebaMixto(int a, int m, int c, double x0,int N, int cantIntervalos)
         {
             generarAlatoriosMixto(a, m, c, x0, N);
@@ -34,6 +40,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             realizarCalculos(cantIntervalos, N);
         }
 
+        /// <summary>
+        /// Método que delega la responsabilidad de generar los numeros pseudo-aleatorios
+        /// a partir del propio lenguaje de programación, y luego realizar los calculos necesarios para establecer
+        /// los intervalos.
+        /// </summary>
         public void realizarPruebaLenguaje(int N, int cantIntervalos)
         {
             generarNrosAleatorios(N);
@@ -41,6 +52,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             realizarCalculos(cantIntervalos, N);
         }
 
+        /// <summary>
+        /// Método que se encarga de generar los numeros pseudo-aleatorios a partir de la
+        /// utilización del método Mixto (Congruencial Lineal).
+        /// </summary>
         private void generarAlatoriosMixto(int a, int m,int c, double x0, int N)
         {
             listaNrosAleatorios = new List<double>();
@@ -54,6 +69,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             interfaz.MostrarNumeros(listaNrosAleatorios);
         }
 
+        /// <summary>
+        /// Método que se encarga de generar los numeros pseudo-aleatorios utilizando el propio
+        /// lenguaje de programación.
+        /// </summary>
         private void generarNrosAleatorios(int cant)
         {
             listaNrosAleatorios = new List<double>();
@@ -66,6 +85,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             interfaz.MostrarNumeros(listaNrosAleatorios);
         }
 
+        /// <summary>
+        /// Método encargado de realizar el calculo de cada uno de los parámetros a mostrar
+        /// en la Tabla y el Histograma de frecuencias, definiendo también si la hipotesis
+        /// se rechaza o no se rechaza a partir de los valores obtenidos de la distribución.
+        /// </summary>
         private void realizarCalculos(int cantIntervalos, int N)
         {
             generarIntervalos(cantIntervalos);
@@ -98,6 +122,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             //interfaz.cargarListaNrosAleatorios(listaNrosAleatorios);
         }
 
+        /// <summary>
+        /// Método que permite definir los intervalos de nuestra distribución, a partir
+        /// de la cantidad de intervalos seleccionada.
+        /// </summary>
         private void generarIntervalos(int cantIntervalos)
         {
             listaIntervalos = new List<double>();
@@ -112,6 +140,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             listaIntervalos.Add(1);
         }
 
+        /// <summary>
+        /// Método que calcula la Frecuencia Observada recorriendo cada uno de los intervalos 
+        /// y estableciendo una condición para verificar a que intervalo pertenece cada uno
+        /// de los nros pseudo-aleatorios, y devuelve como resultado un array de int de contadores
+        /// en donde cada posición corresponde con cada uno de los intervalos.
+        /// </summary>
         private int[] calcularFo()
         {
             int[] contadoresFo = new int[listaIntervalos.Count];
@@ -139,6 +173,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             //}
         }
 
+        /// <summary>
+        /// Método que calcula la Frecuencia Esperada de la distribución y devuelve como
+        /// resultado un array de int.
+        /// </summary>
         private int[] calcularFe(int N, int cantIntervalos)
         {
             int[] fe = new int[listaIntervalos.Count];
@@ -149,7 +187,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             }
             return fe;
         }
-
+        /// <summary>
+        /// Método que toma como parámetros el arrray de Frecuencias Observadas y 
+        /// el de Frecuencias Esperadas y a partir de los mismos calcula el valor
+        /// del estadístico de muestra para cada uno de los intervalos, y devuelve
+        /// estos mismos valores contenidos en un array de doubles.
+        /// </summary>
         private double[] calcularEstadisticoMuestreo(int[] frecuencias_esperadas, int[] frecuencias_observadas)
         {
             double[] c = new double[listaIntervalos.Count];
@@ -159,7 +202,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             }
             return c;
         }
-
+        /// <summary>
+        /// Método que calcula el estadistico acumulado a partir de los estadísticos
+        /// obtenidos en cada uno de los intervalos, y retorna los valores obtenidos
+        /// para cada intervalo contenidos en un array de doubles.
+        /// </summary>
         private double[] estadisticos_acumulados(double[] estadisticos)
         {
             double[] c_acum = new double[listaIntervalos.Count];

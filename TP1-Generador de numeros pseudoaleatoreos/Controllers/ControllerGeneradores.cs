@@ -18,6 +18,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             this.interfaz = interfaz;
         }
 
+        /// <summary>
+        /// Método que toma por parámetros los datos necesarios ingresados
+        /// por el usuario para generar los numeros pseudo-aleatorios y genera
+        /// una por una todas las filas, devolviendo por parametro el ultimo
+        /// valor de xi calculado.
+        /// </summary>
         public double generarSerie(int k, int g, double xi, int c, int a, int m)
         {
             for (i = 0; i <= 19; i++)
@@ -27,6 +33,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             return xi;
         }
 
+        /// <summary>
+        /// Método que calcula las filas, devolviendo como parámetro el valor del
+        /// siguiente xi calculado.
+        /// </summary>
         private double calcularFila(int i, int k, double xi, int c, int a, int m)
         {
             double col2 = a * xi + c;
@@ -37,6 +47,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             return xi;
         }
 
+        /// <summary>
+        /// Método que se encarga de realizar una llamada a la función que lleva
+        /// a cabo el calculo de una fila, con el fin de calcular una y solamente
+        /// una fila.
+        /// </summary>
         public double calcularSiguiente(int k, int c, int a, int m, double ultxi)
         {
             ultxi = calcularFila(i, k, ultxi, c, a, m);
