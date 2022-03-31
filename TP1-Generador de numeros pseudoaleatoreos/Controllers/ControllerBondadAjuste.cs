@@ -66,7 +66,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 double RNDi = Math.Truncate((nextX / m) * 10000) / 10000;
                 listaNrosAleatorios.Add(RNDi);
             }
-            interfaz.MostrarNumeros(listaNrosAleatorios);
+            //interfaz.MostrarNumeros(listaNrosAleatorios);
         }
 
         /// <summary>
@@ -137,6 +137,18 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 acum = (Math.Truncate(acum * 10000) / 10000);
             }
             listaIntervalos.Add(1);
+        }
+
+        public void mostrarSerie()
+        {
+            if (this.listaNrosAleatorios.Count != 0)
+            {
+                interfaz.MostrarNumeros(listaNrosAleatorios);
+            }
+            else
+            {
+                MessageBox.Show("No hay números generados.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         /// <summary>

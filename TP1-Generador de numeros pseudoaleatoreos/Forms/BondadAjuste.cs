@@ -40,6 +40,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         /// </summary>
         private void realizarPrueba(object sender, EventArgs e)
         {
+            label4.Visible = false;
+            dgvNros.Visible = false;
+            dgvNros.Rows.Clear();
             //controla que todos los campos esten completos tanto para el mixto como el generado por el lenguaje
             if (cmbMetodo.SelectedItem == null)
             {
@@ -210,6 +213,13 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             lblHipotesis.Text = mensaje;
             lblHipotesis.Visible = true;
             lblHipotesis.ForeColor = color;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            controlador.mostrarSerie();
+            dgvNros.Visible = true;
+            label4.Visible = true;
         }
     }
 }
