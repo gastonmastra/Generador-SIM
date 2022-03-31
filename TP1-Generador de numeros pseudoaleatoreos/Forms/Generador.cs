@@ -36,6 +36,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             controlador = new ControllerGeneradores(this);
         }
 
+
+        /// <summary>
+        /// Método que se encarga de la delegación de la generación de los nros pseudo-aleatorios a partir
+        /// de las constantes k, g, xi, c, a y m. 
+        /// </summary>
         private void generarNumeros(object sender, EventArgs e)
         {
             if (cmbMetodo.SelectedItem == null || txtC.Text.ToString() == "" || txtG.Text.ToString() == "" || txtX0.Text.ToString() == "" || txtK.Text.ToString() == "")
@@ -98,6 +103,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
         //    return xi;
         //}
 
+        /// <summary>
+        /// Método que permite establecer en cero el valor de c, constante que no se utiliza
+        /// en el método Multiplicativo.
+        /// </summary>
         private void validarSeleccion(object sender, EventArgs e)
         {
             if (cmbMetodo.SelectedItem.ToString() == "Multiplicativo")
@@ -111,6 +120,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             }
         }
 
+        /// <summary>
+        /// Método que permite calcular de a un valor por vez, a partir de haber generado
+        /// los primeros 20 nros de la serie. 
+        /// </summary>
         private void calcularSiguiente(object sender, EventArgs e)
         {
             ultxi = controlador.calcularSiguiente(k, c, a, m, ultxi);
@@ -118,11 +131,19 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             //i = i + 1;
         }
 
+        /// <summary>
+        /// Método que se encarga de llenar el objeto Data Grid View con la información 
+        /// referida a la serie generada de manera pseudo-aleatoria.
+        /// </summary>
         public void mostrarFila(int il, double col2, double nextXi, double RNDi)
         {
             dgvTabla.Rows.Add(il, col2, nextXi, RNDi);
         }
 
+        /// <summary>
+        /// Método que se activa a partir del evento click del btnVolver_Click, el cual permite
+        /// volver al formulario anterior.
+        /// </summary>
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Close();
