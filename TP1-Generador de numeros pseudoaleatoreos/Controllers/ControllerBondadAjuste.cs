@@ -36,8 +36,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         /// </summary>
         public void realizarPruebaLenguaje(int N, int cantIntervalos)
         {
-            generarNrosAleatorios(N);
-            generarNrosConDistribucion();
+            generarNrosConDistribucion(N);
             realizarTestChiCuadrado(cantIntervalos, N);
             realizarTestKs(cantIntervalos, N);
         }
@@ -79,10 +78,25 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             //interfaz.cargarListaNrosAleatorios(listaNrosAleatorios);
         }
 
-        private void generarNrosConDistribucion()
+        private void generarNrosConDistribucion(int N)
         {
             switch (interfaz.getDistribucionSeleccionada())
             {
+                case "EJEMPLO":
+                    //primero generamos los numeros aleatorios (en este caso multiplicamos por 12 imaginando convolucion)
+                    generarNrosAleatorios(N * 12);
+                    List<long> nrosNormales;
+                    foreach (long nro in this.listaNrosAleatorios)
+                    {
+                        //calcular por cada nro aleatorio
+                        //nrosNormales.Add(formula para generar un nro normal);
+                        IControllerDistribucion controllerNormal = new Normal();
+                        long probabilidad = controllerNormal.calcularProbabilidad(1, 3, 5);
+                        long fe = probabilidad * N;
+                    }
+
+                    //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
+                    break;
                 case "Distribucion Normal (Box-Muller)":
                     //crear un nuevo controlador de tipo Normal Box-Muller
                     //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
@@ -103,7 +117,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                     //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
 
                     break;
-                case "Distribucion Poisson":
+                case "Distribucion Poisson": //No se le hace el K-S
                     //calcular
                     //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
                     break;
