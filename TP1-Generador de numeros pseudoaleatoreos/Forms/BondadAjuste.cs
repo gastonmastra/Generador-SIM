@@ -35,7 +35,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         }
 
         /// <summary>
-        /// Método que delega la responsabilidad de realizar la prueba en función
+        /// Método que delega la responsabilidad de realizar la prueba en función.
         /// de lo que se haya seleccionado dentro del Combo Box.
         /// </summary>
         private void realizarPrueba(object sender, EventArgs e)
