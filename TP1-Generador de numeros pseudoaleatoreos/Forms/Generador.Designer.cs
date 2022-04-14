@@ -44,10 +44,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.nextX = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iRnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSiguiente = new System.Windows.Forms.Button();
-            this.txtG = new System.Windows.Forms.MaskedTextBox();
-            this.txtK = new System.Windows.Forms.MaskedTextBox();
-            this.txtC = new System.Windows.Forms.MaskedTextBox();
-            this.txtX0 = new System.Windows.Forms.MaskedTextBox();
+            this.txtG = new System.Windows.Forms.TextBox();
+            this.txtC = new System.Windows.Forms.TextBox();
+            this.txtK = new System.Windows.Forms.TextBox();
+            this.txtX0 = new System.Windows.Forms.TextBox();
+            this.btnVolver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,10 +68,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 13);
-            this.label1.TabIndex = 1;
+            this.label1.Size = new System.Drawing.Size(133, 13);
+            this.label1.TabIndex = 9;
             this.label1.Text = "Seleccionar el método";
             // 
             // label2
@@ -79,7 +81,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.label2.Location = new System.Drawing.Point(159, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(18, 13);
-            this.label2.TabIndex = 3;
+            this.label2.TabIndex = 8;
             this.label2.Text = "G:";
             // 
             // label3
@@ -88,7 +90,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.label3.Location = new System.Drawing.Point(159, 35);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(17, 13);
-            this.label3.TabIndex = 5;
+            this.label3.TabIndex = 10;
             this.label3.Text = "C:";
             // 
             // label4
@@ -132,25 +134,30 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.btnGenerar.Location = new System.Drawing.Point(301, 58);
             this.btnGenerar.Name = "btnGenerar";
             this.btnGenerar.Size = new System.Drawing.Size(100, 23);
-            this.btnGenerar.TabIndex = 13;
+            this.btnGenerar.TabIndex = 5;
             this.btnGenerar.Text = "Generar números";
             this.btnGenerar.UseVisualStyleBackColor = true;
             this.btnGenerar.Click += new System.EventHandler(this.generarNumeros);
             // 
             // dgvTabla
             // 
+            this.dgvTabla.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTabla.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvTabla.BackgroundColor = System.Drawing.Color.White;
             this.dgvTabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTabla.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iteracion,
             this.iCol2,
             this.nextX,
             this.iRnd});
-            this.dgvTabla.Location = new System.Drawing.Point(15, 87);
+            this.dgvTabla.Location = new System.Drawing.Point(20, 87);
             this.dgvTabla.Name = "dgvTabla";
             this.dgvTabla.ReadOnly = true;
-            this.dgvTabla.Size = new System.Drawing.Size(386, 311);
+            this.dgvTabla.Size = new System.Drawing.Size(368, 279);
             this.dgvTabla.TabIndex = 14;
+            this.dgvTabla.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTabla_CellContentClick);
             // 
             // iteracion
             // 
@@ -185,55 +192,60 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.btnSiguiente.Location = new System.Drawing.Point(15, 58);
             this.btnSiguiente.Name = "btnSiguiente";
             this.btnSiguiente.Size = new System.Drawing.Size(100, 23);
-            this.btnSiguiente.TabIndex = 15;
+            this.btnSiguiente.TabIndex = 6;
             this.btnSiguiente.Text = "Siguiente número";
             this.btnSiguiente.UseVisualStyleBackColor = true;
             this.btnSiguiente.Click += new System.EventHandler(this.calcularSiguiente);
             // 
             // txtG
             // 
-            this.txtG.Location = new System.Drawing.Point(177, 6);
-            this.txtG.Mask = "9999999999";
+            this.txtG.Location = new System.Drawing.Point(183, 6);
             this.txtG.Name = "txtG";
-            this.txtG.Size = new System.Drawing.Size(56, 20);
-            this.txtG.TabIndex = 16;
-            this.txtG.ValidatingType = typeof(int);
+            this.txtG.Size = new System.Drawing.Size(49, 20);
+            this.txtG.TabIndex = 1;
+            // 
+            // txtC
+            // 
+            this.txtC.Location = new System.Drawing.Point(183, 32);
+            this.txtC.Name = "txtC";
+            this.txtC.Size = new System.Drawing.Size(49, 20);
+            this.txtC.TabIndex = 2;
             // 
             // txtK
             // 
             this.txtK.Location = new System.Drawing.Point(301, 6);
-            this.txtK.Mask = "9999999999";
             this.txtK.Name = "txtK";
-            this.txtK.Size = new System.Drawing.Size(56, 20);
-            this.txtK.TabIndex = 17;
-            this.txtK.ValidatingType = typeof(int);
-            // 
-            // txtC
-            // 
-            this.txtC.Location = new System.Drawing.Point(177, 32);
-            this.txtC.Mask = "9999999999";
-            this.txtC.Name = "txtC";
-            this.txtC.Size = new System.Drawing.Size(56, 20);
-            this.txtC.TabIndex = 18;
-            this.txtC.ValidatingType = typeof(int);
+            this.txtK.Size = new System.Drawing.Size(49, 20);
+            this.txtK.TabIndex = 3;
             // 
             // txtX0
             // 
             this.txtX0.Location = new System.Drawing.Point(301, 32);
-            this.txtX0.Mask = "9999999999";
             this.txtX0.Name = "txtX0";
-            this.txtX0.Size = new System.Drawing.Size(56, 20);
-            this.txtX0.TabIndex = 19;
-            this.txtX0.ValidatingType = typeof(int);
+            this.txtX0.Size = new System.Drawing.Size(49, 20);
+            this.txtX0.TabIndex = 4;
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnVolver.Location = new System.Drawing.Point(20, 368);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(63, 23);
+            this.btnVolver.TabIndex = 15;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // Generador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(422, 413);
+            this.BackColor = System.Drawing.Color.LightGray;
+            this.ClientSize = new System.Drawing.Size(412, 406);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.txtX0);
-            this.Controls.Add(this.txtC);
             this.Controls.Add(this.txtK);
+            this.Controls.Add(this.txtC);
             this.Controls.Add(this.txtG);
             this.Controls.Add(this.btnSiguiente);
             this.Controls.Add(this.dgvTabla);
@@ -246,8 +258,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbMetodo);
+            this.MinimumSize = new System.Drawing.Size(428, 445);
             this.Name = "Generador";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Generador de números pseudo-aleatorios";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).EndInit();
             this.ResumeLayout(false);
@@ -272,10 +286,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
         private System.Windows.Forms.DataGridViewTextBoxColumn nextX;
         private System.Windows.Forms.DataGridViewTextBoxColumn iRnd;
         private System.Windows.Forms.Button btnSiguiente;
-        private System.Windows.Forms.MaskedTextBox txtG;
-        private System.Windows.Forms.MaskedTextBox txtK;
-        private System.Windows.Forms.MaskedTextBox txtC;
-        private System.Windows.Forms.MaskedTextBox txtX0;
+        private System.Windows.Forms.TextBox txtG;
+        private System.Windows.Forms.TextBox txtC;
+        private System.Windows.Forms.TextBox txtK;
+        private System.Windows.Forms.TextBox txtX0;
+        private System.Windows.Forms.Button btnVolver;
     }
 }
 
