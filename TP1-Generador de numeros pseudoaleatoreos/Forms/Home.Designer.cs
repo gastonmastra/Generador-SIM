@@ -88,7 +88,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.MinimumSize = new System.Drawing.Size(364, 244);
             this.Name = "Home";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TP1: Generación de Números Aleatorios";
+            this.Text = "TP3: Variables Aleatorias";
             this.ResumeLayout(false);
             this.PerformLayout();
 

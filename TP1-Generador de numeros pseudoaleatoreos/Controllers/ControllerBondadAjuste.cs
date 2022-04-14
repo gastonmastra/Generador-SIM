@@ -14,6 +14,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         BondadAjuste interfaz;
         List<double> listaNrosAleatorios;
         List<double> listaIntervalos;
+        List<double> listaNrosConDistribucion;
         double[] arrayChiCuadrado = new double[] {3.84, 5.99, 7.81,
                                                   9.49, 11.1, 12.6,
                                                   14.1, 15.5, 16.9,
@@ -27,18 +28,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             
         }
 
-        /// <summary>
-        /// Método que delega la responsabilidad de generar los numeros pseudo-aleatorios
-        /// enviandole como parámetro los valores de a, m, c, x0 y N al método 
-        /// generarAleatoriosMixto, y luego realizando los calculos necesarios para establecer
-        /// los intervalos.
-        /// </summary>
-        public void realizarPruebaMixto(int a, long m, int c, double x0,int N, int cantIntervalos)
-        {
-            generarAlatoriosMixto(a, m, c, x0, N);
-
-            realizarCalculos(cantIntervalos, N);
-        }
 
         /// <summary>
         /// Método que delega la responsabilidad de generar los numeros pseudo-aleatorios
@@ -48,41 +37,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         public void realizarPruebaLenguaje(int N, int cantIntervalos)
         {
             generarNrosAleatorios(N);
-
-            realizarCalculos(cantIntervalos, N);
-        }
-
-        /// <summary>
-        /// Método que se encarga de generar los numeros pseudo-aleatorios a partir de la
-        /// utilización del método Mixto (Congruencial Lineal).
-        /// </summary>
-        private void generarAlatoriosMixto(int a, long m,int c, double x0, int N)
-        {
-            listaNrosAleatorios = new List<double>();
-            for (int i = 0; i < N; i++)
-            {
-                double nextX = (a * x0 + c) % m;
-                x0 = nextX;
-                double RNDi = Math.Truncate((nextX / m) * 10000) / 10000;
-                listaNrosAleatorios.Add(RNDi);
-            }
-            //interfaz.MostrarNumeros(listaNrosAleatorios);
-        }
-
-        /// <summary>
-        /// Método que se encarga de generar los numeros pseudo-aleatorios utilizando el propio
-        /// lenguaje de programación.
-        /// </summary>
-        private void generarNrosAleatorios(int cant)
-        {
-            listaNrosAleatorios = new List<double>();
-            Random rm = new Random();
-            for (int i = 0; i < cant; i++)
-            {
-                double nro = Math.Truncate(rm.NextDouble() * 10000) / 10000;
-                listaNrosAleatorios.Add(nro);
-            }
-            interfaz.MostrarNumeros(listaNrosAleatorios);
+            generarNrosConDistribucion();
+            realizarTestChiCuadrado(cantIntervalos, N);
+            realizarTestKs(cantIntervalos, N);
         }
 
         /// <summary>
@@ -90,10 +47,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         /// en la Tabla y el Histograma de frecuencias, definiendo también si la hipotesis
         /// se rechaza o no se rechaza a partir de los valores obtenidos de la distribución.
         /// </summary>
-        private void realizarCalculos(int cantIntervalos, int N)
+        private void realizarTestChiCuadrado(int cantIntervalos, int N)
         {
             generarIntervalos(cantIntervalos);
             int[] frecuencias_observadas = calcularFo();
+
             int[] frecuencias_esperadas = calcularFe(N, cantIntervalos);
             double[] estadisticos = calcularEstadisticoMuestreo(frecuencias_esperadas, frecuencias_observadas);
             double[] estadisticos_acum = estadisticos_acumulados(estadisticos);
@@ -101,9 +59,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             interfaz.generarHistograma(frecuencias_observadas, frecuencias_esperadas, listaIntervalos);
             int gradosLibertad = cantIntervalos - 1;
 
-            if (estadisticos_acum[estadisticos_acum.Length-2] < arrayChiCuadrado[gradosLibertad])
+            if (estadisticos_acum[estadisticos_acum.Length - 2] < arrayChiCuadrado[gradosLibertad])
             {
-                string mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 2] + " < " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad] + " con "+gradosLibertad+" grados de libertad\n" +
+                string mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 2] + " < " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad] + " con " + gradosLibertad + " grados de libertad\n" +
                     "\t La hipotesis no se rechaza. Nivel de significancia 1−∝= 0,95";
                 string hex = "#0096c7";
                 Color color = System.Drawing.ColorTranslator.FromHtml(hex);
@@ -120,6 +78,63 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             //listaNrosAleatorios = this.generarNrosAleatorios(N);
             //interfaz.cargarListaNrosAleatorios(listaNrosAleatorios);
         }
+
+        private void generarNrosConDistribucion()
+        {
+            switch (interfaz.getDistribucionSeleccionada())
+            {
+                case "Distribucion Normal (Box-Muller)":
+                    //crear un nuevo controlador de tipo Normal Box-Muller
+                    //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
+                    break;
+
+                case "Distribucion Normal (Convolucion)":
+                    //calcular
+                    //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
+                    break;
+
+                case "Distribucion Exponencial Neg.":
+                    //calcular
+                    //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
+
+                    break;
+                case "Distribucion Uniforme":
+                    //calcular
+                    //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
+
+                    break;
+                case "Distribucion Poisson":
+                    //calcular
+                    //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void realizarTestKs(int cantIntervalos, int N)
+        {
+
+        }
+
+        /// <summary>
+        /// Método que se encarga de generar los numeros pseudo-aleatorios utilizando el propio
+        /// lenguaje de programación.
+        /// </summary>
+        private void generarNrosAleatorios(int cant)
+        {
+            listaNrosAleatorios = new List<double>();
+            Random rm = new Random();
+            for (int i = 0; i < cant; i++)
+            {
+                double nro = Math.Truncate(rm.NextDouble() * 10000) / 10000;
+                listaNrosAleatorios.Add(nro);
+            }
+            //interfaz.MostrarNumeros(listaNrosAleatorios);
+        }
+
+        
 
         /// <summary>
         /// Método que permite definir los intervalos de nuestra distribución, a partir
@@ -141,7 +156,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
 
         public void mostrarSerie()
         {
-            if (this.listaNrosAleatorios.Count != 0)
+            if (this.listaNrosAleatorios == null)
             {
                 interfaz.MostrarNumeros(listaNrosAleatorios);
             }

@@ -22,16 +22,16 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         int cantIntervalos = 0;
         List<double> listaNrosAleat;
         List<double> listaIntervalos;
-        //Para generador
-        int A;
-        long M;
-        int c;
-        double X0;
-
+        string cmbDistribucionSeleccionada { get; set; }
 
         public BondadAjuste()
         {
             InitializeComponent();
+        }
+
+        public string getDistribucionSeleccionada()
+        {
+            return this.cmbDistribucionSeleccionada;
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             dgvNros.Visible = false;
             dgvNros.Rows.Clear();
             //controla que todos los campos esten completos tanto para el mixto como el generado por el lenguaje
-            if (cmbMetodo.SelectedItem == null)
+            if (cmbDistribucion.SelectedItem == null)
             {
-                MessageBox.Show("Por favor, seleccione un método para la prueba de bondad de ajuste.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Por favor, seleccione una distribucion para la prueba de bondad de ajuste.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             if (cmbK.SelectedItem == null || txtN.Text.ToString() == "")
@@ -54,40 +54,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            if (Convert.ToInt32(txtN.Text.ToString()) < 30)
-            {
-                MessageBox.Show("El tamaño de la serie debe ser mayor a 30", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-            
-            //controla que los campos necesarios para el mixto esten completos
-            if (cmbMetodo.SelectedItem.ToString() == "Mixto (Congruencial lineal)")
-            {
-                if (txtC.Text.ToString() == "" || txtG.Text.ToString() == "" || txtX0.Text.ToString() == "" || txtK.Text.ToString() == "")
-                {
-                    MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-            }
 
+            cmbDistribucionSeleccionada = cmbDistribucion.SelectedItem.ToString();
             N = Convert.ToInt32(txtN.Text);
-
-            //Si se selecciona el Método Mixto se va por esta rama
-            if (cmbMetodo.SelectedItem.ToString() == "Mixto (Congruencial lineal)")
-            {
-                c = Convert.ToInt32(txtC.Text);
-                X0 = Convert.ToInt32(txtX0.Text);
-                controlador.realizarPruebaMixto(A, M, c, X0, N, cantIntervalos);
-            }
-            //Sino se realiza la Prueba de Bondad utilizando como Generador al propio
-            //lenguaje.
-            else
-            {
-                controlador.realizarPruebaLenguaje(N, cantIntervalos);
-            }
-
+            controlador.realizarPruebaLenguaje(N, cantIntervalos);
         }
-        
+
         public void generarHistograma(int[] frecuencias_observadas,int[] frecuencias_esperadas, List<double> listaIntervalos)
         {
             histograma.Series["Fe"].Points.Clear();
@@ -126,17 +98,13 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         {
             dgvNros.Rows.Clear();
             dgvBondad.Rows.Clear();
+            dgvKs.Rows.Clear();
             cmbK.SelectedItem = null;
             txtN.Text = "";
             histograma.Series["Fe"].Points.Clear();
             histograma.Series["Fo"].Points.Clear();
-            txtC.Text = "";
-            txtK.Text = "";
-            txtX0.Text = "";
-            txtG.Text = "";
-            txtA.Text = "";
-            txtM.Text = "";
             lblHipotesis.Text = "";
+            lblHipotesisKs.Text = "";
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -148,41 +116,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         {
             cantIntervalos = Convert.ToInt32(cmbK.SelectedItem.ToString());
         }
-        /// <summary>
-        /// Método que se encarga del calculo de M.
-        /// </summary>
-        private void calcularM(object sender, EventArgs e)
-        {
-            if (txtG.Text != "")
-            {
-                M = (long)Math.Pow(2, Convert.ToInt64(txtG.Text));
-                txtM.Text = "m: " + M.ToString();
-            }  
-        }
-        /// <summary>
-        /// Método que se encarga del calculo de A.
-        /// </summary>
-        private void calcularA(object sender, EventArgs e)
-        {
-            if (txtK.Text != "")
-            {
-                A = 1 + 4 * Convert.ToInt32(txtK.Text);
-                txtA.Text = "a: " + A.ToString();
-            }
-        }
 
-        private void validarMetodo(object sender, EventArgs e)
-        {
-
-            if (cmbMetodo.SelectedItem.ToString() == "Mixto (Congruencial lineal)")
-            {
-                gbGenerador.Visible = true;
-            }
-            else
-            {
-                gbGenerador.Visible = false;
-            }
-        }
 
         private void BondadAjuste_Load(object sender, EventArgs e)
         {
@@ -217,9 +151,47 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if(listaNrosAleat == null)
+            {
+                MessageBox.Show("Primero debe generar una serie", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             controlador.mostrarSerie();
             dgvNros.Visible = true;
             label4.Visible = true;
+        }
+
+        private void validarDistribucion(object sender, EventArgs e)
+        {
+            deshabilitarParametros();
+            switch (cmbDistribucion.SelectedItem.ToString())
+            {
+                case "Distribucion Normal (Box-Muller)":
+                    gbNormal.Visible = true;
+                    break;
+                case "Distribucion Normal (Convolucion)":
+                    gbNormal.Visible = true;
+                    break;
+                case "Distribucion Exponencial Neg.":
+                    gbExponencial.Visible = true;
+                    break;
+                case "Distribucion Uniforme":
+                    gbUniforme.Visible = true;
+                    break;
+                case "Distribucion Poisson":
+                    gbPoisson.Visible = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void deshabilitarParametros()
+        {
+            gbUniforme.Visible = false;
+            gbPoisson.Visible = false;
+            gbNormal.Visible = false;
+            gbExponencial.Visible = false;
         }
     }
 }
