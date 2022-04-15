@@ -17,5 +17,15 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         {
             throw new NotImplementedException();
         }
+
+        public List<double> generarNrosAleatorios(int cantidad)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<double> generarNrosAleatorios(int cantidad, long media)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

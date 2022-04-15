@@ -110,8 +110,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 case "Distribucion Exponencial Neg.":
                     //calcular
                     //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
-                    IControllerDistribucion exponencialNegativa = new ExponencialNegativa();
-                    listaNrosConDistribucion = exponencialNegativa.generarNrosAleatorios(N, )
+                    double lambda = 0;
+                    IControllerDistribucion exponencialNegativa = new ExponencialNegativa(lambda);
+                    listaNrosConDistribucion = exponencialNegativa.generarNrosAleatorios(N);
 
 
                     break;
