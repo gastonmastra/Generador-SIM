@@ -10,6 +10,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
     {
         long calcularProbabilidad(long x, long media, long desvStd);
         long calcularProbabilidad(long x, long media);
+        List<double> generarNrosAleatorios(int cantidad);
+        List<double> generarNrosAleatorios(int cantidad, long media);
+
 
     }
 }

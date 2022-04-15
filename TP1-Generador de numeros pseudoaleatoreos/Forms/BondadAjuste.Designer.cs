@@ -29,10 +29,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.txtN = new System.Windows.Forms.TextBox();
             this.cmbK = new System.Windows.Forms.ComboBox();
             this.dgvBondad = new System.Windows.Forms.DataGridView();
@@ -240,24 +240,24 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.histograma.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.histograma.ChartAreas.Add(chartArea1);
-            legend1.Name = "Frecuencias";
-            legend1.Title = "Frecuencias";
-            this.histograma.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            this.histograma.ChartAreas.Add(chartArea4);
+            legend4.Name = "Frecuencias";
+            legend4.Title = "Frecuencias";
+            this.histograma.Legends.Add(legend4);
             this.histograma.Location = new System.Drawing.Point(17, 96);
             this.histograma.Name = "histograma";
             this.histograma.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
-            series1.ChartArea = "ChartArea1";
-            series1.CustomProperties = "LabelStyle=Bottom";
-            series1.Legend = "Frecuencias";
-            series1.Name = "Fo";
-            series2.ChartArea = "ChartArea1";
-            series2.CustomProperties = "LabelStyle=Bottom";
-            series2.Legend = "Frecuencias";
-            series2.Name = "Fe";
-            this.histograma.Series.Add(series1);
-            this.histograma.Series.Add(series2);
+            series7.ChartArea = "ChartArea1";
+            series7.CustomProperties = "LabelStyle=Bottom";
+            series7.Legend = "Frecuencias";
+            series7.Name = "Fo";
+            series8.ChartArea = "ChartArea1";
+            series8.CustomProperties = "LabelStyle=Bottom";
+            series8.Legend = "Frecuencias";
+            series8.Name = "Fe";
+            this.histograma.Series.Add(series7);
+            this.histograma.Series.Add(series8);
             this.histograma.Size = new System.Drawing.Size(606, 212);
             this.histograma.TabIndex = 7;
             this.histograma.Text = "chart1";
@@ -619,7 +619,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(820, 810);
-            this.Controls.Add(this.gbNormal);
             this.Controls.Add(this.gbExponencial);
             this.Controls.Add(this.gbPoisson);
             this.Controls.Add(this.gbUniforme);
@@ -642,6 +641,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.Controls.Add(this.dgvBondad);
             this.Controls.Add(this.cmbK);
             this.Controls.Add(this.txtN);
+            this.Controls.Add(this.gbNormal);
             this.MinimumSize = new System.Drawing.Size(817, 726);
             this.Name = "BondadAjuste";
             this.RightToLeftLayout = true;
