@@ -32,11 +32,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         public List<double> generarNrosAleatorios(int cantidad)
         {
             List<double> listaNrosAleatorios = new List<double>();
-            Random rm = new Random();
+            Random generador = new Random();
             for (int i = 0; i < cantidad; i++)
             {
-                double nro = Math.Truncate(rm.NextDouble() * 10000) / 10000;
-                double x = -1/this.lambda * Math.Log(1 - nro);
+                double rnd = Math.Truncate(generador.NextDouble() * 10000) / 10000;
+                double x = -1/this.lambda * Math.Log(1 - rnd);
                 listaNrosAleatorios.Add(x);
             }
             return listaNrosAleatorios;
