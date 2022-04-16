@@ -8,22 +8,17 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
 {
     class Normal : IControllerDistribucion
     {
-        public long calcularProbabilidad(long x, long media, long desvStd)
+        public double[] calcularFe(int N, List<double> probabilidades)
         {
             throw new NotImplementedException();
         }
 
-        public long calcularProbabilidad(long x, long media)
+        public List<double> calcularProbabilidades(List<double> listaIntervalos)
         {
             throw new NotImplementedException();
         }
 
         public List<double> generarNrosAleatorios(int cantidad)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<double> generarNrosAleatorios(int cantidad, long media)
         {
             throw new NotImplementedException();
         }

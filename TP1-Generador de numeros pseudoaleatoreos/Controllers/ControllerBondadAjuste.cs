@@ -15,6 +15,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         List<double> listaNrosAleatorios;
         List<double> listaIntervalos;
         List<double> listaNrosConDistribucion;
+        List<double> probabilidades;
+        //m
+        int parametros_empiricos;
+        IControllerDistribucion distribucion;
+
         double[] arrayChiCuadrado = new double[] {3.84, 5.99, 7.81,
                                                   9.49, 11.1, 12.6,
                                                   14.1, 15.5, 16.9,
@@ -36,6 +41,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         /// </summary>
         public void realizarPruebaLenguaje(int N, int cantIntervalos)
         {
+            generarIntervalos(cantIntervalos);
             generarNrosConDistribucion(N);
             realizarTestChiCuadrado(cantIntervalos, N);
             realizarTestKs(cantIntervalos, N);
@@ -48,15 +54,14 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         /// </summary>
         private void realizarTestChiCuadrado(int cantIntervalos, int N)
         {
-            generarIntervalos(cantIntervalos);
             int[] frecuencias_observadas = calcularFo();
 
-            int[] frecuencias_esperadas = calcularFe(N, cantIntervalos);
+            double[] frecuencias_esperadas = distribucion.calcularFe(N, probabilidades);
             double[] estadisticos = calcularEstadisticoMuestreo(frecuencias_esperadas, frecuencias_observadas);
             double[] estadisticos_acum = estadisticos_acumulados(estadisticos);
             interfaz.llenarTablaFrecuencias(listaIntervalos, frecuencias_observadas, frecuencias_esperadas, estadisticos, estadisticos_acum);
             interfaz.generarHistograma(frecuencias_observadas, frecuencias_esperadas, listaIntervalos);
-            int gradosLibertad = cantIntervalos - 1;
+            int gradosLibertad = cantIntervalos - 1 - parametros_empiricos;
 
             if (estadisticos_acum[estadisticos_acum.Length - 2] < arrayChiCuadrado[gradosLibertad])
             {
@@ -90,9 +95,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                     {
                         //calcular por cada nro aleatorio
                         //nrosNormales.Add(formula para generar un nro normal);
-                        IControllerDistribucion controllerNormal = new Normal();
-                        long probabilidad = controllerNormal.calcularProbabilidad(1, 3, 5);
-                        long fe = probabilidad * N;
+                        distribucion = new Normal();
+                        //long probabilidad = distribucion.calcularProbabilidades();
+                        //long fe = probabilidad * N;
                     }
 
                     //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
@@ -110,10 +115,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 case "Distribucion Exponencial Neg.":
                     //calcular
                     //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
-                    double lambda = 0;
-                    IControllerDistribucion exponencialNegativa = new ExponencialNegativa(lambda);
-                    listaNrosConDistribucion = exponencialNegativa.generarNrosAleatorios(N);
-
+                    double lambda = interfaz.getLambdaExponencial();
+                    //verificar si lambda es =! 0 en el metodo verificar pruebas
+                    distribucion = new ExponencialNegativa(lambda);
+                    listaNrosConDistribucion = distribucion.generarNrosAleatorios(N);
+                    probabilidades = distribucion.calcularProbabilidades(listaIntervalos);
+                    parametros_empiricos = 1;
 
                     break;
                 case "Distribucion Uniforme":
@@ -200,12 +207,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 //contadoresFo[i] = contador;
                 if (i == (listaIntervalos.Count - 1))
                 {
-                    contador = listaNrosAleatorios.Count(x => x >= listaIntervalos[i - 1] && x < 1);
+                    contador = listaNrosConDistribucion.Count(x => x >= listaIntervalos[i - 1] && x < 1);
                     contadoresFo[i] = contador;
                 }
                 else
                 {
-                    contador = listaNrosAleatorios.Count(x => x >= listaIntervalos[i] && x < listaIntervalos[i + 1]);
+                    contador = listaNrosConDistribucion.Count(x => x >= listaIntervalos[i] && x < listaIntervalos[i + 1]);
                     contadoresFo[i] = contador;
                 }
             }
@@ -237,10 +244,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         /// del estadístico de muestra para cada uno de los intervalos, y devuelve
         /// estos mismos valores contenidos en un array de doubles.
         /// </summary>
-        private double[] calcularEstadisticoMuestreo(int[] frecuencias_esperadas, int[] frecuencias_observadas)
+        private double[] calcularEstadisticoMuestreo(double[] frecuencias_esperadas, int[] frecuencias_observadas)
         {
             double[] c = new double[listaIntervalos.Count];
-            for (int i = 0; i < listaIntervalos.Count; i++)
+            for (int i = 0; i < listaIntervalos.Count - 1; i++)
             {
                 c[i] = Math.Pow((frecuencias_observadas[i] - frecuencias_esperadas[i]), 2) / frecuencias_esperadas[i];
             }
@@ -264,8 +271,5 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             return c_acum;
         }
 
-    }
-    class GeneradorLenguaje
-    {
     }
 }

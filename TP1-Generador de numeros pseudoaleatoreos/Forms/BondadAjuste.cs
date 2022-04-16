@@ -60,7 +60,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             controlador.realizarPruebaLenguaje(N, cantIntervalos);
         }
 
-        public void generarHistograma(int[] frecuencias_observadas,int[] frecuencias_esperadas, List<double> listaIntervalos)
+        public double getLambdaExponencial()
+        {
+            return Convert.ToDouble(this.txtLambdaExponencial.Text);
+        }
+
+        public void generarHistograma(int[] frecuencias_observadas, double[] frecuencias_esperadas, List<double> listaIntervalos)
         {
             histograma.Series["Fe"].Points.Clear();
             histograma.Series["Fo"].Points.Clear();
@@ -77,7 +82,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         /// datos obtenidos, a partir de la frecuencia observada y esperada obtenidas, y
         /// las formulas de estadistico de muestra y estadistico acumulado.
         /// </summary>
-        public void llenarTablaFrecuencias(List<double> intervalos, int[] contadoresFo, int[] Fe, double[] c, double[] c_acumulado)
+        public void llenarTablaFrecuencias(List<double> intervalos, int[] contadoresFo, double[] Fe, double[] c, double[] c_acumulado)
         {
             dgvBondad.Rows.Clear();
             for (int i = 1; i < intervalos.Count; i++)

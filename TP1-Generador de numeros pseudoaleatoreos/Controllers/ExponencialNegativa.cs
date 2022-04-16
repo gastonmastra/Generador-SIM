@@ -13,34 +13,39 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         {
             this.lambda = lambda; 
         }
-        public long calcularProbabilidad(long x, long media, long desvStd)
+
+        public double[] calcularFe(int N, List<double> probabilidades)
         {
-            throw new NotImplementedException();
+            double[] frecuenciasEsperadas = new double[probabilidades.Count];
+            for (int i = 0; i < probabilidades.Count; i++)
+            {
+                frecuenciasEsperadas[i] = N * probabilidades[i];
+            }
+            return frecuenciasEsperadas;
         }
 
-        public long calcularProbabilidad(long x, long media)
+        public List<double> calcularProbabilidades(List<double> intervalos)
         {
-            throw new NotImplementedException();
-        }
-
-        public List<double> generarNrosAleatorios(int cantidad, long media)
-        {
-            //No corresponde a esta distribución
-            throw new NotImplementedException();
+            List<double> probabilidades = new List<double>();
+            for (int i = 0; i < intervalos.Count - 1; i++)
+            {
+                double probabilidad = (1 - Math.Exp(-lambda * intervalos[i + 1])) - (1 - Math.Exp(-lambda * intervalos[i]));
+                probabilidades.Add(probabilidad);
+            }
+            return probabilidades;
         }
 
         public List<double> generarNrosAleatorios(int cantidad)
         {
-            List<double> listaNrosAleatorios = new List<double>();
+            List<double> listaNrosExponencialesAleatorios = new List<double>();
             Random generador = new Random();
             for (int i = 0; i < cantidad; i++)
             {
                 double rnd = Math.Truncate(generador.NextDouble() * 10000) / 10000;
                 double x = -1/this.lambda * Math.Log(1 - rnd);
-                listaNrosAleatorios.Add(x);
+                listaNrosExponencialesAleatorios.Add(x);
             }
-            return listaNrosAleatorios;
+            return listaNrosExponencialesAleatorios;
         }
-
     }
 }
