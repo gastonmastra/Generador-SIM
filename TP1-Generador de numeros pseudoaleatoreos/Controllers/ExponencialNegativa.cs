@@ -44,10 +44,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             {
                 double rnd = Math.Truncate(generador.NextDouble() * 10000) / 10000;
                 double x = ((-1)/this.lambda) * Math.Log(1 - rnd);
-                if ( x >= 1)
-                {
-                    MessageBox.Show(x.ToString() + "debido a un rnd de: " + rnd.ToString() + " y un lambda de: " + lambda.ToString() );
-                }
+                //if ( x >= 1)
+                //{
+                //    MessageBox.Show(x.ToString() + "debido a un rnd de: " + rnd.ToString() + " y un lambda de: " + lambda.ToString() );
+                //}
                 listaNrosExponencialesAleatorios.Add(x);
             }
             return listaNrosExponencialesAleatorios;
