@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
 {
@@ -42,7 +43,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             for (int i = 0; i < cantidad; i++)
             {
                 double rnd = Math.Truncate(generador.NextDouble() * 10000) / 10000;
-                double x = -1/this.lambda * Math.Log(1 - rnd);
+                double x = ((-1)/this.lambda) * Math.Log(1 - rnd);
+                if ( x >= 1)
+                {
+                    MessageBox.Show(x.ToString() + "debido a un rnd de: " + rnd.ToString() + " y un lambda de: " + lambda.ToString() );
+                }
                 listaNrosExponencialesAleatorios.Add(x);
             }
             return listaNrosExponencialesAleatorios;

@@ -82,17 +82,67 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         /// datos obtenidos, a partir de la frecuencia observada y esperada obtenidas, y
         /// las formulas de estadistico de muestra y estadistico acumulado.
         /// </summary>
-        public void llenarTablaFrecuencias(List<double> intervalos, int[] contadoresFo, double[] Fe, double[] c, double[] c_acumulado)
+        public void llenarTablaChiCuadrado(List<double> intervalos, int[] contadoresFo, double[] Fe, double[] c, double[] c_acumulado)
         {
-            dgvBondad.Rows.Clear();
+            dgvChiCuadrado.Rows.Clear();
             for (int i = 1; i < intervalos.Count; i++)
             {
-                dgvBondad.Rows.Add(
+                dgvChiCuadrado.Rows.Add(
                     intervalos[i-1]+" - "+ intervalos[i],
                     contadoresFo[i-1],
                     Fe[i-1],
                     Math.Truncate(c[i-1]*10000)/10000,
                     Math.Truncate(c_acumulado[i - 1] * 10000) / 10000
+                    );
+            }
+        }
+
+        public void llenarTablaKS(List<double> intervalos, int[] contadoresFo, double[] Fe, List<double> probabilidades)
+        {
+            double maxDifAcum = 0;
+            double NasDouble = Convert.ToDouble(N);
+            double PoAcum = 0;
+            double PeAcum = 0;
+            dgvKs.Rows.Clear();
+            for (int i = 0; i < intervalos.Count - 1; i++)
+            {
+                double Po = Convert.ToDouble(contadoresFo[i]) / NasDouble;
+                PoAcum = PoAcum + Po;
+
+
+                double Pe = probabilidades[i];
+                PeAcum = PeAcum + Pe;
+
+                if (i == 0)
+                {
+                    PoAcum = Po;
+                    PeAcum = Pe;
+                }
+
+                string desdeHasta = intervalos[i] + " - " + intervalos[i + 1];
+                if (i == intervalos.Count)
+                {
+                    desdeHasta = intervalos[i] + " - " + 1;
+                }
+
+                double diferenciaAcum = Math.Abs(PeAcum - PoAcum);
+                if (diferenciaAcum > maxDifAcum)
+                {
+                    maxDifAcum = diferenciaAcum;
+                };
+
+
+
+                dgvKs.Rows.Add(
+                    desdeHasta,
+                    contadoresFo[i],
+                    Fe[i],
+                    Po,
+                    PoAcum,
+                    Pe,
+                    PeAcum,
+                    diferenciaAcum,
+                    maxDifAcum
                     );
             }
         }
@@ -102,7 +152,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         private void limpiarCampos()
         {
             dgvNros.Rows.Clear();
-            dgvBondad.Rows.Clear();
+            dgvChiCuadrado.Rows.Clear();
             dgvKs.Rows.Clear();
             cmbK.SelectedItem = null;
             txtN.Text = "";

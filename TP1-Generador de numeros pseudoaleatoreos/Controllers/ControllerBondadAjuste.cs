@@ -12,10 +12,15 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
     class ControllerBondadAjuste
     {
         BondadAjuste interfaz;
-        List<double> listaNrosAleatorios;
         List<double> listaIntervalos;
         List<double> listaNrosConDistribucion;
+        
+
+        //iguales para k-s y chi-cuadrado
+        int[] frecuencias_observadas;
+        double[] frecuencias_esperadas;
         List<double> probabilidades;
+
         //m
         int parametros_empiricos;
         IControllerDistribucion distribucion;
@@ -44,7 +49,8 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             generarIntervalos(cantIntervalos);
             generarNrosConDistribucion(N);
             realizarTestChiCuadrado(cantIntervalos, N);
-            realizarTestKs(cantIntervalos, N);
+            interfaz.generarHistograma(frecuencias_observadas, frecuencias_esperadas, listaIntervalos);
+            realizarTestKs(cantIntervalos);
         }
 
         /// <summary>
@@ -54,13 +60,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         /// </summary>
         private void realizarTestChiCuadrado(int cantIntervalos, int N)
         {
-            int[] frecuencias_observadas = calcularFo();
+            frecuencias_observadas = calcularFo();
 
-            double[] frecuencias_esperadas = distribucion.calcularFe(N, probabilidades);
+            frecuencias_esperadas = distribucion.calcularFe(N, probabilidades);
             double[] estadisticos = calcularEstadisticoMuestreo(frecuencias_esperadas, frecuencias_observadas);
             double[] estadisticos_acum = estadisticos_acumulados(estadisticos);
-            interfaz.llenarTablaFrecuencias(listaIntervalos, frecuencias_observadas, frecuencias_esperadas, estadisticos, estadisticos_acum);
-            interfaz.generarHistograma(frecuencias_observadas, frecuencias_esperadas, listaIntervalos);
+            interfaz.llenarTablaChiCuadrado(listaIntervalos, frecuencias_observadas, frecuencias_esperadas, estadisticos, estadisticos_acum);
             int gradosLibertad = cantIntervalos - 1 - parametros_empiricos;
 
             if (estadisticos_acum[estadisticos_acum.Length - 2] < arrayChiCuadrado[gradosLibertad])
@@ -89,16 +94,16 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             {
                 case "EJEMPLO":
                     //primero generamos los numeros aleatorios (en este caso multiplicamos por 12 imaginando convolucion)
-                    generarNrosAleatorios(N * 12);
+                    //generarNrosAleatorios(N * 12);
                     List<long> nrosNormales;
-                    foreach (long nro in this.listaNrosAleatorios)
-                    {
-                        //calcular por cada nro aleatorio
-                        //nrosNormales.Add(formula para generar un nro normal);
-                        distribucion = new Normal();
-                        //long probabilidad = distribucion.calcularProbabilidades();
-                        //long fe = probabilidad * N;
-                    }
+                    //foreach (long nro in this.listaNrosAleatorios)
+                    //{
+                    //    //calcular por cada nro aleatorio
+                    //    //nrosNormales.Add(formula para generar un nro normal);
+                    //    distribucion = new Normal();
+                    //    //long probabilidad = distribucion.calcularProbabilidades();
+                    //    //long fe = probabilidad * N;
+                    //}
 
                     //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
                     break;
@@ -122,6 +127,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                     probabilidades = distribucion.calcularProbabilidades(listaIntervalos);
                     parametros_empiricos = 1;
 
+                    
                     break;
                 case "Distribucion Uniforme":
                     //calcular
@@ -138,28 +144,28 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             }
         }
 
-        private void realizarTestKs(int cantIntervalos, int N)
+        private void realizarTestKs(int cantIntervalos)
         {
+            interfaz.llenarTablaKS(listaIntervalos, frecuencias_observadas, frecuencias_esperadas, probabilidades);
+            int gradosLibertad = cantIntervalos - 1 - parametros_empiricos;
 
+            //if (true) //ver condicion
+            //{
+            //    string mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 2] + " < " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad] + " con " + gradosLibertad + " grados de libertad\n" +
+            //        "\t La hipotesis no se rechaza. Nivel de significancia 1−∝= 0,95";
+            //    string hex = "#0096c7";
+            //    Color color = System.Drawing.ColorTranslator.FromHtml(hex);
+            //    //Color color = Color.BlueViolet;
+            //    interfaz.mostrarResultadoHipotesis(mensaje, color);
+            //}
+            //else
+            //{
+            //    string mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 2] + " > " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad] + " con " + gradosLibertad + " grados de libertad\n" +
+            //        "\t La hipotesis se rechaza. Nivel de significancia 1−∝= 0,95";
+            //    Color color = Color.DarkRed;
+            //    interfaz.mostrarResultadoHipotesis(mensaje, color);
+            //}
         }
-
-        /// <summary>
-        /// Método que se encarga de generar los numeros pseudo-aleatorios utilizando el propio
-        /// lenguaje de programación.
-        /// </summary>
-        private void generarNrosAleatorios(int cant)
-        {
-            listaNrosAleatorios = new List<double>();
-            Random rm = new Random();
-            for (int i = 0; i < cant; i++)
-            {
-                double nro = Math.Truncate(rm.NextDouble() * 10000) / 10000;
-                listaNrosAleatorios.Add(nro);
-            }
-            //interfaz.MostrarNumeros(listaNrosAleatorios);
-        }
-
-        
 
         /// <summary>
         /// Método que permite definir los intervalos de nuestra distribución, a partir
@@ -181,9 +187,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
 
         public void mostrarSerie()
         {
-            if (this.listaNrosAleatorios == null)
+            if (this.listaNrosConDistribucion == null)
             {
-                interfaz.MostrarNumeros(listaNrosAleatorios);
+                interfaz.MostrarNumeros(listaNrosConDistribucion);
             }
             else
             {
@@ -207,7 +213,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 //contadoresFo[i] = contador;
                 if (i == (listaIntervalos.Count - 1))
                 {
-                    contador = listaNrosConDistribucion.Count(x => x >= listaIntervalos[i - 1] && x < 1);
+                    contador = listaNrosConDistribucion.Count(x => x >= listaIntervalos[i - 1] && x <= 1);
                     contadoresFo[i] = contador;
                 }
                 else
@@ -224,20 +230,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             //}
         }
 
-        /// <summary>
-        /// Método que calcula la Frecuencia Esperada de la distribución y devuelve como
-        /// resultado un array de int.
-        /// </summary>
-        private int[] calcularFe(int N, int cantIntervalos)
-        {
-            int[] fe = new int[listaIntervalos.Count];
-            int frecuencia_esperada = N / cantIntervalos;
-            for (int i = 0; i < listaIntervalos.Count; i++)
-            {
-                fe[i] = frecuencia_esperada;
-            }
-            return fe;
-        }
         /// <summary>
         /// Método que toma como parámetros el arrray de Frecuencias Observadas y 
         /// el de Frecuencias Esperadas y a partir de los mismos calcula el valor

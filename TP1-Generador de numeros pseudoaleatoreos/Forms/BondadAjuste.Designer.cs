@@ -35,7 +35,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.txtN = new System.Windows.Forms.TextBox();
             this.cmbK = new System.Windows.Forms.ComboBox();
-            this.dgvBondad = new System.Windows.Forms.DataGridView();
+            this.dgvChiCuadrado = new System.Windows.Forms.DataGridView();
             this.intervalo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fe = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -84,7 +84,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.txtDesviacionNormal = new System.Windows.Forms.TextBox();
             this.txtMediaNormal = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBondad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChiCuadrado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNros)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.histograma)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKs)).BeginInit();
@@ -119,21 +119,21 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             // 
             // dgvBondad
             // 
-            this.dgvBondad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgvChiCuadrado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvBondad.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvBondad.BackgroundColor = System.Drawing.Color.White;
-            this.dgvBondad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBondad.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvChiCuadrado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvChiCuadrado.BackgroundColor = System.Drawing.Color.White;
+            this.dgvChiCuadrado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvChiCuadrado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.intervalo,
             this.fo,
             this.fe,
             this.estadisticoMuestra,
             this.cAcum});
-            this.dgvBondad.Location = new System.Drawing.Point(17, 341);
-            this.dgvBondad.Name = "dgvBondad";
-            this.dgvBondad.Size = new System.Drawing.Size(606, 161);
-            this.dgvBondad.TabIndex = 4;
+            this.dgvChiCuadrado.Location = new System.Drawing.Point(17, 341);
+            this.dgvChiCuadrado.Name = "dgvBondad";
+            this.dgvChiCuadrado.Size = new System.Drawing.Size(606, 161);
+            this.dgvChiCuadrado.TabIndex = 4;
             // 
             // intervalo
             // 
@@ -638,7 +638,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.Controls.Add(this.bntPruebaBondad);
             this.Controls.Add(this.dgvNros);
             this.Controls.Add(this.dgvKs);
-            this.Controls.Add(this.dgvBondad);
+            this.Controls.Add(this.dgvChiCuadrado);
             this.Controls.Add(this.cmbK);
             this.Controls.Add(this.txtN);
             this.Controls.Add(this.gbNormal);
@@ -648,7 +648,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Test de frecuencias: Chi-Cuadrado / K.S";
             this.Load += new System.EventHandler(this.BondadAjuste_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBondad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChiCuadrado)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNros)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.histograma)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKs)).EndInit();
@@ -669,7 +669,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
 
         private System.Windows.Forms.TextBox txtN;
         private System.Windows.Forms.ComboBox cmbK;
-        private System.Windows.Forms.DataGridView dgvBondad;
+        private System.Windows.Forms.DataGridView dgvChiCuadrado;
         private System.Windows.Forms.DataGridViewTextBoxColumn intervalo;
         private System.Windows.Forms.DataGridViewTextBoxColumn fo;
         private System.Windows.Forms.DataGridViewTextBoxColumn fe;
