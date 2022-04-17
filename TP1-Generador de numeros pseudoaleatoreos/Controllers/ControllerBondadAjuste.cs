@@ -53,6 +53,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             realizarTestKs(cantIntervalos);
         }
 
+
         /// <summary>
         /// Método encargado de realizar el calculo de cada uno de los parámetros a mostrar
         /// en la Tabla y el Histograma de frecuencias, definiendo también si la hipotesis
@@ -66,7 +67,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             double[] estadisticos = calcularEstadisticoMuestreo(frecuencias_esperadas, frecuencias_observadas);
             double[] estadisticos_acum = estadisticos_acumulados(estadisticos);
             interfaz.llenarTablaChiCuadrado(listaIntervalos, frecuencias_observadas, frecuencias_esperadas, estadisticos, estadisticos_acum);
-            int gradosLibertad = cantIntervalos - 1 - parametros_empiricos;
+            int gradosLibertad = (listaIntervalos.Count-1) - 1 - parametros_empiricos;
 
             if (estadisticos_acum[estadisticos_acum.Length - 2] < arrayChiCuadrado[gradosLibertad])
             {
@@ -140,7 +141,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                     double lambdaPoisson = interfaz.getLambdaPoisson();
                     distribucion = new Poisson(lambdaPoisson);
                     listaNrosConDistribucion = distribucion.generarNrosAleatorios(N);
-                    probabilidades = distribucion.calcularProbabilidades(listaNrosConDistribucion);
+                    List <double> listaValores = listaNrosConDistribucion.Distinct().OrderBy(number => number).ToList();
+                    IEnumerable<int> listaIntervalosP = Enumerable.Range(Convert.ToInt32(listaValores[0]), Convert.ToInt32((listaValores[listaValores.Count-1]- listaValores[0] )+ 1));
+                    listaIntervalos = listaIntervalosP.Select(x => Convert.ToDouble(x)).ToList();
+                    probabilidades = distribucion.calcularProbabilidades(listaIntervalos);
                     //no puede usar calcularFo porque no tiene intervalos
                     parametros_empiricos = 1;
                     break;

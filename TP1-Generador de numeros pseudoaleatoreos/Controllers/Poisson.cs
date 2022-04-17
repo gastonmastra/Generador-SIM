@@ -16,16 +16,20 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
 
         public double[] calcularFe(int N, List<double> probabilidades)
         {
-            throw new NotImplementedException();
+            double[] frecuenciasEsperadas = new double[probabilidades.Count];
+            for (int i = 0; i < probabilidades.Count; i++)
+            {
+                frecuenciasEsperadas[i] = Math.Round(N * probabilidades[i]);
+            }
+            return frecuenciasEsperadas;
         }
 
-        public List<double> calcularProbabilidades(List<double> listaNros)
+        public List<double> calcularProbabilidades(List<double> listaConValores)
         {
-            List<double> listaConValores = listaNros.Distinct().ToList(); 
             List<double> probabilidades = new List<double>();
             for (int i = 0; i < listaConValores.Count; i++)
             {
-                double probabilidad = (Math.Pow(lambda,listaNros[i])* Math.Exp(-lambda))/ factorial(Convert.ToInt32(listaNros[i]));
+                double probabilidad = (Math.Pow(lambda,listaConValores[i])* Math.Exp(-lambda))/ factorial(Convert.ToInt32(listaConValores[i]));
                 probabilidades.Add(probabilidad);
             }
             return probabilidades;

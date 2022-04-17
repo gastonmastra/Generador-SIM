@@ -49,7 +49,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 MessageBox.Show("Por favor, seleccione una distribucion para la prueba de bondad de ajuste.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            if (cmbK.SelectedItem == null || txtN.Text.ToString() == "")
+            if ((cmbK.SelectedItem == null || txtN.Text.ToString() == "") && cmbDistribucion.SelectedItem.ToString() != "Distribucion Poisson")
             {
                 MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -57,7 +57,16 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
 
             cmbDistribucionSeleccionada = cmbDistribucion.SelectedItem.ToString();
             N = Convert.ToInt32(txtN.Text);
-            controlador.realizarPruebaLenguaje(N, cantIntervalos);
+
+            if (cmbDistribucionSeleccionada == "Distribucion Poisson")
+            {
+                controlador.realizarPruebaLenguaje(N, 0);
+            }
+            else
+            {
+                controlador.realizarPruebaLenguaje(N, cantIntervalos);
+            }
+            
         }
 
         public double getLambdaExponencial()
@@ -74,13 +83,27 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         {
             histograma.Series["Fe"].Points.Clear();
             histograma.Series["Fo"].Points.Clear();
-            for (int i = 0; i < listaIntervalos.Count-1; i++)
-            //Recorre los intervalos y va agregandolos al grafico junto con las frecuencias
+            if (cmbDistribucionSeleccionada == "Distribucion Poisson")
             {
-                histograma.Series["Fe"].Points.AddXY(listaIntervalos[i] + " - "+ listaIntervalos[i + 1], frecuencias_esperadas[i]); //Agrega la fe al grafico             
-                histograma.Series["Fo"].Points.AddXY(listaIntervalos[i] + " - " + listaIntervalos[i + 1], frecuencias_observadas[i]);//Agrega la fo al grafico
-                histograma.Series["Fe"].AxisLabel = "Frecuencia";
+                for (int i = 0; i < listaIntervalos.Count; i++)
+                //Recorre los intervalos y va agregandolos al grafico junto con las frecuencias
+                {
+                    histograma.Series["Fe"].Points.AddXY(listaIntervalos[i], frecuencias_esperadas[i]); //Agrega la fe al grafico             
+                    histograma.Series["Fo"].Points.AddXY(listaIntervalos[i], frecuencias_observadas[i]);//Agrega la fo al grafico
+                    //histograma.Series["Fe"].AxisLabel = "Frecuencia";
+                }
             }
+            else
+            {
+                for (int i = 0; i < listaIntervalos.Count - 1; i++)
+                //Recorre los intervalos y va agregandolos al grafico junto con las frecuencias
+                {
+                    histograma.Series["Fe"].Points.AddXY(listaIntervalos[i] + " - " + listaIntervalos[i + 1], frecuencias_esperadas[i]); //Agrega la fe al grafico             
+                    histograma.Series["Fo"].Points.AddXY(listaIntervalos[i] + " - " + listaIntervalos[i + 1], frecuencias_observadas[i]);//Agrega la fo al grafico
+                    histograma.Series["Fe"].AxisLabel = "Frecuencia";
+                }
+            }
+                
         }
         /// <summary>
         /// Método que se encarga de llenar la tabla de frecuencias en base a los 
@@ -90,16 +113,33 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         public void llenarTablaChiCuadrado(List<double> intervalos, int[] contadoresFo, double[] Fe, double[] c, double[] c_acumulado)
         {
             dgvChiCuadrado.Rows.Clear();
-            for (int i = 1; i < intervalos.Count; i++)
+            if (cmbDistribucionSeleccionada == "Distribucion Poisson")
             {
-                dgvChiCuadrado.Rows.Add(
-                    intervalos[i-1]+" - "+ intervalos[i],
-                    contadoresFo[i-1],
-                    Fe[i-1],
-                    Math.Truncate(c[i-1]*10000)/10000,
-                    Math.Truncate(c_acumulado[i - 1] * 10000) / 10000
-                    );
+                for (int i = 1; i <= intervalos.Count; i++)
+                {
+                    dgvChiCuadrado.Rows.Add(
+                        intervalos[i - 1],
+                        contadoresFo[i - 1],
+                        Fe[i - 1],
+                        Math.Truncate(c[i - 1] * 10000) / 10000,
+                        Math.Truncate(c_acumulado[i - 1] * 10000) / 10000
+                        );
+                }
             }
+            else
+            {
+                for (int i = 1; i < intervalos.Count; i++)
+                {
+                    dgvChiCuadrado.Rows.Add(
+                        intervalos[i - 1] + " - " + intervalos[i],
+                        contadoresFo[i - 1],
+                        Fe[i - 1],
+                        Math.Truncate(c[i - 1] * 10000) / 10000,
+                        Math.Truncate(c_acumulado[i - 1] * 10000) / 10000
+                        );
+                }
+            }
+            
         }
 
         public void llenarTablaKS(List<double> intervalos, int[] contadoresFo, double[] Fe, List<double> probabilidades)
@@ -228,18 +268,23 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             {
                 case "Distribucion Normal (Box-Muller)":
                     gbNormal.Visible = true;
+                    cmbK.Visible = true;
                     break;
                 case "Distribucion Normal (Convolucion)":
                     gbNormal.Visible = true;
+                    cmbK.Visible = true;
                     break;
                 case "Distribucion Exponencial Neg.":
                     gbExponencial.Visible = true;
+                    cmbK.Visible = true;
                     break;
                 case "Distribucion Uniforme":
                     gbUniforme.Visible = true;
+                    cmbK.Visible = true;
                     break;
                 case "Distribucion Poisson":
                     gbPoisson.Visible = true;
+                    cmbK.Visible = false;
                     break;
                 default:
                     break;
