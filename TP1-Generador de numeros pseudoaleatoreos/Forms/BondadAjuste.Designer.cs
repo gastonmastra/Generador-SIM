@@ -117,7 +117,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.cmbK.TabIndex = 2;
             this.cmbK.SelectionChangeCommitted += new System.EventHandler(this.cmbK_SelectionChangeCommitted);
             // 
-            // dgvBondad
+            // dgvChiCuadrado
             // 
             this.dgvChiCuadrado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -131,7 +131,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.estadisticoMuestra,
             this.cAcum});
             this.dgvChiCuadrado.Location = new System.Drawing.Point(17, 341);
-            this.dgvChiCuadrado.Name = "dgvBondad";
+            this.dgvChiCuadrado.Name = "dgvChiCuadrado";
             this.dgvChiCuadrado.Size = new System.Drawing.Size(606, 161);
             this.dgvChiCuadrado.TabIndex = 4;
             // 
@@ -619,8 +619,8 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(820, 810);
-            this.Controls.Add(this.gbExponencial);
             this.Controls.Add(this.gbPoisson);
+            this.Controls.Add(this.gbExponencial);
             this.Controls.Add(this.gbUniforme);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblHipotesisKs);

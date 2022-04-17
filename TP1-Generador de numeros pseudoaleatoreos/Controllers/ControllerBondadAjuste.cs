@@ -46,7 +46,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         /// </summary>
         public void realizarPruebaLenguaje(int N, int cantIntervalos)
         {
-            generarIntervalos(cantIntervalos);
+            generarIntervalos(cantIntervalos); //poisson no los usa
             generarNrosConDistribucion(N);
             realizarTestChiCuadrado(cantIntervalos, N);
             interfaz.generarHistograma(frecuencias_observadas, frecuencias_esperadas, listaIntervalos);
@@ -127,16 +127,22 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                     probabilidades = distribucion.calcularProbabilidades(listaIntervalos);
                     parametros_empiricos = 1;
 
-                    
+
                     break;
                 case "Distribucion Uniforme":
                     //calcular
                     //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
-
+                    
                     break;
                 case "Distribucion Poisson": //No se le hace el K-S
                     //calcular
                     //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
+                    double lambdaPoisson = interfaz.getLambdaPoisson();
+                    distribucion = new Poisson(lambdaPoisson);
+                    listaNrosConDistribucion = distribucion.generarNrosAleatorios(N);
+                    probabilidades = distribucion.calcularProbabilidades(listaNrosConDistribucion);
+                    //no puede usar calcularFo porque no tiene intervalos
+                    parametros_empiricos = 1;
                     break;
 
                 default:

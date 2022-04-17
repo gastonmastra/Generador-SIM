@@ -65,6 +65,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             return Convert.ToDouble(this.txtLambdaExponencial.Text);
         }
 
+        public double getLambdaPoisson()
+        {
+            return Convert.ToDouble(this.textBox2.Text);
+        }
+
         public void generarHistograma(int[] frecuencias_observadas, double[] frecuencias_esperadas, List<double> listaIntervalos)
         {
             histograma.Series["Fe"].Points.Clear();
