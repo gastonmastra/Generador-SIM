@@ -117,7 +117,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.cmbK.TabIndex = 2;
             this.cmbK.SelectionChangeCommitted += new System.EventHandler(this.cmbK_SelectionChangeCommitted);
             // 
-            // dgvBondad
+            // dgvChiCuadrado
             // 
             this.dgvChiCuadrado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -131,7 +131,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.estadisticoMuestra,
             this.cAcum});
             this.dgvChiCuadrado.Location = new System.Drawing.Point(17, 341);
-            this.dgvChiCuadrado.Name = "dgvBondad";
+            this.dgvChiCuadrado.Name = "dgvChiCuadrado";
             this.dgvChiCuadrado.Size = new System.Drawing.Size(606, 161);
             this.dgvChiCuadrado.TabIndex = 4;
             // 
@@ -521,7 +521,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.gbExponencial.Controls.Add(this.txtLambdaExponencial);
             this.gbExponencial.Location = new System.Drawing.Point(348, 9);
             this.gbExponencial.Name = "gbExponencial";
-            this.gbExponencial.Size = new System.Drawing.Size(173, 49);
+            this.gbExponencial.Size = new System.Drawing.Size(256, 49);
             this.gbExponencial.TabIndex = 22;
             this.gbExponencial.TabStop = false;
             this.gbExponencial.Text = "Parametros (Exponencial)";

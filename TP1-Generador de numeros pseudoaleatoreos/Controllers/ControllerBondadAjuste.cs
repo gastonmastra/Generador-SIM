@@ -48,6 +48,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         {
             generarIntervalos(cantIntervalos);
             generarNrosConDistribucion(N);
+            mostrarSerie();
             realizarTestChiCuadrado(cantIntervalos, N);
             interfaz.generarHistograma(frecuencias_observadas, frecuencias_esperadas, listaIntervalos);
             realizarTestKs(cantIntervalos);
@@ -108,11 +109,23 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                     //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
                     break;
                 case "Distribucion Normal (Box-Muller)":
+                    double mediaBox = interfaz.getMediaNormal();
+                    double desvEstandarBox = interfaz.getDesvEstandarNormal();
+                    distribucion = new Normal(desvEstandarBox, mediaBox, 1);
+                    listaNrosConDistribucion = distribucion.generarNrosAleatorios(N);
+                    probabilidades = distribucion.calcularProbabilidades(listaIntervalos);
+                    parametros_empiricos = 2;
                     //crear un nuevo controlador de tipo Normal Box-Muller
                     //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
                     break;
 
                 case "Distribucion Normal (Convolucion)":
+                    double mediaConv = interfaz.getMediaNormal();
+                    double desvEstandarConv = interfaz.getDesvEstandarNormal();
+                    distribucion = new Normal(desvEstandarConv, mediaConv, 2);
+                    listaNrosConDistribucion = distribucion.generarNrosAleatorios(N);
+                    probabilidades = distribucion.calcularProbabilidades(listaIntervalos);
+                    parametros_empiricos = 2;
                     //calcular
                     //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
                     break;
@@ -187,7 +200,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
 
         public void mostrarSerie()
         {
-            if (this.listaNrosConDistribucion == null)
+            if (this.listaNrosConDistribucion != null)
             {
                 interfaz.MostrarNumeros(listaNrosConDistribucion);
             }

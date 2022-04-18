@@ -184,6 +184,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         /// </summary>
         public void MostrarNumeros(List<double> nros)
         {
+            listaNrosAleat = nros;
             dgvNros.Rows.Clear();
             for (int i = 0; i < nros.Count; i++)
             {
@@ -247,6 +248,16 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             gbPoisson.Visible = false;
             gbNormal.Visible = false;
             gbExponencial.Visible = false;
+        }
+
+        public double getMediaNormal()
+        {
+            return Convert.ToDouble(txtMediaNormal.Text.ToString());
+        }
+
+        public double getDesvEstandarNormal()
+        {
+            return Convert.ToDouble(txtDesviacionNormal.Text.ToString());
         }
     }
 }
