@@ -48,7 +48,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         {
             generarIntervalos(cantIntervalos);
             generarNrosConDistribucion(N);
-            mostrarSerie();
             realizarTestChiCuadrado(cantIntervalos, N);
             interfaz.generarHistograma(frecuencias_observadas, frecuencias_esperadas, listaIntervalos);
             realizarTestKs(cantIntervalos);
