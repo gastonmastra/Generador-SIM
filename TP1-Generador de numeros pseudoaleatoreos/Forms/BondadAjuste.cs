@@ -23,6 +23,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         List<double> listaNrosAleat;
         List<double> listaIntervalos;
         string cmbDistribucionSeleccionada { get; set; }
+        double Max;
+
+        public double getMax()
+        {
+            return Max;
+        }
 
         public BondadAjuste()
         {
@@ -110,7 +116,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 PoAcum = PoAcum + Po;
 
 
-                double Pe = probabilidades[i];
+                double Pe = probabilidades[i];                
+                if (cmbDistribucionSeleccionada == "Distribucion Uniforme")
+                {
+                    Fe[i] = N / cantIntervalos;
+                    Pe = Fe[i] / N;
+                }
                 PeAcum = PeAcum + Pe;
 
                 if (i == 0)
@@ -145,6 +156,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                     maxDifAcum
                     );
             }
+            Max = maxDifAcum;
         }
         /// <summary>
         /// Método que se encarga de limpiar los campos del formulario.
@@ -205,6 +217,13 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             lblHipotesis.ForeColor = color;
         }
 
+        public void mostrarResultadoHipotesisKs(string mensaje, Color color)
+        {
+            lblHipotesisKs.Text = mensaje;
+            lblHipotesisKs.Visible = true;
+            lblHipotesisKs.ForeColor = color;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if(listaNrosAleat == null)
@@ -258,6 +277,15 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         public double getDesvEstandarNormal()
         {
             return Convert.ToDouble(txtDesviacionNormal.Text.ToString());
+        }
+
+        public double getAUniforme()
+        {
+            return Convert.ToDouble(txtA.Text.ToString());
+        }
+        public double getBUniforme()
+        {
+            return Convert.ToDouble(txtB.Text.ToString());
         }
     }
 }
