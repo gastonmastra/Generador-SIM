@@ -61,7 +61,15 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         /// </summary>
         private void realizarTestChiCuadrado(int cantIntervalos, int N)
         {
-            frecuencias_observadas = calcularFo();
+            if (interfaz.getDistribucionSeleccionada() == "Distribucion Poisson")
+            {
+                frecuencias_observadas = calcularFoP();
+            }
+            else
+            {
+                frecuencias_observadas = calcularFo();
+            }
+            
 
             frecuencias_esperadas = distribucion.calcularFe(N, probabilidades);
             double[] estadisticos = calcularEstadisticoMuestreo(frecuencias_esperadas, frecuencias_observadas);
@@ -238,6 +246,20 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             //    contador = listaNrosAleat.Count(x => x >= intervalo && x < listaIntervalos.);
             //    contadoresFo[i] = contador;
             //}
+        }
+
+        private int[] calcularFoP()
+        {
+            int[] contadoresFo = new int[listaIntervalos.Count];
+            int contador = 0;
+            for (int i = 0; i < listaIntervalos.Count; i++)
+            {
+                contador = listaNrosConDistribucion.Count(x => x == listaIntervalos[i]);
+                contadoresFo[i] = contador;
+               
+            }
+            return contadoresFo;
+            
         }
 
         /// <summary>

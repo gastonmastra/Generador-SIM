@@ -149,6 +149,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             double PoAcum = 0;
             double PeAcum = 0;
             dgvKs.Rows.Clear();
+
             for (int i = 0; i < intervalos.Count - 1; i++)
             {
                 double Po = Convert.ToDouble(contadoresFo[i]) / NasDouble;
@@ -264,27 +265,35 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         private void validarDistribucion(object sender, EventArgs e)
         {
             deshabilitarParametros();
+            dgvKs.Visible = true;
+            lblHipotesisKs.Visible = true;
+            label1.Visible = true;
+            cmbK.Visible = true;
             switch (cmbDistribucion.SelectedItem.ToString())
             {
                 case "Distribucion Normal (Box-Muller)":
                     gbNormal.Visible = true;
-                    cmbK.Visible = true;
+                    
                     break;
                 case "Distribucion Normal (Convolucion)":
                     gbNormal.Visible = true;
-                    cmbK.Visible = true;
+
                     break;
                 case "Distribucion Exponencial Neg.":
                     gbExponencial.Visible = true;
-                    cmbK.Visible = true;
+
                     break;
                 case "Distribucion Uniforme":
                     gbUniforme.Visible = true;
-                    cmbK.Visible = true;
+
+            
                     break;
                 case "Distribucion Poisson":
                     gbPoisson.Visible = true;
                     cmbK.Visible = false;
+                    dgvKs.Visible = false;
+                    lblHipotesisKs.Visible = false;
+                    label1.Visible = false;
                     break;
                 default:
                     break;
