@@ -53,6 +53,7 @@
     <Compile Include="Controllers\ExponencialNegativa.cs" />
     <Compile Include="Controllers\Normal.cs" />
     <Compile Include="Controllers\IControllerDistribucion.cs" />
+    <Compile Include="Controllers\Poisson.cs" />
     <Compile Include="Forms\BondadAjuste.cs">
       <SubType>Form</SubType>
     </Compile>
