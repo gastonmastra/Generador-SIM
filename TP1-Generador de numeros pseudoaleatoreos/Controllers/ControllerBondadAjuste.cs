@@ -48,13 +48,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         /// </summary>
         public void realizarPruebaLenguaje(int N, int cantIntervalos)
         {
-<<<<<<< HEAD
-            generarIntervalos(cantIntervalos); //poisson no los usa
-            generarNrosConDistribucion(N);
-=======
-            //generarIntervalos(cantIntervalos);
             generarNrosConDistribucion(N, cantIntervalos);
->>>>>>> 6cc1d74ae418b92c79814d42bca64aefe24ed8bf
             realizarTestChiCuadrado(cantIntervalos, N);
             interfaz.generarHistograma(frecuencias_observadas, frecuencias_esperadas, listaIntervalos);
             realizarTestKs(cantIntervalos);
@@ -150,11 +144,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
 
                     break;
                 case "Distribucion Uniforme":
-<<<<<<< HEAD
-                    //calcular
-                    //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
-                    
-=======
                     double A = interfaz.getAUniforme();
                     double B = interfaz.getBUniforme();
                     distribucion = new Uniforme(A, B);
@@ -164,11 +153,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
 
                     probabilidades = listaIntervalos;
                     parametros_empiricos = 0; //VER CUANTOS
->>>>>>> 6cc1d74ae418b92c79814d42bca64aefe24ed8bf
                     break;
 
                 case "Distribucion Poisson": //No se le hace el K-S
-<<<<<<< HEAD
                     //calcular
                     //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
                     double lambdaPoisson = interfaz.getLambdaPoisson();
@@ -180,10 +167,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                     probabilidades = distribucion.calcularProbabilidades(listaIntervalos);
                     //no puede usar calcularFo porque no tiene intervalos
                     parametros_empiricos = 1;
-=======
-
-
->>>>>>> 6cc1d74ae418b92c79814d42bca64aefe24ed8bf
                     break;
 
                 default:
