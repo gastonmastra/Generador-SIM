@@ -23,6 +23,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         List<double> listaNrosAleat;
         List<double> listaIntervalos;
         string cmbDistribucionSeleccionada { get; set; }
+        double Max;
+
+        public double getMax()
+        {
+            return Max;
+        }
 
         public BondadAjuste()
         {
@@ -156,7 +162,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 PoAcum = PoAcum + Po;
 
 
-                double Pe = probabilidades[i];
+                double Pe = probabilidades[i];                
+                if (cmbDistribucionSeleccionada == "Distribucion Uniforme")
+                {
+                    Fe[i] = N / cantIntervalos;
+                    Pe = Fe[i] / N;
+                }
                 PeAcum = PeAcum + Pe;
 
                 if (i == 0)
@@ -191,6 +202,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                     maxDifAcum
                     );
             }
+            Max = maxDifAcum;
         }
         /// <summary>
         /// Método que se encarga de limpiar los campos del formulario.
@@ -251,6 +263,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             lblHipotesis.ForeColor = color;
         }
 
+<<<<<<< HEAD
 
 
         private void deshabilitarParametros()
@@ -272,6 +285,16 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         }
 
         private void verSerie(object sender, EventArgs e)
+=======
+        public void mostrarResultadoHipotesisKs(string mensaje, Color color)
+        {
+            lblHipotesisKs.Text = mensaje;
+            lblHipotesisKs.Visible = true;
+            lblHipotesisKs.ForeColor = color;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+>>>>>>> 6cc1d74ae418b92c79814d42bca64aefe24ed8bf
         {
             controlador.mostrarSerie();
             dgvNros.Visible = true;
@@ -312,5 +335,35 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                     break;
             }
         }
+<<<<<<< HEAD
+=======
+
+        private void deshabilitarParametros()
+        {
+            gbUniforme.Visible = false;
+            gbPoisson.Visible = false;
+            gbNormal.Visible = false;
+            gbExponencial.Visible = false;
+        }
+
+        public double getMediaNormal()
+        {
+            return Convert.ToDouble(txtMediaNormal.Text.ToString());
+        }
+
+        public double getDesvEstandarNormal()
+        {
+            return Convert.ToDouble(txtDesviacionNormal.Text.ToString());
+        }
+
+        public double getAUniforme()
+        {
+            return Convert.ToDouble(txtA.Text.ToString());
+        }
+        public double getBUniforme()
+        {
+            return Convert.ToDouble(txtB.Text.ToString());
+        }
+>>>>>>> 6cc1d74ae418b92c79814d42bca64aefe24ed8bf
     }
 }

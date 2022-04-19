@@ -32,6 +32,8 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                                                   22.4, 23.7, 25.0,
                                                   26.3, 27.6, 28.9,
                                                   30.1, 31.4 };
+        
+
         public ControllerBondadAjuste(BondadAjuste interfaz)
         {
             this.interfaz = interfaz;
@@ -46,8 +48,13 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         /// </summary>
         public void realizarPruebaLenguaje(int N, int cantIntervalos)
         {
+<<<<<<< HEAD
             generarIntervalos(cantIntervalos); //poisson no los usa
             generarNrosConDistribucion(N);
+=======
+            //generarIntervalos(cantIntervalos);
+            generarNrosConDistribucion(N, cantIntervalos);
+>>>>>>> 6cc1d74ae418b92c79814d42bca64aefe24ed8bf
             realizarTestChiCuadrado(cantIntervalos, N);
             interfaz.generarHistograma(frecuencias_observadas, frecuencias_esperadas, listaIntervalos);
             realizarTestKs(cantIntervalos);
@@ -97,30 +104,16 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             //interfaz.cargarListaNrosAleatorios(listaNrosAleatorios);
         }
 
-        private void generarNrosConDistribucion(int N)
+        private void generarNrosConDistribucion(int N, int cantIntervalos)
         {
             switch (interfaz.getDistribucionSeleccionada())
             {
-                case "EJEMPLO":
-                    //primero generamos los numeros aleatorios (en este caso multiplicamos por 12 imaginando convolucion)
-                    //generarNrosAleatorios(N * 12);
-                    List<long> nrosNormales;
-                    //foreach (long nro in this.listaNrosAleatorios)
-                    //{
-                    //    //calcular por cada nro aleatorio
-                    //    //nrosNormales.Add(formula para generar un nro normal);
-                    //    distribucion = new Normal();
-                    //    //long probabilidad = distribucion.calcularProbabilidades();
-                    //    //long fe = probabilidad * N;
-                    //}
-
-                    //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
-                    break;
                 case "Distribucion Normal (Box-Muller)":
                     double mediaBox = interfaz.getMediaNormal();
                     double desvEstandarBox = interfaz.getDesvEstandarNormal();
                     distribucion = new Normal(desvEstandarBox, mediaBox, 1);
                     listaNrosConDistribucion = distribucion.generarNrosAleatorios(N);
+                    generarIntervalos(cantIntervalos, listaNrosConDistribucion);
                     probabilidades = distribucion.calcularProbabilidades(listaIntervalos);
                     parametros_empiricos = 2;
                     //crear un nuevo controlador de tipo Normal Box-Muller
@@ -132,6 +125,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                     double desvEstandarConv = interfaz.getDesvEstandarNormal();
                     distribucion = new Normal(desvEstandarConv, mediaConv, 2);
                     listaNrosConDistribucion = distribucion.generarNrosAleatorios(N);
+
+                    generarIntervalos(cantIntervalos, listaNrosConDistribucion);
+
                     probabilidades = distribucion.calcularProbabilidades(listaIntervalos);
                     parametros_empiricos = 2;
                     //calcular
@@ -145,17 +141,34 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                     //verificar si lambda es =! 0 en el metodo verificar pruebas
                     distribucion = new ExponencialNegativa(lambda);
                     listaNrosConDistribucion = distribucion.generarNrosAleatorios(N);
+
+                    generarIntervalos(cantIntervalos, listaNrosConDistribucion);
+
                     probabilidades = distribucion.calcularProbabilidades(listaIntervalos);
                     parametros_empiricos = 1;
 
 
                     break;
                 case "Distribucion Uniforme":
+<<<<<<< HEAD
                     //calcular
                     //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
                     
+=======
+                    double A = interfaz.getAUniforme();
+                    double B = interfaz.getBUniforme();
+                    distribucion = new Uniforme(A, B);
+                    listaNrosConDistribucion = distribucion.generarNrosAleatorios(N);
+
+                    generarIntervalos(cantIntervalos, listaNrosConDistribucion);
+
+                    probabilidades = listaIntervalos;
+                    parametros_empiricos = 0; //VER CUANTOS
+>>>>>>> 6cc1d74ae418b92c79814d42bca64aefe24ed8bf
                     break;
+
                 case "Distribucion Poisson": //No se le hace el K-S
+<<<<<<< HEAD
                     //calcular
                     //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
                     double lambdaPoisson = interfaz.getLambdaPoisson();
@@ -167,6 +180,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                     probabilidades = distribucion.calcularProbabilidades(listaIntervalos);
                     //no puede usar calcularFo porque no tiene intervalos
                     parametros_empiricos = 1;
+=======
+
+
+>>>>>>> 6cc1d74ae418b92c79814d42bca64aefe24ed8bf
                     break;
 
                 default:
@@ -177,8 +194,29 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         private void realizarTestKs(int cantIntervalos)
         {
             interfaz.llenarTablaKS(listaIntervalos, frecuencias_observadas, frecuencias_esperadas, probabilidades);
-            int gradosLibertad = cantIntervalos - 1 - parametros_empiricos;
-
+            int gradosLibertad = listaNrosConDistribucion.Count ;
+            double valor_tabulado = 1.36 / (Math.Sqrt(listaNrosConDistribucion.Count));
+            if (gradosLibertad < 35)
+            {
+                valor_tabulado = arrayKs[gradosLibertad];
+            }
+            double maximo = interfaz.getMax();
+            if ( maximo < valor_tabulado)
+            {
+                string mensaje = " Estadístico de prueba: " + maximo + " < " + " Valor tabulado: " + valor_tabulado + " con " + gradosLibertad + " grados de libertad\n" +
+                    "\t La hipotesis no se rechaza. Nivel de significancia 1−∝= 0,95";
+                string hex = "#0096c7";
+                Color color = System.Drawing.ColorTranslator.FromHtml(hex);
+                //Color color = Color.BlueViolet;
+                interfaz.mostrarResultadoHipotesisKs(mensaje, color);
+            }
+            else
+            {
+                string mensaje = " Estadístico de prueba: " + maximo + " > " + " Valor tabulado: " + valor_tabulado + " con " + gradosLibertad + " grados de libertad\n" +
+                    "\t La hipotesis se rechaza. Nivel de significancia 1−∝= 0,95";
+                Color color = Color.DarkRed;
+                interfaz.mostrarResultadoHipotesisKs(mensaje, color);
+            }
             //if (true) //ver condicion
             //{
             //    string mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 2] + " < " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad] + " con " + gradosLibertad + " grados de libertad\n" +
@@ -201,18 +239,23 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         /// Método que permite definir los intervalos de nuestra distribución, a partir
         /// de la cantidad de intervalos seleccionada.
         /// </summary>
-        private void generarIntervalos(int cantIntervalos)
+        private void generarIntervalos(int cantIntervalos, List<double> listaNrosAleatorios)
         {
             listaIntervalos = new List<double>();
-            double intervalo = (1 / (double)cantIntervalos);
-            double acum = 0;
-            for (int i = 0; i < cantIntervalos; i++)
+            double maximo = listaNrosAleatorios.Max();
+            double minimo = listaNrosAleatorios.Min();
+            double intervalo = ( (maximo - minimo)/ (double)cantIntervalos);
+            double acum = minimo;
+            //listaIntervalos.Add(Math.Round(minimo, 3));
+
+            for (int i = 0; i < cantIntervalos+1; i++)
             {
                 listaIntervalos.Add(Math.Round(acum, 3));
                 acum += intervalo;
                 acum = (Math.Truncate(acum * 10000) / 10000);
             }
-            listaIntervalos.Add(1);
+            
+            //listaIntervalos.Add(1);
         }
 
         public void mostrarSerie()
@@ -307,5 +350,40 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             return c_acum;
         }
 
+        double[] arrayKs = new double[] { 0.97500,
+                                          0.70760,
+                                          0.84189,
+                                          0.62394,
+                                          0.56328,
+                                          0.51926,
+                                          0.48342,
+                                          0.45427,
+                                          0.43001,
+                                          0.40925,
+                                          0.39122,
+                                          0.37543,
+                                          0.36143,
+                                          0.34890,
+                                          0.33750,
+                                          0.32733,
+                                          0.31796,
+                                          0.30936,
+                                          0.30143,
+                                          0.29408,
+                                          0.28724,
+                                          0.28087,
+                                          0.2749,
+                                          0.26931,
+                                          0.26404,
+                                          0.25908,
+                                          0.25438,
+                                          0.24993,
+                                          0.24571,
+                                          0.24170,
+                                          0.23788,
+                                          0.23424,
+                                          0.23076,
+                                          0.22743,
+                                          0.22425, };
     }
 }
