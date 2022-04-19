@@ -260,6 +260,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             controlador.mostrarSerie();
             dgvNros.Visible = true;
             label4.Visible = true;
+
+
+
+
         }
 
         private void validarDistribucion(object sender, EventArgs e)
