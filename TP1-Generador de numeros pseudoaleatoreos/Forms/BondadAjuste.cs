@@ -205,17 +205,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             lblHipotesis.ForeColor = color;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if(listaNrosAleat == null)
-            {
-                MessageBox.Show("Primero debe generar una serie", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-            controlador.mostrarSerie();
-            dgvNros.Visible = true;
-            label4.Visible = true;
-        }
+
 
         private void validarDistribucion(object sender, EventArgs e)
         {
@@ -258,6 +248,13 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         public double getDesvEstandarNormal()
         {
             return Convert.ToDouble(txtDesviacionNormal.Text.ToString());
+        }
+
+        private void verSerie(object sender, EventArgs e)
+        {
+            controlador.mostrarSerie();
+            dgvNros.Visible = true;
+            label4.Visible = true;
         }
     }
 }
