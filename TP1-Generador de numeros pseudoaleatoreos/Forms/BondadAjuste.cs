@@ -289,7 +289,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             {
                 case "Distribucion Normal (Box-Muller)":
                     gbNormal.Visible = true;
-
                     break;
                 case "Distribucion Normal (Convolucion)":
                     gbNormal.Visible = true;
@@ -301,8 +300,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                     break;
                 case "Distribucion Uniforme":
                     gbUniforme.Visible = true;
-
-
                     break;
                 case "Distribucion Poisson":
                     gbPoisson.Visible = true;

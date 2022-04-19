@@ -70,6 +70,7 @@ C:\Users\ignac\TPS-SIM\TP3\Generador-SIM\TP1-Generador de numeros pseudoaleatore
 C:\Users\ignac\TPS-SIM\TP3\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1-Generador de numeros pseudoaleatoreos.exe
 C:\Users\ignac\TPS-SIM\TP3\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1-Generador de numeros pseudoaleatoreos.pdb
 <<<<<<< HEAD
+<<<<<<< HEAD
 D:\Fonti\FACULTAD\4to Año\Simulacion\Práctico\TP\TP\TP1-TP3\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\bin\Debug\TP1-Generador de numeros pseudoaleatoreos.exe.config
 D:\Fonti\FACULTAD\4to Año\Simulacion\Práctico\TP\TP\TP1-TP3\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\bin\Debug\TP1-Generador de numeros pseudoaleatoreos.exe
 D:\Fonti\FACULTAD\4to Año\Simulacion\Práctico\TP\TP\TP1-TP3\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\bin\Debug\TP1-Generador de numeros pseudoaleatoreos.pdb
@@ -83,6 +84,8 @@ D:\Fonti\FACULTAD\4to Año\Simulacion\Práctico\TP\TP\TP1-TP3\Generador-SIM\TP1-
 D:\Fonti\FACULTAD\4to Año\Simulacion\Práctico\TP\TP\TP1-TP3\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1-Generador de numeros pseudoaleatoreos.exe
 D:\Fonti\FACULTAD\4to Año\Simulacion\Práctico\TP\TP\TP1-TP3\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1-Generador de numeros pseudoaleatoreos.pdb
 =======
+=======
+>>>>>>> 78e8362df633625e058304de33f829c57b8f9a29
 F:\Milagros\Documents\Facultad\SIM\Practico\TPs\TP1 - Grupo\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\bin\Debug\TP1-Generador de numeros pseudoaleatoreos.exe.config
 F:\Milagros\Documents\Facultad\SIM\Practico\TPs\TP1 - Grupo\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\bin\Debug\TP1-Generador de numeros pseudoaleatoreos.exe
 F:\Milagros\Documents\Facultad\SIM\Practico\TPs\TP1 - Grupo\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\bin\Debug\TP1-Generador de numeros pseudoaleatoreos.pdb
@@ -95,4 +98,7 @@ F:\Milagros\Documents\Facultad\SIM\Practico\TPs\TP1 - Grupo\Generador-SIM\TP1-Ge
 F:\Milagros\Documents\Facultad\SIM\Practico\TPs\TP1 - Grupo\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1-Generador de numeros pseudoaleatoreos.csproj.CoreCompileInputs.cache
 F:\Milagros\Documents\Facultad\SIM\Practico\TPs\TP1 - Grupo\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1-Generador de numeros pseudoaleatoreos.exe
 F:\Milagros\Documents\Facultad\SIM\Practico\TPs\TP1 - Grupo\Generador-SIM\TP1-Generador de numeros pseudoaleatoreos\obj\Debug\TP1-Generador de numeros pseudoaleatoreos.pdb
+<<<<<<< HEAD
+>>>>>>> 78e8362df633625e058304de33f829c57b8f9a29
+=======
 >>>>>>> 78e8362df633625e058304de33f829c57b8f9a29
