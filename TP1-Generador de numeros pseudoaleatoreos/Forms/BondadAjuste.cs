@@ -258,6 +258,24 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             label4.Visible = true;
         }
 
+        
+
+        public void mostrarResultadoHipotesisKs(string mensaje, Color color)
+        {
+            lblHipotesisKs.Text = mensaje;
+            lblHipotesisKs.Visible = true;
+            lblHipotesisKs.ForeColor = color;
+        }
+
+        public double getAUniforme()
+        {
+            return Convert.ToDouble(txtA.Text.ToString());
+        }
+        public double getBUniforme()
+        {
+            return Convert.ToDouble(txtB.Text.ToString());
+        }
+
         private void validarDistribucion(object sender, EventArgs e)
         {
             deshabilitarParametros();
@@ -291,22 +309,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 default:
                     break;
             }
-        }
-
-        public void mostrarResultadoHipotesisKs(string mensaje, Color color)
-        {
-            lblHipotesisKs.Text = mensaje;
-            lblHipotesisKs.Visible = true;
-            lblHipotesisKs.ForeColor = color;
-        }
-
-        public double getAUniforme()
-        {
-            return Convert.ToDouble(txtA.Text.ToString());
-        }
-        public double getBUniforme()
-        {
-            return Convert.ToDouble(txtB.Text.ToString());
         }
     }
 }
