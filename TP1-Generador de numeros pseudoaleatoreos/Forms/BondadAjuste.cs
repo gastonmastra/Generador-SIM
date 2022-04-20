@@ -23,6 +23,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         List<double> listaNrosAleat;
         List<double> listaIntervalos;
         string cmbDistribucionSeleccionada { get; set; }
+        double Max;
+
+        public double getMax()
+        {
+            return Max;
+        }
 
         public BondadAjuste()
         {
@@ -35,7 +41,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         }
 
         /// <summary>
-        /// Método que delega la responsabilidad de realizar la prueba en función
+        /// Método que delega la responsabilidad de realizar la prueba en función.
         /// de lo que se haya seleccionado dentro del Combo Box.
         /// </summary>
         private void realizarPrueba(object sender, EventArgs e)
@@ -49,7 +55,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 MessageBox.Show("Por favor, seleccione una distribucion para la prueba de bondad de ajuste.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            if (cmbK.SelectedItem == null || txtN.Text.ToString() == "")
+            if ((cmbK.SelectedItem == null || txtN.Text.ToString() == "") && cmbDistribucion.SelectedItem.ToString() != "Distribucion Poisson")
             {
                 MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -57,39 +63,146 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
 
             cmbDistribucionSeleccionada = cmbDistribucion.SelectedItem.ToString();
             N = Convert.ToInt32(txtN.Text);
-            controlador.realizarPruebaLenguaje(N, cantIntervalos);
+
+            if (cmbDistribucionSeleccionada == "Distribucion Poisson")
+            {
+                controlador.realizarPruebaLenguaje(N, 0);
+            }
+            else
+            {
+                controlador.realizarPruebaLenguaje(N, cantIntervalos);
+            }
+            
         }
 
-        public void generarHistograma(int[] frecuencias_observadas,int[] frecuencias_esperadas, List<double> listaIntervalos)
+        public double getLambdaExponencial()
+        {
+            return Convert.ToDouble(this.txtLambdaExponencial.Text);
+        }
+
+        public double getLambdaPoisson()
+        {
+            return Convert.ToDouble(this.textBox2.Text);
+        }
+
+        public void generarHistograma(int[] frecuencias_observadas, double[] frecuencias_esperadas, List<double> listaIntervalos)
         {
             histograma.Series["Fe"].Points.Clear();
             histograma.Series["Fo"].Points.Clear();
-            for (int i = 0; i < listaIntervalos.Count-1; i++)
-            //Recorre los intervalos y va agregandolos al grafico junto con las frecuencias
+            if (cmbDistribucionSeleccionada == "Distribucion Poisson")
             {
-                histograma.Series["Fe"].Points.AddXY(listaIntervalos[i] + " - "+ listaIntervalos[i + 1], frecuencias_esperadas[i]); //Agrega la fe al grafico             
-                histograma.Series["Fo"].Points.AddXY(listaIntervalos[i] + " - " + listaIntervalos[i + 1], frecuencias_observadas[i]);//Agrega la fo al grafico
-                histograma.Series["Fe"].AxisLabel = "Frecuencia";
+                for (int i = 0; i < listaIntervalos.Count; i++)
+                //Recorre los intervalos y va agregandolos al grafico junto con las frecuencias
+                {
+                    histograma.Series["Fe"].Points.AddXY(listaIntervalos[i], frecuencias_esperadas[i]); //Agrega la fe al grafico             
+                    histograma.Series["Fo"].Points.AddXY(listaIntervalos[i], frecuencias_observadas[i]);//Agrega la fo al grafico
+                    //histograma.Series["Fe"].AxisLabel = "Frecuencia";
+                }
             }
+            else
+            {
+                for (int i = 0; i < listaIntervalos.Count - 1; i++)
+                //Recorre los intervalos y va agregandolos al grafico junto con las frecuencias
+                {
+                    histograma.Series["Fe"].Points.AddXY(listaIntervalos[i] + " - " + listaIntervalos[i + 1], frecuencias_esperadas[i]); //Agrega la fe al grafico             
+                    histograma.Series["Fo"].Points.AddXY(listaIntervalos[i] + " - " + listaIntervalos[i + 1], frecuencias_observadas[i]);//Agrega la fo al grafico
+                    histograma.Series["Fe"].AxisLabel = "Frecuencia";
+                }
+            }
+                
         }
         /// <summary>
         /// Método que se encarga de llenar la tabla de frecuencias en base a los 
         /// datos obtenidos, a partir de la frecuencia observada y esperada obtenidas, y
         /// las formulas de estadistico de muestra y estadistico acumulado.
         /// </summary>
-        public void llenarTablaFrecuencias(List<double> intervalos, int[] contadoresFo, int[] Fe, double[] c, double[] c_acumulado)
+        public void llenarTablaChiCuadrado(List<double> intervalos, int[] contadoresFo, double[] Fe, double[] c, double[] c_acumulado)
         {
-            dgvBondad.Rows.Clear();
-            for (int i = 1; i < intervalos.Count; i++)
+            dgvChiCuadrado.Rows.Clear();
+            if (cmbDistribucionSeleccionada == "Distribucion Poisson")
             {
-                dgvBondad.Rows.Add(
-                    intervalos[i-1]+" - "+ intervalos[i],
-                    contadoresFo[i-1],
-                    Fe[i-1],
-                    Math.Truncate(c[i-1]*10000)/10000,
-                    Math.Truncate(c_acumulado[i - 1] * 10000) / 10000
+                for (int i = 1; i <= intervalos.Count; i++)
+                {
+                    dgvChiCuadrado.Rows.Add(
+                        intervalos[i - 1],
+                        contadoresFo[i - 1],
+                        Fe[i - 1],
+                        Math.Truncate(c[i - 1] * 10000) / 10000,
+                        Math.Truncate(c_acumulado[i - 1] * 10000) / 10000
+                        );
+                }
+            }
+            else
+            {
+                for (int i = 1; i < intervalos.Count; i++)
+                {
+                    dgvChiCuadrado.Rows.Add(
+                        intervalos[i - 1] + " - " + intervalos[i],
+                        contadoresFo[i - 1],
+                        Fe[i - 1],
+                        Math.Truncate(c[i - 1] * 10000) / 10000,
+                        Math.Truncate(c_acumulado[i - 1] * 10000) / 10000
+                        );
+                }
+            }
+            
+        }
+
+        public void llenarTablaKS(List<double> intervalos, int[] contadoresFo, double[] Fe, List<double> probabilidades)
+        {
+            double maxDifAcum = 0;
+            double NasDouble = Convert.ToDouble(N);
+            double PoAcum = 0;
+            double PeAcum = 0;
+            dgvKs.Rows.Clear();
+
+            for (int i = 0; i < intervalos.Count - 1; i++)
+            {
+                double Po = Convert.ToDouble(contadoresFo[i]) / NasDouble;
+                PoAcum = PoAcum + Po;
+
+
+                double Pe = probabilidades[i];                
+                if (cmbDistribucionSeleccionada == "Distribucion Uniforme")
+                {
+                    Fe[i] = N / cantIntervalos;
+                    Pe = Fe[i] / N;
+                }
+                PeAcum = PeAcum + Pe;
+
+                if (i == 0)
+                {
+                    PoAcum = Po;
+                    PeAcum = Pe;
+                }
+
+                string desdeHasta = intervalos[i] + " - " + intervalos[i + 1];
+                if (i == intervalos.Count)
+                {
+                    desdeHasta = intervalos[i] + " - " + 1;
+                }
+
+                double diferenciaAcum = Math.Abs(PeAcum - PoAcum);
+                if (diferenciaAcum > maxDifAcum)
+                {
+                    maxDifAcum = diferenciaAcum;
+                };
+
+
+
+                dgvKs.Rows.Add(
+                    desdeHasta,
+                    contadoresFo[i],
+                    Fe[i],
+                    Po,
+                    PoAcum,
+                    Pe,
+                    PeAcum,
+                    diferenciaAcum,
+                    maxDifAcum
                     );
             }
+            Max = maxDifAcum;
         }
         /// <summary>
         /// Método que se encarga de limpiar los campos del formulario.
@@ -97,7 +210,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         private void limpiarCampos()
         {
             dgvNros.Rows.Clear();
-            dgvBondad.Rows.Clear();
+            dgvChiCuadrado.Rows.Clear();
             dgvKs.Rows.Clear();
             cmbK.SelectedItem = null;
             txtN.Text = "";
@@ -129,6 +242,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         /// </summary>
         public void MostrarNumeros(List<double> nros)
         {
+            listaNrosAleat = nros;
             dgvNros.Rows.Clear();
             for (int i = 0; i < nros.Count; i++)
             {
@@ -149,13 +263,26 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             lblHipotesis.ForeColor = color;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void deshabilitarParametros()
         {
-            if(listaNrosAleat == null)
-            {
-                MessageBox.Show("Primero debe generar una serie", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
+            gbUniforme.Visible = false;
+            gbPoisson.Visible = false;
+            gbNormal.Visible = false;
+            gbExponencial.Visible = false;
+        }
+
+        public double getMediaNormal()
+        {
+            return Convert.ToDouble(txtMediaNormal.Text.ToString());
+        }
+
+        public double getDesvEstandarNormal()
+        {
+            return Convert.ToDouble(txtDesviacionNormal.Text.ToString());
+        }
+
+        private void verSerie(object sender, EventArgs e)
+        {
             controlador.mostrarSerie();
             dgvNros.Visible = true;
             label4.Visible = true;
@@ -164,6 +291,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         private void validarDistribucion(object sender, EventArgs e)
         {
             deshabilitarParametros();
+            dgvKs.Visible = true;
+            lblHipotesisKs.Visible = true;
+            label1.Visible = true;
+            cmbK.Visible = true;
             switch (cmbDistribucion.SelectedItem.ToString())
             {
                 case "Distribucion Normal (Box-Muller)":
@@ -171,27 +302,41 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                     break;
                 case "Distribucion Normal (Convolucion)":
                     gbNormal.Visible = true;
+
                     break;
                 case "Distribucion Exponencial Neg.":
                     gbExponencial.Visible = true;
+
                     break;
                 case "Distribucion Uniforme":
                     gbUniforme.Visible = true;
                     break;
                 case "Distribucion Poisson":
                     gbPoisson.Visible = true;
+                    cmbK.Visible = false;
+                    dgvKs.Visible = false;
+                    lblHipotesisKs.Visible = false;
+                    label1.Visible = false;
                     break;
                 default:
                     break;
             }
         }
 
-        private void deshabilitarParametros()
+        public void mostrarResultadoHipotesisKs(string mensaje, Color color)
         {
-            gbUniforme.Visible = false;
-            gbPoisson.Visible = false;
-            gbNormal.Visible = false;
-            gbExponencial.Visible = false;
+            lblHipotesisKs.Text = mensaje;
+            lblHipotesisKs.Visible = true;
+            lblHipotesisKs.ForeColor = color;
+        }
+
+        public double getAUniforme()
+        {
+            return Convert.ToDouble(txtA.Text.ToString());
+        }
+        public double getBUniforme()
+        {
+            return Convert.ToDouble(txtB.Text.ToString());
         }
     }
 }
