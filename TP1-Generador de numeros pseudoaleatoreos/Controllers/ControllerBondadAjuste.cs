@@ -54,7 +54,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             realizarTestKs(cantIntervalos);
         }
 
-
         /// <summary>
         /// Método encargado de realizar el calculo de cada uno de los parámetros a mostrar
         /// en la Tabla y el Histograma de frecuencias, definiendo también si la hipotesis
@@ -62,21 +61,13 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         /// </summary>
         private void realizarTestChiCuadrado(int cantIntervalos, int N)
         {
-            if (interfaz.getDistribucionSeleccionada() == "Distribucion Poisson")
-            {
-                frecuencias_observadas = calcularFoP();
-            }
-            else
-            {
-                frecuencias_observadas = calcularFo();
-            }
-            
+            frecuencias_observadas = calcularFo();
 
             frecuencias_esperadas = distribucion.calcularFe(N, probabilidades);
             double[] estadisticos = calcularEstadisticoMuestreo(frecuencias_esperadas, frecuencias_observadas);
             double[] estadisticos_acum = estadisticos_acumulados(estadisticos);
             interfaz.llenarTablaChiCuadrado(listaIntervalos, frecuencias_observadas, frecuencias_esperadas, estadisticos, estadisticos_acum);
-            int gradosLibertad = (listaIntervalos.Count-1) - 1 - parametros_empiricos;
+            int gradosLibertad = cantIntervalos - 1 - parametros_empiricos;
 
             if (estadisticos_acum[estadisticos_acum.Length - 2] < arrayChiCuadrado[gradosLibertad])
             {
@@ -141,7 +132,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                     probabilidades = distribucion.calcularProbabilidades(listaIntervalos);
                     parametros_empiricos = 1;
 
-
+                    
                     break;
                 case "Distribucion Uniforme":
                     double A = interfaz.getAUniforme();
@@ -284,20 +275,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             //    contador = listaNrosAleat.Count(x => x >= intervalo && x < listaIntervalos.);
             //    contadoresFo[i] = contador;
             //}
-        }
-
-        private int[] calcularFoP()
-        {
-            int[] contadoresFo = new int[listaIntervalos.Count];
-            int contador = 0;
-            for (int i = 0; i < listaIntervalos.Count; i++)
-            {
-                contador = listaNrosConDistribucion.Count(x => x == listaIntervalos[i]);
-                contadoresFo[i] = contador;
-               
-            }
-            return contadoresFo;
-            
         }
 
         /// <summary>
