@@ -52,7 +52,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             generarNrosConDistribucion(N, cantIntervalos);
             realizarTestChiCuadrado(cantIntervalos, N);
             interfaz.generarHistograma(frecuencias_observadas, frecuencias_esperadas, listaIntervalos);
-            realizarTestKs(cantIntervalos);
+            realizarTestKs(cantIntervalos, N);
         }
 
         /// <summary>
@@ -157,19 +157,27 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             }
         }
 
-        private void realizarTestKs(int cantIntervalos)
+        private void realizarTestKs(int cantIntervalos, int N)
         {
-            interfaz.llenarTablaKS(listaIntervalos, frecuencias_observadas, frecuencias_esperadas, probabilidades);
-            int gradosLibertad = listaNrosConDistribucion.Count ;
+            frecuencias_observadas = calcularFo();
+            frecuencias_esperadas = distribucion.calcularFe(N, probabilidades);
+            double[] probabilidad = calcularProbabilidad(frecuencias_observadas, N);
+            double[] probabilidadAcum = calcularProbabilidadAcum(probabilidad);
+            double[] probabilidadE = calcularProbabilidadE(probabilidades);
+            double[] probabilidadEAcum = calcularProbabilidadEAcum(probabilidadE);
+            double[] diferenciaAcum = calcularDiferenciaAcum(probabilidadAcum, probabilidadEAcum);
+            double[] maxDifAcum = calcularMaxDifAcum(diferenciaAcum);
+            interfaz.llenarTablaKS(listaIntervalos, frecuencias_observadas, frecuencias_esperadas, probabilidades, probabilidad, probabilidadAcum, probabilidadE, probabilidadEAcum, diferenciaAcum, maxDifAcum);
+            int gradosLibertadKs = N - 1 - parametros_empiricos;
             double valor_tabulado = 1.36 / (Math.Sqrt(listaNrosConDistribucion.Count));
-            if (gradosLibertad < 35)
+            if (gradosLibertadKs < 35)
             {
-                valor_tabulado = arrayKs[gradosLibertad];
+                valor_tabulado = arrayKs[gradosLibertadKs];
             }
-            double maximo = interfaz.getMax();
-            if ( maximo < valor_tabulado)
+            //double maximo = interfaz.getMax();
+            if ( maxDifAcum[maxDifAcum.Length-2] < valor_tabulado)
             {
-                string mensaje = " Estadístico de prueba: " + maximo + " < " + " Valor tabulado: " + valor_tabulado + " con " + gradosLibertad + " grados de libertad\n" +
+                string mensaje = " Estadístico de prueba: " + maxDifAcum[maxDifAcum.Length-2] + " < " + " Valor tabulado: " + valor_tabulado + " con " + gradosLibertadKs + " grados de libertad\n" +
                     "\t La hipotesis no se rechaza. Nivel de significancia 1−∝= 0,95";
                 string hex = "#0096c7";
                 Color color = System.Drawing.ColorTranslator.FromHtml(hex);
@@ -178,7 +186,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             }
             else
             {
-                string mensaje = " Estadístico de prueba: " + maximo + " > " + " Valor tabulado: " + valor_tabulado + " con " + gradosLibertad + " grados de libertad\n" +
+                string mensaje = " Estadístico de prueba: " + maxDifAcum[maxDifAcum.Length-2] + " > " + " Valor tabulado: " + valor_tabulado + " con " + gradosLibertadKs + " grados de libertad\n" +
                     "\t La hipotesis se rechaza. Nivel de significancia 1−∝= 0,95";
                 Color color = Color.DarkRed;
                 interfaz.mostrarResultadoHipotesisKs(mensaje, color);
@@ -300,6 +308,80 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 aux = c_acum[i];
             }
             return c_acum;
+        }
+
+
+        private double[] calcularProbabilidad(int[] frecuenciasObservadas, int N)
+        {
+            double NasDouble = Convert.ToDouble(N);
+            double[] Po = new double[listaIntervalos.Count];
+            for (int i = 0; i < listaIntervalos.Count - 1; i++)
+            {
+                Po[i] = Convert.ToDouble(frecuencias_observadas[i] / NasDouble);
+            }
+            return Po;
+        }
+
+        private double[] calcularProbabilidadAcum(double[] probabilidades)
+        {
+            double[] PoAcum = new double[listaIntervalos.Count];
+            double aux = 0;
+            for (int i = 0; i < listaIntervalos.Count - 1; i++)
+            {
+                PoAcum[i] = probabilidades[i] + aux;
+                aux = PoAcum[i];
+            }
+            return PoAcum;
+
+        }
+
+        private double[] calcularProbabilidadE(List<double> probabilidades)
+        {
+            double[] Pe = new double[listaIntervalos.Count];
+            for (int i = 0; i < listaIntervalos.Count - 1; i++)
+            {
+                Pe[i] = probabilidades[i];
+            }
+            return Pe;
+        }
+
+        private double[] calcularProbabilidadEAcum(double[] probabilidadE)
+        {
+            double[] PeAcum = new double[listaIntervalos.Count];
+            double aux = 0;
+            for (int i = 0; i < listaIntervalos.Count - 1; i++)
+            {
+                PeAcum[i] = probabilidadE[i] + aux;
+                aux = PeAcum[i];
+            }
+            return PeAcum;
+        }
+
+        private double[] calcularDiferenciaAcum(double[] probabilidadAcum, double[] probabilidadEAcum)
+        {
+            double[] dif = new double[listaIntervalos.Count];
+            for (int i = 0; i < listaIntervalos.Count - 1; i++)
+            {
+                dif[i] = Math.Abs(probabilidadAcum[i] - probabilidadEAcum[i]);
+            }
+            return dif;
+        }
+        private double[] calcularMaxDifAcum(double[] difAcum)
+        {
+            double[] maxDif = new double[listaIntervalos.Count];
+            maxDif[0] = difAcum[0];
+            for (int i = 1; i < listaIntervalos.Count - 1; i++)
+            {
+                if (maxDif[i - 1] < difAcum[i])
+                {
+                    maxDif[i] = difAcum[i];
+                }
+                else
+                {
+                    maxDif[i] = maxDif[i - 1];
+                }
+            }
+            return maxDif;
         }
 
         double[] arrayKs = new double[] { 0.97500,

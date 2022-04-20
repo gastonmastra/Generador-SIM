@@ -23,12 +23,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         List<double> listaNrosAleat;
         List<double> listaIntervalos;
         string cmbDistribucionSeleccionada { get; set; }
-        double Max;
+        
 
-        public double getMax()
-        {
-            return Max;
-        }
+        //public double getMax()
+        //{
+        //    return Max;
+        //}
 
         public BondadAjuste()
         {
@@ -103,60 +103,30 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             }
         }
 
-        public void llenarTablaKS(List<double> intervalos, int[] contadoresFo, double[] Fe, List<double> probabilidades)
+        public void llenarTablaKS(List<double> intervalos, int[] contadoresFo, double[] Fe, List<double> probabilidades, double[] Po, double[] PoAcum, double[] Pe, double[] PeAcum, double[] diferenciaAcum, double[] maxDifAcum)
         {
-            double maxDifAcum = 0;
-            double NasDouble = Convert.ToDouble(N);
-            double PoAcum = 0;
-            double PeAcum = 0;
             dgvKs.Rows.Clear();
             for (int i = 0; i < intervalos.Count - 1; i++)
             {
-                double Po = Convert.ToDouble(contadoresFo[i]) / NasDouble;
-                PoAcum = PoAcum + Po;
-
-
-                double Pe = probabilidades[i];                
-                if (cmbDistribucionSeleccionada == "Distribucion Uniforme")
-                {
-                    Fe[i] = N / cantIntervalos;
-                    Pe = Fe[i] / N;
-                }
-                PeAcum = PeAcum + Pe;
-
-                if (i == 0)
-                {
-                    PoAcum = Po;
-                    PeAcum = Pe;
-                }
-
                 string desdeHasta = intervalos[i] + " - " + intervalos[i + 1];
                 if (i == intervalos.Count)
                 {
                     desdeHasta = intervalos[i] + " - " + 1;
                 }
 
-                double diferenciaAcum = Math.Abs(PeAcum - PoAcum);
-                if (diferenciaAcum > maxDifAcum)
-                {
-                    maxDifAcum = diferenciaAcum;
-                };
-
-
-
                 dgvKs.Rows.Add(
                     desdeHasta,
                     contadoresFo[i],
                     Fe[i],
-                    Po,
-                    PoAcum,
-                    Pe,
-                    PeAcum,
-                    diferenciaAcum,
-                    maxDifAcum
+                    Po[i],
+                    PoAcum[i],
+                    Pe[i],
+                    PeAcum[i],
+                    diferenciaAcum[i],
+                    maxDifAcum[i]
                     );
             }
-            Max = maxDifAcum;
+            
         }
         /// <summary>
         /// Método que se encarga de limpiar los campos del formulario.
