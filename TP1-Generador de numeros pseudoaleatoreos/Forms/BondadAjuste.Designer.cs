@@ -342,7 +342,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.button1.TabIndex = 21;
             this.button1.Text = "Ver serie";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.verSerie);
             // 
             // label5
             // 
@@ -619,8 +619,8 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(820, 810);
-            this.Controls.Add(this.gbExponencial);
             this.Controls.Add(this.gbPoisson);
+            this.Controls.Add(this.gbExponencial);
             this.Controls.Add(this.gbUniforme);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblHipotesisKs);
