@@ -91,7 +91,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             histograma.Series["Fo"].Points.Clear();
             if (cmbDistribucionSeleccionada == "Distribucion Poisson")
             {
-                for (int i = 0; i < listaIntervalos.Count; i++)
+                for (int i = 0; i <= listaIntervalos.Count - 1; i++)
                 //Recorre los intervalos y va agregandolos al grafico junto con las frecuencias
                 {
                     histograma.Series["Fe"].Points.AddXY(listaIntervalos[i], frecuencias_esperadas[i]); //Agrega la fe al grafico             
@@ -106,7 +106,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 {
                     histograma.Series["Fe"].Points.AddXY(listaIntervalos[i] + " - " + listaIntervalos[i + 1], frecuencias_esperadas[i]); //Agrega la fe al grafico             
                     histograma.Series["Fo"].Points.AddXY(listaIntervalos[i] + " - " + listaIntervalos[i + 1], frecuencias_observadas[i]);//Agrega la fo al grafico
-                    histograma.Series["Fe"].AxisLabel = "Frecuencia";
+                    //histograma.Series["Fe"].AxisLabel = "Frecuencia";
                 }
             }
                 
@@ -121,28 +121,43 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             dgvChiCuadrado.Rows.Clear();
             if (cmbDistribucionSeleccionada == "Distribucion Poisson")
             {
-                for (int i = 1; i <= intervalos.Count; i++)
+                for (int i = 0; i <= intervalos.Count - 1; i++)
                 {
                     dgvChiCuadrado.Rows.Add(
-                        intervalos[i - 1],
-                        contadoresFo[i - 1],
-                        Fe[i - 1],
-                        Math.Truncate(c[i - 1] * 10000) / 10000,
-                        Math.Truncate(c_acumulado[i - 1] * 10000) / 10000
+                        intervalos[i],
+                        contadoresFo[i],
+                        Fe[i],
+                        Math.Truncate(c[i] * 10000) / 10000,
+                        Math.Truncate(c_acumulado[i] * 10000) / 10000
                         );
                 }
             }
             else
             {
-                for (int i = 1; i < intervalos.Count; i++)
+                for (int i = 0; i <= intervalos.Count - 1; i++)
                 {
-                    dgvChiCuadrado.Rows.Add(
-                        intervalos[i - 1] + " - " + intervalos[i],
-                        contadoresFo[i - 1],
-                        Fe[i - 1],
-                        Math.Truncate(c[i - 1] * 10000) / 10000,
-                        Math.Truncate(c_acumulado[i - 1] * 10000) / 10000
+                    if (i == 0)
+                    {
+                        dgvChiCuadrado.Rows.Add(
+                        "0 - " + intervalos[i],
+                        contadoresFo[i],
+                        Fe[i],
+                        Math.Truncate(c[i] * 10000) / 10000,
+                        Math.Truncate(c_acumulado[i] * 10000) / 10000
                         );
+                    }
+                    else
+                    {
+                        dgvChiCuadrado.Rows.Add(
+                        intervalos[i - 1] + " - " + intervalos[i],
+                        contadoresFo[i],
+                        Fe[i],
+                        Math.Truncate(c[i] * 10000) / 10000,
+                        Math.Truncate(c_acumulado[i] * 10000) / 10000
+                        );
+                    }
+
+
                 }
             }
             
@@ -262,9 +277,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
 
         public void mostrarResultadoHipotesisKs(string mensaje, Color color)
         {
-            lblHipotesisKs.Text = mensaje;
-            lblHipotesisKs.Visible = true;
-            lblHipotesisKs.ForeColor = color;
+            if (getDistribucionSeleccionada() != "Distribucion Poisson")
+            {
+                lblHipotesisKs.Text = mensaje;
+                lblHipotesisKs.Visible = true;
+                lblHipotesisKs.ForeColor = color;
+            }
         }
 
         public double getAUniforme()

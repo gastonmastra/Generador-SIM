@@ -34,6 +34,21 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             
         }
 
+        private void calcularFrecuencias(int N)
+        {
+            if (interfaz.getDistribucionSeleccionada() == "Distribucion Poisson")
+            {
+                frecuencias_observadas = calcularFoP();
+            }
+            else
+            {
+                frecuencias_observadas = calcularFo();
+            }
+
+
+            frecuencias_esperadas = distribucion.calcularFe(N, probabilidades);
+        }
+
 
         /// <summary>
         /// Método que delega la responsabilidad de generar los numeros pseudo-aleatorios
@@ -43,9 +58,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         public void realizarPruebaLenguaje(int N, int cantIntervalos)
         {
             generarNrosConDistribucion(N, cantIntervalos);
-            realizarTestChiCuadrado(cantIntervalos, N);
+            calcularFrecuencias(N);
+
             interfaz.generarHistograma(frecuencias_observadas, frecuencias_esperadas, listaIntervalos);
             realizarTestKs(cantIntervalos, N);
+            realizarTestChiCuadrado(cantIntervalos, N);
+
         }
 
 
@@ -73,7 +91,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             double[] estadisticos = calcularEstadisticoMuestreo(frecuencias_esperadas, frecuencias_observadas);
             double[] estadisticos_acum = estadisticos_acumulados(estadisticos);
             interfaz.llenarTablaChiCuadrado(listaIntervalos, frecuencias_observadas, frecuencias_esperadas, estadisticos, estadisticos_acum);
-            int gradosLibertad = (listaIntervalos.Count-1) - 1 - parametros_empiricos;
+            int gradosLibertad = (listaIntervalos.Count) - 1 - parametros_empiricos;
 
             if (estadisticos_acum[estadisticos_acum.Length - 2] < arrayChiCuadrado[gradosLibertad])
             {
@@ -106,60 +124,91 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             List<double> frecuencias_esperadas_acumuladas = new List<double>();
             List<int> frecuencias_observadas_acumuladas = new List<int>();
             List<double> lista_intervalos_acumulados = new List<double>();
+            int indice = 0;
+            frecuencias_esperadas_acumuladas.Add(frecuencias_esperadas[0]);
+            frecuencias_observadas_acumuladas.Add(frecuencias_observadas[0]);
 
-            for(int i = 0; i <= frecuencias_esperadas.Length; i++)
+            List<double> listaIntervalosArtificiales = new List<double>();
+
+            listaIntervalosArtificiales.Add(listaIntervalos[0]);
+
+            for(int i = 1; i <= frecuencias_esperadas.Length - 1; i++)
             {
-                if (valorFE >= 5)
+                if (frecuencias_esperadas_acumuladas[indice] <= 5)
                 {
-                    frecuencias_esperadas_acumuladas.Add(valorFE);
-                    frecuencias_observadas_acumuladas.Add(valorFO);
-                    lista_intervalos_acumulados.Add(listaIntervalos[i]);
-                    desde = 0;
-                    if(i == frecuencias_esperadas.Length)
-                    {
-                        lista_intervalos_acumulados.Remove(lista_intervalos_acumulados[lista_intervalos_acumulados.Count - 1]);
-                        break;
-                    }
-                    else
-                    {
-                        valorFE = frecuencias_esperadas[i];
-                        valorFO = frecuencias_observadas[i];
-                    }
+                    frecuencias_esperadas_acumuladas[indice] += frecuencias_esperadas[i];
+                    frecuencias_observadas_acumuladas[indice] += frecuencias_observadas[i];
+
+
+
+                    //lista_intervalos_acumulados.Add(listaIntervalos[i]);
+                    //desde = 0;
+                    //if(i == frecuencias_esperadas.Length)
+                    //{
+                    //    lista_intervalos_acumulados.Remove(lista_intervalos_acumulados[lista_intervalos_acumulados.Count - 1]);
+                    //    break;
+                    //}
+                    //else
+                    //{
+                    //    valorFE = frecuencias_esperadas[i];
+                    //    valorFO = frecuencias_observadas[i];
+                    //}
                     
                 } 
                 else
                 {
-                    if(desde == 0)
-                    {
-                        lista_intervalos_acumulados.Add(listaIntervalos[i]);
-                        desde = 1;
-                    }
-                    if(i == frecuencias_esperadas.Length)
-                    {
-                        ultAcumFE = frecuencias_esperadas_acumuladas[frecuencias_esperadas_acumuladas.Count-1];
-                        frecuencias_esperadas_acumuladas.Remove(ultAcumFE);
+                    indice += 1;
+                    frecuencias_esperadas_acumuladas.Add(frecuencias_esperadas[i]);
+                    frecuencias_observadas_acumuladas.Add(frecuencias_observadas[i]);
 
-                        lista_intervalos_acumulados.Remove(lista_intervalos_acumulados[lista_intervalos_acumulados.Count - 1]);
+                    listaIntervalosArtificiales.Add(listaIntervalos[i]);
+                    //if(desde == 0)
+                    //{
+                    //    lista_intervalos_acumulados.Add(listaIntervalos[i]);
+                    //    desde = 1;
+                    //}
+                    //if(i == frecuencias_esperadas.Length)
+                    //{
+                    //    ultAcumFE = frecuencias_esperadas_acumuladas[frecuencias_esperadas_acumuladas.Count-1];
+                    //    frecuencias_esperadas_acumuladas.Remove(ultAcumFE);
 
-                        ultAcumFO = frecuencias_observadas_acumuladas[frecuencias_observadas_acumuladas.Count - 1];
-                        frecuencias_observadas_acumuladas.Remove(ultAcumFO);
+                    //    lista_intervalos_acumulados.Remove(lista_intervalos_acumulados[lista_intervalos_acumulados.Count - 1]);
 
-                        valorFE = valorFE + ultAcumFE;
-                        valorFO = valorFO + ultAcumFO;
+                    //    ultAcumFO = frecuencias_observadas_acumuladas[frecuencias_observadas_acumuladas.Count - 1];
+                    //    frecuencias_observadas_acumuladas.Remove(ultAcumFO);
 
-                        frecuencias_esperadas_acumuladas.Add(valorFE);
-                        frecuencias_observadas_acumuladas.Add(valorFO);
-                    }
-                    else
-                    {
-                        valorFE += frecuencias_esperadas[i];
-                        valorFO += frecuencias_observadas[i];
-                    }
+                    //    valorFE = valorFE + ultAcumFE;
+                    //    valorFO = valorFO + ultAcumFO;
+
+                    //    frecuencias_esperadas_acumuladas.Add(valorFE);
+                    //    frecuencias_observadas_acumuladas.Add(valorFO);
+                    //}
+                    //else
+                    //{
+                    //    valorFE += frecuencias_esperadas[i];
+                    //    valorFO += frecuencias_observadas[i];
+                    //}
                 }
             }
+
+            if (frecuencias_esperadas_acumuladas[indice] <= 5)
+            {
+                frecuencias_esperadas_acumuladas[indice-1] += frecuencias_esperadas_acumuladas[indice];
+                frecuencias_observadas_acumuladas[indice - 1] += frecuencias_observadas_acumuladas[indice];
+
+                frecuencias_esperadas_acumuladas.RemoveAt(indice);
+                frecuencias_observadas_acumuladas.RemoveAt(indice);
+                listaIntervalosArtificiales.RemoveAt(indice);
+                //frecuencias_esperadas = frecuencias_esperadas_acumuladas.ToArray();
+                //frecuencias_observadas = frecuencias_observadas_acumuladas.ToArray();
+                //listaIntervalos = lista_intervalos_acumulados;
+            }
+
             frecuencias_esperadas = frecuencias_esperadas_acumuladas.ToArray();
             frecuencias_observadas = frecuencias_observadas_acumuladas.ToArray();
-            listaIntervalos = lista_intervalos_acumulados;
+            listaIntervalos = listaIntervalosArtificiales;
+
+            
         }
 
         private void generarNrosConDistribucion(int N, int cantIntervalos)
@@ -380,8 +429,8 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         /// </summary>
         private double[] calcularEstadisticoMuestreo(double[] frecuencias_esperadas, int[] frecuencias_observadas)
         {
-            double[] c = new double[listaIntervalos.Count];
-            for (int i = 0; i < listaIntervalos.Count - 1; i++)
+            double[] c = new double[frecuencias_esperadas.Length];
+            for (int i = 0; i <= frecuencias_esperadas.Length - 1; i++)
             {
                 c[i] = Math.Pow((frecuencias_observadas[i] - frecuencias_esperadas[i]), 2) / frecuencias_esperadas[i];
             }
@@ -394,9 +443,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         /// </summary>
         private double[] estadisticos_acumulados(double[] estadisticos)
         {
-            double[] c_acum = new double[listaIntervalos.Count];
+            double[] c_acum = new double[frecuencias_esperadas.Length];
             double aux = 0;
-            for (int i = 0; i < listaIntervalos.Count; i++)
+            for (int i = 0; i <= frecuencias_esperadas.Length - 1; i++)
             {
                 c_acum[i] = estadisticos[i] + aux;
                 //c_acum[i] += estadisticos[i];

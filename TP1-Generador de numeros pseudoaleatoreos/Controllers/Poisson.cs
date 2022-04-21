@@ -29,7 +29,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             List<double> probabilidades = new List<double>();
             for (int i = 0; i < listaConValores.Count; i++)
             {
-                double probabilidad = (Math.Pow(lambda,listaConValores[i])* Math.Exp(-lambda))/ factorial(Convert.ToInt32(listaConValores[i]));
+                double probabilidad = Math.Truncate((Math.Pow(lambda,listaConValores[i])* Math.Exp(-lambda))/ factorial(Convert.ToInt32(listaConValores[i])) * 10000) / 10000;
                 probabilidades.Add(probabilidad);
             }
             return probabilidades;
