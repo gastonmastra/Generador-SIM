@@ -25,13 +25,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         int parametros_empiricos;
         IControllerDistribucion distribucion;
 
-        double[] arrayChiCuadrado = new double[] {3.84, 5.99, 7.81,
-                                                  9.49, 11.1, 12.6,
-                                                  14.1, 15.5, 16.9,
-                                                  18.3, 19.7, 21.0,
-                                                  22.4, 23.7, 25.0,
-                                                  26.3, 27.6, 28.9,
-                                                  30.1, 31.4 };
+        double[] arrayChiCuadrado = new double[] { 3.84, 5.99, 7.81, 9.49, 11.1, 12.6, 14.1, 15.5, 16.9, 18.3, 19.7, 21.0, 22.4, 23.7, 25.0, 26.3, 27.6, 28.9, 30.1, 31.4, 32.7, 33.9, 35.2, 36.4, 37.7, 38.9, 40.1, 41.3, 42.6, 43.8, 43.8, 43.8, 43.8, 43.8, 43.8, 55.8, 55.8, 55.8, 55.8, 55.8, 55.8, 55.8, 55.8, 55.8, 55.8, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 79.1, 79.1, 79.1, 79.1, 79.1, 79.1, 79.1, 79.1, 79.1, 79.1, 90.5, 90.5, 90.5, 90.5, 90.5, 90.5, 90.5, 90.5, 90.5, 90.5, 101.9, 101.9, 101.9, 101.9, 101.9, 101.9, 101.9, 101.9, 101.9, 101.9, 113.1, 113.1, 113.1, 113.1, 113.1, 113.1, 113.1, 113.1, 113.1, 113.1, 124.3, 124.3, 124.3, 124.3, 124.3 };
         
 
         public ControllerBondadAjuste(BondadAjuste interfaz)
@@ -73,6 +67,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             
 
             frecuencias_esperadas = distribucion.calcularFe(N, probabilidades);
+
+            acumular();
+
             double[] estadisticos = calcularEstadisticoMuestreo(frecuencias_esperadas, frecuencias_observadas);
             double[] estadisticos_acum = estadisticos_acumulados(estadisticos);
             interfaz.llenarTablaChiCuadrado(listaIntervalos, frecuencias_observadas, frecuencias_esperadas, estadisticos, estadisticos_acum);
@@ -96,6 +93,25 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             }
             //listaNrosAleatorios = this.generarNrosAleatorios(N);
             //interfaz.cargarListaNrosAleatorios(listaNrosAleatorios);
+        }
+
+        private void acumular()
+        {
+            List<double> frecuencias_esperadas_acumuladas = new List<double>();
+            List<double> freucencias_observadas_acumuladas = new List<double>();
+            double acum = 0;
+            for(int i = 0; i <= frecuencias_esperadas.Length; i++)
+            {
+                if (frecuencias_esperadas[i] >= 5)
+                {
+                    frecuencias_esperadas_acumuladas.Add(frecuencias_esperadas[i]);
+                    freucencias_observadas_acumuladas.Add(frecuencias_observadas[i]);
+                }
+                else
+                {
+                    acum += frecuencias_esperadas[i];
+                }
+            }
         }
 
         private void generarNrosConDistribucion(int N, int cantIntervalos)
