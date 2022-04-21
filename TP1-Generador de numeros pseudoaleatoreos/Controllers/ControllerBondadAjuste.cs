@@ -390,7 +390,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 //contadoresFo[i] = contador;
                 if (i == (listaIntervalos.Count - 1))
                 {
-                    contador = listaNrosConDistribucion.Count(x => x >= listaIntervalos[i - 1] && x <= 1);
+                    contador = listaNrosConDistribucion.Count(x => x >= listaIntervalos[i - 1] && x < listaIntervalos[listaIntervalos.Count - 1]);
                     contadoresFo[i] = contador;
                 }
                 else

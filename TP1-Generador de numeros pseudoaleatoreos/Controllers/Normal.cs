@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
 {
@@ -58,8 +59,8 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 Random generador2 = new Random();
                 for (int i = 0; i < cantidad / 2; i++)
                 {
-                    double rnd = Math.Truncate(generador.NextDouble() * 10000) / 10000;
-                    double rnd2 = Math.Truncate(generador2.NextDouble() * 10000) / 10000;
+                    double rnd = Math.Truncate(generador.NextDouble() * 100000000) / 100000000;
+                    double rnd2 = Math.Truncate(generador2.NextDouble() * 100000000) / 100000000;
                     double primerParte = ((Math.Sqrt(-2 * Math.Log(rnd))));
                     double segundaParte = Math.Cos(2 * Math.PI * rnd2);
                     double segundaParteN2 = Math.Sin(2 * Math.PI * rnd2);
@@ -69,6 +70,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                     //{
                     //    MessageBox.Show(x.ToString() + "debido a un rnd de: " + rnd.ToString() + " y un lambda de: " + lambda.ToString() );
                     //}
+                    if(N1==(Double.NaN) || N2 ==(Double.NaN) || Double.IsInfinity(N1) || Double.IsInfinity(N2))
+                    {
+                        MessageBox.Show("N1: " + N1.ToString() + " N2: " + N2.ToString());
+                    }
                     listaNrosNormalesAleatorios.Add(N1);
                     listaNrosNormalesAleatorios.Add(N2);
                 }
