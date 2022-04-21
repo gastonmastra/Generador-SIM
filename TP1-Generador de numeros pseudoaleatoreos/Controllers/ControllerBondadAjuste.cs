@@ -97,21 +97,63 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
 
         private void acumular()
         {
+            double ultAcumFE = 0;
+            int ultAcumFO = 0;
+            double valorFE = 0;
+            int valorFO = 0;
+            int desde = 0;
+            int hasta = 0;
             List<double> frecuencias_esperadas_acumuladas = new List<double>();
-            List<double> freucencias_observadas_acumuladas = new List<double>();
-            double acum = 0;
+            List<int> frecuencias_observadas_acumuladas = new List<int>();
+            List<double> lista_intervalos_acumulados = new List<double>();
+
             for(int i = 0; i <= frecuencias_esperadas.Length; i++)
             {
-                if (frecuencias_esperadas[i] >= 5)
+                if (valorFE >= 5)
                 {
-                    frecuencias_esperadas_acumuladas.Add(frecuencias_esperadas[i]);
-                    freucencias_observadas_acumuladas.Add(frecuencias_observadas[i]);
-                }
+                    frecuencias_esperadas_acumuladas.Add(valorFE);
+                    frecuencias_observadas_acumuladas.Add(valorFO);
+                    lista_intervalos_acumulados.Add(listaIntervalos[desde]);
+                    lista_intervalos_acumulados.Add(listaIntervalos[hasta]);
+                    desde = hasta;
+                    if(i == frecuencias_esperadas.Length)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        valorFE = frecuencias_esperadas[i];
+                        valorFO = frecuencias_observadas[i];
+                    }
+                    
+                } 
                 else
                 {
-                    acum += frecuencias_esperadas[i];
+                    if(i == frecuencias_esperadas.Length)
+                    {
+                        ultAcumFE = frecuencias_esperadas_acumuladas[frecuencias_esperadas_acumuladas.Count-1];
+                        frecuencias_esperadas_acumuladas.Remove(ultAcumFE);
+
+                        ultAcumFO = frecuencias_observadas_acumuladas[frecuencias_observadas_acumuladas.Count - 1];
+                        frecuencias_observadas_acumuladas.Remove(ultAcumFO);
+
+                        valorFE = valorFE + ultAcumFE;
+                        valorFO = valorFO + ultAcumFO;
+
+                        frecuencias_esperadas_acumuladas.Add(valorFE);
+                        frecuencias_observadas_acumuladas.Add(valorFO);
+                    }
+                    else
+                    {
+                        hasta += 1;
+                        valorFE += frecuencias_esperadas[i];
+                        valorFO += frecuencias_observadas[i];
+                    }
                 }
+                
             }
+            frecuencias_esperadas = frecuencias_esperadas_acumuladas.ToArray();
+            frecuencias_observadas = frecuencias_observadas_acumuladas.ToArray();
         }
 
         private void generarNrosConDistribucion(int N, int cantIntervalos)
