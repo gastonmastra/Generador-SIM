@@ -63,7 +63,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
 
             cmbDistribucionSeleccionada = cmbDistribucion.SelectedItem.ToString();
             N = Convert.ToInt32(txtN.Text);
-
+            if(Convert.ToDouble(txtA.Text.ToString()) > Convert.ToDouble(txtB.Text.ToString()))
+            {
+                MessageBox.Show("Limite superior debe ser mayor a limite inferior", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txtA.Text = ""; txtA.Focus();
+                return;
+            }
             if (cmbDistribucionSeleccionada == "Distribucion Poisson")
             {
                 controlador.realizarPruebaLenguaje(N, 0);
@@ -106,7 +111,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 {
                     histograma.Series["Fe"].Points.AddXY(listaIntervalos[i] + " - " + listaIntervalos[i + 1], frecuencias_esperadas[i]); //Agrega la fe al grafico             
                     histograma.Series["Fo"].Points.AddXY(listaIntervalos[i] + " - " + listaIntervalos[i + 1], frecuencias_observadas[i]);//Agrega la fo al grafico
-                    histograma.Series["Fe"].AxisLabel = "Frecuencia";
+                    //histograma.Series["Fe"].AxisLabel = "Frecuencia";
                 }
             }
                 

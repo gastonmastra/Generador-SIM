@@ -37,12 +37,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             List<double> probabilidades = new List<double>();
             for (int i = 0; i < intervalos.Count - 1; i++)
             {                
-                double difEntreHasta = ((intervalos[i+1]-intervalos[i]) / (double)(intervalos.Count - 1));
-                double marcaClase = (intervalos[i] + intervalos[i + 1]) / 2;
+                double difEntreHasta = (intervalos[i+1]-intervalos[i]);
+                double marcaClase = ((intervalos[i] + intervalos[i + 1]) / 2);
                 double calculo = ((marcaClase - media) / desvEstandar);
                 double exponente = Math.Pow(calculo,2);
                 double numerador = (Math.Exp(-0.5 * (exponente)));
-                double denominador = (desvEstandar * Math.Sqrt(2 * Math.PI));
+                double denominador = (desvEstandar * (Math.Sqrt(2 * Math.PI)));
                 double probabilidad = (numerador / denominador) * difEntreHasta;
                 probabilidades.Add(probabilidad);
             }

@@ -56,7 +56,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
 
                 do
                 {
-                    double U = Math.Truncate(rnd.NextDouble() * 10000) / 10000;
+                    double U = rnd.NextDouble(); //Math.Truncate(rnd.NextDouble() * 10000) / 10000;
                     P *= U;
                     X += 1;
                 } while (P >= A);
