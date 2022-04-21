@@ -8,8 +8,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
 {
     interface IControllerDistribucion
     {
-        long calcularProbabilidad(long x, long media, long desvStd);
-        long calcularProbabilidad(long x, long media);
+        List<double> calcularProbabilidades(List<double> listaIntervalos);
+        List<double> generarNrosAleatorios(int cantidad);
+
+        double[] calcularFe(int N, List<double> probabilidades);
+
+
 
     }
 }
