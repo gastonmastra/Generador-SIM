@@ -55,9 +55,29 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 MessageBox.Show("Por favor, seleccione una distribucion para la prueba de bondad de ajuste.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            if ((cmbK.SelectedItem == null || txtN.Text.ToString() == "") && cmbDistribucion.SelectedItem.ToString() != "Distribucion Poisson")
+            if ((cmbK.SelectedItem == null || txtN.Text.ToString() == "" || txtDesviacionNormal.Text.ToString() == "" || txtMediaNormal.Text.ToString() == "") && (cmbDistribucion.SelectedItem.ToString() == "Distribucion Normal (Convolucion)" || cmbDistribucion.SelectedItem.ToString() == "Distribucion Normal (Box-Muller)"))
             {
                 MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }   
+            if ((txtN.Text.ToString() == "" || textBox2.Text.ToString() == "") && (cmbDistribucion.SelectedItem.ToString() == "Distribucion Poisson"))
+            {
+                MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if ((cmbK.SelectedItem == null || txtN.Text.ToString() == "" || txtLambdaExponencial.ToString() == "") && (cmbDistribucion.SelectedItem.ToString() == "Distribucion Exponencial Neg."))
+            {
+                MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if ((cmbK.SelectedItem == null || txtN.Text.ToString() == "" || txtA.Text.ToString() == "" || txtB.Text.ToString() == "") && (cmbDistribucion.SelectedItem.ToString() == "Distribucion Uniforme"))
+            {
+                MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if ((txtA.Text.ToString() != "" || txtB.Text.ToString() != "") && (double.Parse(txtA.Text) > double.Parse(txtB.Text)))
+            {
+                MessageBox.Show("El valor de A debe ser menor que el valor de B, por favor ingrese otro valor ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 

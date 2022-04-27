@@ -57,16 +57,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.lblHipotesis = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.dgvKs = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pe_acum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.diferencia_PoAC_PeAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.max = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblHipotesisKs = new System.Windows.Forms.Label();
             this.gbUniforme = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -84,14 +74,24 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.txtDesviacionNormal = new System.Windows.Forms.TextBox();
             this.txtMediaNormal = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.max = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.diferencia_PoAC_PeAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pe_acum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvKs = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChiCuadrado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNros)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.histograma)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvKs)).BeginInit();
             this.gbUniforme.SuspendLayout();
             this.gbPoisson.SuspendLayout();
             this.gbExponencial.SuspendLayout();
             this.gbNormal.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvKs)).BeginInit();
             this.SuspendLayout();
             // 
             // txtN
@@ -119,7 +119,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             // 
             // dgvChiCuadrado
             // 
-            this.dgvChiCuadrado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgvChiCuadrado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvChiCuadrado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvChiCuadrado.BackgroundColor = System.Drawing.Color.White;
@@ -132,7 +132,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.cAcum});
             this.dgvChiCuadrado.Location = new System.Drawing.Point(17, 341);
             this.dgvChiCuadrado.Name = "dgvChiCuadrado";
-            this.dgvChiCuadrado.Size = new System.Drawing.Size(606, 161);
+            this.dgvChiCuadrado.Size = new System.Drawing.Size(589, 161);
             this.dgvChiCuadrado.TabIndex = 4;
             // 
             // intervalo
@@ -205,9 +205,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.dgvNros.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iteracion,
             this.nroAleatorio});
-            this.dgvNros.Location = new System.Drawing.Point(632, 33);
+            this.dgvNros.Location = new System.Drawing.Point(615, 33);
             this.dgvNros.Name = "dgvNros";
-            this.dgvNros.Size = new System.Drawing.Size(179, 533);
+            this.dgvNros.Size = new System.Drawing.Size(179, 539);
             this.dgvNros.TabIndex = 4;
             this.dgvNros.Visible = false;
             // 
@@ -225,8 +225,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(14, 571);
@@ -258,7 +257,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             series2.Name = "Fe";
             this.histograma.Series.Add(series1);
             this.histograma.Series.Add(series2);
-            this.histograma.Size = new System.Drawing.Size(606, 212);
+            this.histograma.Size = new System.Drawing.Size(589, 218);
             this.histograma.TabIndex = 7;
             this.histograma.Text = "chart1";
             // 
@@ -267,7 +266,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(633, 12);
+            this.label4.Location = new System.Drawing.Point(616, 12);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(178, 13);
             this.label4.TabIndex = 6;
@@ -313,7 +312,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             // btnVolver
             // 
             this.btnVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnVolver.Location = new System.Drawing.Point(14, 758);
+            this.btnVolver.Location = new System.Drawing.Point(14, 764);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(63, 23);
             this.btnVolver.TabIndex = 19;
@@ -323,10 +322,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             // 
             // lblHipotesis
             // 
-            this.lblHipotesis.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblHipotesis.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHipotesis.BackColor = System.Drawing.Color.Transparent;
             this.lblHipotesis.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblHipotesis.Location = new System.Drawing.Point(183, 505);
+            this.lblHipotesis.Location = new System.Drawing.Point(166, 508);
             this.lblHipotesis.Name = "lblHipotesis";
             this.lblHipotesis.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblHipotesis.Size = new System.Drawing.Size(440, 43);
@@ -356,84 +356,13 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.label5.TabIndex = 6;
             this.label5.Text = "A:";
             // 
-            // dgvKs
-            // 
-            this.dgvKs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvKs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvKs.BackgroundColor = System.Drawing.Color.White;
-            this.dgvKs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvKs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.Pe,
-            this.Pe_acum,
-            this.diferencia_PoAC_PeAC,
-            this.max});
-            this.dgvKs.Location = new System.Drawing.Point(14, 587);
-            this.dgvKs.Name = "dgvKs";
-            this.dgvKs.Size = new System.Drawing.Size(797, 165);
-            this.dgvKs.TabIndex = 4;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Intervalo";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Fo";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Fe";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Po()";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Po() AC";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // Pe
-            // 
-            this.Pe.HeaderText = "Pe()";
-            this.Pe.Name = "Pe";
-            // 
-            // Pe_acum
-            // 
-            this.Pe_acum.HeaderText = "Pe() AC";
-            this.Pe_acum.Name = "Pe_acum";
-            // 
-            // diferencia_PoAC_PeAC
-            // 
-            this.diferencia_PoAC_PeAC.HeaderText = "Po()AC - Pe()AC";
-            this.diferencia_PoAC_PeAC.Name = "diferencia_PoAC_PeAC";
-            // 
-            // max
-            // 
-            this.max.HeaderText = "MAX";
-            this.max.Name = "max";
-            // 
             // lblHipotesisKs
             // 
-            this.lblHipotesisKs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblHipotesisKs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHipotesisKs.BackColor = System.Drawing.Color.Transparent;
             this.lblHipotesisKs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblHipotesisKs.Location = new System.Drawing.Point(370, 758);
+            this.lblHipotesisKs.Location = new System.Drawing.Point(353, 761);
             this.lblHipotesisKs.Name = "lblHipotesisKs";
             this.lblHipotesisKs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblHipotesisKs.Size = new System.Drawing.Size(440, 43);
@@ -613,12 +542,84 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.label11.TabIndex = 6;
             this.label11.Text = "Test de Chi-Cuadrado:";
             // 
+            // max
+            // 
+            this.max.HeaderText = "MAX";
+            this.max.Name = "max";
+            // 
+            // diferencia_PoAC_PeAC
+            // 
+            this.diferencia_PoAC_PeAC.HeaderText = "Po()AC - Pe()AC";
+            this.diferencia_PoAC_PeAC.Name = "diferencia_PoAC_PeAC";
+            // 
+            // Pe_acum
+            // 
+            this.Pe_acum.HeaderText = "Pe() AC";
+            this.Pe_acum.Name = "Pe_acum";
+            // 
+            // Pe
+            // 
+            this.Pe.HeaderText = "Pe()";
+            this.Pe.Name = "Pe";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Po() AC";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Po()";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Fe";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Fo";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Intervalo";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dgvKs
+            // 
+            this.dgvKs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvKs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvKs.BackgroundColor = System.Drawing.Color.White;
+            this.dgvKs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvKs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.Pe,
+            this.Pe_acum,
+            this.diferencia_PoAC_PeAC,
+            this.max});
+            this.dgvKs.Location = new System.Drawing.Point(14, 587);
+            this.dgvKs.Name = "dgvKs";
+            this.dgvKs.Size = new System.Drawing.Size(780, 165);
+            this.dgvKs.TabIndex = 4;
+            // 
             // BondadAjuste
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
-            this.ClientSize = new System.Drawing.Size(820, 810);
+            this.ClientSize = new System.Drawing.Size(803, 816);
             this.Controls.Add(this.gbPoisson);
             this.Controls.Add(this.gbExponencial);
             this.Controls.Add(this.gbUniforme);
@@ -642,7 +643,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.Controls.Add(this.cmbK);
             this.Controls.Add(this.txtN);
             this.Controls.Add(this.gbNormal);
-            this.MinimumSize = new System.Drawing.Size(817, 726);
+            this.MinimumSize = new System.Drawing.Size(819, 855);
             this.Name = "BondadAjuste";
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -651,7 +652,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dgvChiCuadrado)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNros)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.histograma)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvKs)).EndInit();
             this.gbUniforme.ResumeLayout(false);
             this.gbUniforme.PerformLayout();
             this.gbPoisson.ResumeLayout(false);
@@ -660,6 +660,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.gbExponencial.PerformLayout();
             this.gbNormal.ResumeLayout(false);
             this.gbNormal.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvKs)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -691,16 +692,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         private System.Windows.Forms.Label lblHipotesis;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataGridView dgvKs;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pe_acum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn diferencia_PoAC_PeAC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn max;
         private System.Windows.Forms.Label lblHipotesisKs;
         private System.Windows.Forms.GroupBox gbUniforme;
         private System.Windows.Forms.Label label6;
@@ -718,5 +709,15 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtDesviacionNormal;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn max;
+        private System.Windows.Forms.DataGridViewTextBoxColumn diferencia_PoAC_PeAC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pe_acum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridView dgvKs;
     }
 }

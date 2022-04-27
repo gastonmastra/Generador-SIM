@@ -20,7 +20,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         public double[] calcularFe(int N, List<double> probabilidades)
         {
             double[] frecuenciasEsperadas = new double[probabilidades.Count];
-            Fe = N / probabilidades.Count;
+            Fe = N / (double) probabilidades.Count;
             for (int i = 0; i < probabilidades.Count; i++)
             {
                 frecuenciasEsperadas[i] = Fe;

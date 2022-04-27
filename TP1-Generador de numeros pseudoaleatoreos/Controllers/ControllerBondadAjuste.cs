@@ -59,7 +59,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         {
             generarNrosConDistribucion(N, cantIntervalos);
             calcularFrecuencias(N);
-
             interfaz.generarHistograma(frecuencias_observadas, frecuencias_esperadas, listaIntervalos);
             realizarTestKs(cantIntervalos, N);
             realizarTestChiCuadrado(cantIntervalos, N);
@@ -137,23 +136,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 if (frecuencias_esperadas_acumuladas[indice] <= 5)
                 {
                     frecuencias_esperadas_acumuladas[indice] += frecuencias_esperadas[i];
-                    frecuencias_observadas_acumuladas[indice] += frecuencias_observadas[i];
-
-
-
-                    //lista_intervalos_acumulados.Add(listaIntervalos[i]);
-                    //desde = 0;
-                    //if(i == frecuencias_esperadas.Length)
-                    //{
-                    //    lista_intervalos_acumulados.Remove(lista_intervalos_acumulados[lista_intervalos_acumulados.Count - 1]);
-                    //    break;
-                    //}
-                    //else
-                    //{
-                    //    valorFE = frecuencias_esperadas[i];
-                    //    valorFO = frecuencias_observadas[i];
-                    //}
-                    
+                    frecuencias_observadas_acumuladas[indice] += frecuencias_observadas[i];             
                 } 
                 else
                 {
@@ -162,32 +145,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                     frecuencias_observadas_acumuladas.Add(frecuencias_observadas[i]);
 
                     listaIntervalosArtificiales.Add(listaIntervalos[i]);
-                    //if(desde == 0)
-                    //{
-                    //    lista_intervalos_acumulados.Add(listaIntervalos[i]);
-                    //    desde = 1;
-                    //}
-                    //if(i == frecuencias_esperadas.Length)
-                    //{
-                    //    ultAcumFE = frecuencias_esperadas_acumuladas[frecuencias_esperadas_acumuladas.Count-1];
-                    //    frecuencias_esperadas_acumuladas.Remove(ultAcumFE);
-
-                    //    lista_intervalos_acumulados.Remove(lista_intervalos_acumulados[lista_intervalos_acumulados.Count - 1]);
-
-                    //    ultAcumFO = frecuencias_observadas_acumuladas[frecuencias_observadas_acumuladas.Count - 1];
-                    //    frecuencias_observadas_acumuladas.Remove(ultAcumFO);
-
-                    //    valorFE = valorFE + ultAcumFE;
-                    //    valorFO = valorFO + ultAcumFO;
-
-                    //    frecuencias_esperadas_acumuladas.Add(valorFE);
-                    //    frecuencias_observadas_acumuladas.Add(valorFO);
-                    //}
-                    //else
-                    //{
-                    //    valorFE += frecuencias_esperadas[i];
-                    //    valorFO += frecuencias_observadas[i];
-                    //}
                 }
             }
 
@@ -199,9 +156,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 frecuencias_esperadas_acumuladas.RemoveAt(indice);
                 frecuencias_observadas_acumuladas.RemoveAt(indice);
                 listaIntervalosArtificiales.RemoveAt(indice);
-                //frecuencias_esperadas = frecuencias_esperadas_acumuladas.ToArray();
-                //frecuencias_observadas = frecuencias_observadas_acumuladas.ToArray();
-                //listaIntervalos = lista_intervalos_acumulados;
             }
 
             frecuencias_esperadas = frecuencias_esperadas_acumuladas.ToArray();

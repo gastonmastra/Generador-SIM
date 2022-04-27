@@ -59,17 +59,13 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 Random generador2 = new Random();
                 for (int i = 0; i < cantidad / 2; i++)
                 {
-                    double rnd = Math.Truncate(generador.NextDouble() * 100000000) / 100000000;
-                    double rnd2 = Math.Truncate(generador2.NextDouble() * 100000000) / 100000000;
+                    double rnd = generador.NextDouble(); 
+                    double rnd2 = generador.NextDouble();
                     double primerParte = ((Math.Sqrt(-2 * Math.Log(rnd))));
                     double segundaParte = Math.Cos(2 * Math.PI * rnd2);
                     double segundaParteN2 = Math.Sin(2 * Math.PI * rnd2);
                     double N1 = ((primerParte * segundaParte) * desvEstandar) + media;
                     double N2 = ((primerParte * segundaParteN2) * desvEstandar) + media;
-                    //if ( x >= 1)
-                    //{
-                    //    MessageBox.Show(x.ToString() + "debido a un rnd de: " + rnd.ToString() + " y un lambda de: " + lambda.ToString() );
-                    //}
                     if(N1==(Double.NaN) || N2 ==(Double.NaN) || Double.IsInfinity(N1) || Double.IsInfinity(N2))
                     {
                         MessageBox.Show("N1: " + N1.ToString() + " N2: " + N2.ToString());
