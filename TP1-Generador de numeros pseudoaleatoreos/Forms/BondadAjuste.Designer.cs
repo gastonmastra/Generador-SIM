@@ -130,9 +130,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.fe,
             this.estadisticoMuestra,
             this.cAcum});
-            this.dgvChiCuadrado.Location = new System.Drawing.Point(17, 341);
+            this.dgvChiCuadrado.Location = new System.Drawing.Point(15, 248);
             this.dgvChiCuadrado.Name = "dgvChiCuadrado";
-            this.dgvChiCuadrado.Size = new System.Drawing.Size(589, 161);
+            this.dgvChiCuadrado.Size = new System.Drawing.Size(589, 136);
             this.dgvChiCuadrado.TabIndex = 4;
             // 
             // intervalo
@@ -207,7 +207,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.nroAleatorio});
             this.dgvNros.Location = new System.Drawing.Point(615, 33);
             this.dgvNros.Name = "dgvNros";
-            this.dgvNros.Size = new System.Drawing.Size(179, 539);
+            this.dgvNros.Size = new System.Drawing.Size(179, 397);
             this.dgvNros.TabIndex = 4;
             this.dgvNros.Visible = false;
             // 
@@ -228,7 +228,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 571);
+            this.label1.Location = new System.Drawing.Point(12, 431);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(143, 13);
             this.label1.TabIndex = 6;
@@ -257,7 +257,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             series2.Name = "Fe";
             this.histograma.Series.Add(series1);
             this.histograma.Series.Add(series2);
-            this.histograma.Size = new System.Drawing.Size(589, 218);
+            this.histograma.Size = new System.Drawing.Size(589, 133);
             this.histograma.TabIndex = 7;
             this.histograma.Text = "chart1";
             // 
@@ -312,7 +312,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             // btnVolver
             // 
             this.btnVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnVolver.Location = new System.Drawing.Point(14, 764);
+            this.btnVolver.Location = new System.Drawing.Point(12, 623);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(63, 23);
             this.btnVolver.TabIndex = 19;
@@ -326,7 +326,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHipotesis.BackColor = System.Drawing.Color.Transparent;
             this.lblHipotesis.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblHipotesis.Location = new System.Drawing.Point(166, 508);
+            this.lblHipotesis.Location = new System.Drawing.Point(167, 387);
             this.lblHipotesis.Name = "lblHipotesis";
             this.lblHipotesis.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblHipotesis.Size = new System.Drawing.Size(440, 43);
@@ -362,7 +362,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHipotesisKs.BackColor = System.Drawing.Color.Transparent;
             this.lblHipotesisKs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblHipotesisKs.Location = new System.Drawing.Point(353, 761);
+            this.lblHipotesisKs.Location = new System.Drawing.Point(358, 603);
             this.lblHipotesisKs.Name = "lblHipotesisKs";
             this.lblHipotesisKs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblHipotesisKs.Size = new System.Drawing.Size(440, 43);
@@ -536,7 +536,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(18, 325);
+            this.label11.Location = new System.Drawing.Point(11, 232);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(113, 13);
             this.label11.TabIndex = 6;
@@ -609,9 +609,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.Pe_acum,
             this.diferencia_PoAC_PeAC,
             this.max});
-            this.dgvKs.Location = new System.Drawing.Point(14, 587);
+            this.dgvKs.Location = new System.Drawing.Point(15, 447);
             this.dgvKs.Name = "dgvKs";
-            this.dgvKs.Size = new System.Drawing.Size(780, 165);
+            this.dgvKs.Size = new System.Drawing.Size(780, 153);
             this.dgvKs.TabIndex = 4;
             // 
             // BondadAjuste
@@ -619,7 +619,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
-            this.ClientSize = new System.Drawing.Size(803, 816);
+            this.ClientSize = new System.Drawing.Size(803, 749);
             this.Controls.Add(this.gbPoisson);
             this.Controls.Add(this.gbExponencial);
             this.Controls.Add(this.gbUniforme);
@@ -643,7 +643,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.Controls.Add(this.cmbK);
             this.Controls.Add(this.txtN);
             this.Controls.Add(this.gbNormal);
-            this.MinimumSize = new System.Drawing.Size(819, 855);
+            this.MinimumSize = new System.Drawing.Size(819, 726);
             this.Name = "BondadAjuste";
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

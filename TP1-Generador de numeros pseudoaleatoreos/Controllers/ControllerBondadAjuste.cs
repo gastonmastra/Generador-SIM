@@ -94,7 +94,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
 
             if (estadisticos_acum[estadisticos_acum.Length - 2] < arrayChiCuadrado[gradosLibertad])
             {
-                string mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 2] + " < " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad] + " con " + gradosLibertad + " grados de libertad\n" +
+                string mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 1] + " < " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad] + " con " + gradosLibertad + " grados de libertad\n" +
                     "\t La hipotesis no se rechaza. Nivel de significancia 1−∝= 0,95";
                 string hex = "#0096c7";
                 Color color = System.Drawing.ColorTranslator.FromHtml(hex);
@@ -103,7 +103,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             }
             else
             {
-                string mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 2] + " > " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad] + " con " + gradosLibertad + " grados de libertad\n" +
+                string mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 1] + " > " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad] + " con " + gradosLibertad + " grados de libertad\n" +
                     "\t La hipotesis se rechaza. Nivel de significancia 1−∝= 0,95";
                 Color color = Color.DarkRed;
                 interfaz.mostrarResultadoHipotesis(mensaje, color);
@@ -169,6 +169,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         {
             switch (interfaz.getDistribucionSeleccionada())
             {
+                //para asignarle los valores que tiene cada distribucion
                 case "Distribucion Normal (Box-Muller)":
                     double mediaBox = interfaz.getMediaNormal();
                     double desvEstandarBox = interfaz.getDesvEstandarNormal();
@@ -261,7 +262,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             //double maximo = interfaz.getMax();
             if ( maxDifAcum[maxDifAcum.Length-2] < valor_tabulado)
             {
-                string mensaje = " Estadístico de prueba: " + maxDifAcum[maxDifAcum.Length-2] + " < " + " Valor tabulado: " + valor_tabulado + " con " + gradosLibertadKs + " grados de libertad\n" +
+                string mensaje = " Estadístico de prueba: " + maxDifAcum[maxDifAcum.Length-1] + " < " + " Valor tabulado: " + valor_tabulado + " con " + gradosLibertadKs + " grados de libertad\n" +
                     "\t La hipotesis no se rechaza. Nivel de significancia 1−∝= 0,95";
                 string hex = "#0096c7";
                 Color color = System.Drawing.ColorTranslator.FromHtml(hex);
@@ -270,7 +271,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             }
             else
             {
-                string mensaje = " Estadístico de prueba: " + maxDifAcum[maxDifAcum.Length-2] + " > " + " Valor tabulado: " + valor_tabulado + " con " + gradosLibertadKs + " grados de libertad\n" +
+                string mensaje = " Estadístico de prueba: " + maxDifAcum[maxDifAcum.Length-1] + " > " + " Valor tabulado: " + valor_tabulado + " con " + gradosLibertadKs + " grados de libertad\n" +
                     "\t La hipotesis se rechaza. Nivel de significancia 1−∝= 0,95";
                 Color color = Color.DarkRed;
                 interfaz.mostrarResultadoHipotesisKs(mensaje, color);

@@ -80,6 +80,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 MessageBox.Show("El valor de A debe ser menor que el valor de B, por favor ingrese otro valor ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+            
+            if ((txtDesviacionNormal.Text.ToString() != "") && (double.Parse(txtDesviacionNormal.Text) < 0) && (cmbDistribucion.SelectedItem.ToString() == "Distribucion Normal (Box-Muller)" || cmbDistribucion.SelectedItem.ToString() == "Distribucion Normal (Convolucion)"))
+            {
+                MessageBox.Show("No se pueden ingresar numeros menores a 0, por favor ingrese otro valor ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
 
             cmbDistribucionSeleccionada = cmbDistribucion.SelectedItem.ToString();
             N = Convert.ToInt32(txtN.Text);
