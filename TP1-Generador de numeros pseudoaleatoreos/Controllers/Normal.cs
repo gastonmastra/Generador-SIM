@@ -56,7 +56,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             if (tipoDistribucion == 1)
             {
                 Random generador = new Random();
-                Random generador2 = new Random();
                 for (int i = 0; i < cantidad / 2; i++)
                 {
                     double rnd = generador.NextDouble(); 
