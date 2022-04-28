@@ -59,9 +59,20 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+            if((textBox2.Text.ToString() != "") && (double.Parse(textBox2.Text)) <= 0 && cmbDistribucion.SelectedItem.ToString() == "Distribucion Poisson")
+            {
+                MessageBox.Show("Lambda debe ser positivo", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             if ((cmbK.SelectedItem == null || txtN.Text.ToString() == "" || txtLambdaExponencial.Text.ToString() == "") && (cmbDistribucion.SelectedItem.ToString() == "Distribucion Exponencial Neg."))
             {
                 MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if ((txtLambdaExponencial.Text.ToString() != "") && (double.Parse(txtLambdaExponencial.Text) <= 0 && cmbDistribucion.SelectedItem.ToString() == "Distribucion Exponencial Neg."))
+            {
+                MessageBox.Show("Lambda debe ser positivo", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             if ((cmbK.SelectedItem == null || txtN.Text.ToString() == "" || txtA.Text.ToString() == "" || txtB.Text.ToString() == "") && (cmbDistribucion.SelectedItem.ToString() == "Distribucion Uniforme"))
