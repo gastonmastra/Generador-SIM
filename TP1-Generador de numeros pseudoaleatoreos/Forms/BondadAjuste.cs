@@ -23,12 +23,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         List<double> listaNrosAleat;
         List<double> listaIntervalos;
         string cmbDistribucionSeleccionada { get; set; }
-        
-
-        //public double getMax()
-        //{
-        //    return Max;
-        //}
 
         public BondadAjuste()
         {
@@ -65,7 +59,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            if ((cmbK.SelectedItem == null || txtN.Text.ToString() == "" || txtLambdaExponencial.ToString() == "") && (cmbDistribucion.SelectedItem.ToString() == "Distribucion Exponencial Neg."))
+            if ((cmbK.SelectedItem == null || txtN.Text.ToString() == "" || txtLambdaExponencial.Text.ToString() == "") && (cmbDistribucion.SelectedItem.ToString() == "Distribucion Exponencial Neg."))
             {
                 MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -122,7 +116,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 {
                     histograma.Series["Fe"].Points.AddXY(listaIntervalos[i], frecuencias_esperadas[i]); //Agrega la fe al grafico             
                     histograma.Series["Fo"].Points.AddXY(listaIntervalos[i], frecuencias_observadas[i]);//Agrega la fo al grafico
-                    //histograma.Series["Fe"].AxisLabel = "Frecuencia";
                 }
             }
             else
@@ -132,7 +125,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 {
                     histograma.Series["Fe"].Points.AddXY(listaIntervalos[i] + " - " + listaIntervalos[i + 1], frecuencias_esperadas[i]); //Agrega la fe al grafico             
                     histograma.Series["Fo"].Points.AddXY(listaIntervalos[i] + " - " + listaIntervalos[i + 1], frecuencias_observadas[i]);//Agrega la fo al grafico
-                    //histograma.Series["Fe"].AxisLabel = "Frecuencia";
                 }
             }
                 
@@ -147,7 +139,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             dgvChiCuadrado.Rows.Clear();
             if (cmbDistribucionSeleccionada == "Distribucion Poisson")
             {
-                for (int i = 0; i <= intervalos.Count - 1; i++)
+                for (int i = 0; i <= intervalos.Count - 2; i++)
                 {
                     dgvChiCuadrado.Rows.Add(
                         intervalos[i],
@@ -160,30 +152,17 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             }
             else
             {
-                for (int i = 0; i <= intervalos.Count - 1; i++)
+                string[] txtIntervalos = new string[intervalos.Count - 1];
+                for (int i = 0; i <= intervalos.Count - 2; i++)
                 {
-                    if (i == 0)
-                    {
-                        dgvChiCuadrado.Rows.Add(
-                        "0 - " + intervalos[i],
-                        contadoresFo[i],
-                        Fe[i],
-                        Math.Truncate(c[i] * 10000) / 10000,
-                        Math.Truncate(c_acumulado[i] * 10000) / 10000
-                        );
-                    }
-                    else
-                    {
-                        dgvChiCuadrado.Rows.Add(
-                        intervalos[i - 1] + " - " + intervalos[i],
-                        contadoresFo[i],
-                        Fe[i],
-                        Math.Truncate(c[i] * 10000) / 10000,
-                        Math.Truncate(c_acumulado[i] * 10000) / 10000
-                        );
-                    }
-
-
+                    txtIntervalos[i] = intervalos[i].ToString() + "-" + intervalos[i + 1].ToString();
+                    dgvChiCuadrado.Rows.Add(
+                    txtIntervalos[i],
+                    contadoresFo[i],
+                    Fe[i],
+                    Math.Truncate(c[i] * 10000) / 10000,
+                    Math.Truncate(c_acumulado[i] * 10000) / 10000
+                    );
                 }
             }
             

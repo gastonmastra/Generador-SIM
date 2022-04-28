@@ -14,37 +14,34 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         BondadAjuste interfaz;
         List<double> listaIntervalos;
         List<double> listaNrosConDistribucion;
-        
-
-        //iguales para k-s y chi-cuadrado
         int[] frecuencias_observadas;
         double[] frecuencias_esperadas;
         List<double> probabilidades;
-
-        //m
         int parametros_empiricos;
         IControllerDistribucion distribucion;
 
-        double[] arrayChiCuadrado = new double[] { 3.84, 5.99, 7.81, 9.49, 11.1, 12.6, 14.1, 15.5, 16.9, 18.3, 19.7, 21.0, 22.4, 23.7, 25.0, 26.3, 27.6, 28.9, 30.1, 31.4, 32.7, 33.9, 35.2, 36.4, 37.7, 38.9, 40.1, 41.3, 42.6, 43.8, 43.8, 43.8, 43.8, 43.8, 43.8, 55.8, 55.8, 55.8, 55.8, 55.8, 55.8, 55.8, 55.8, 55.8, 55.8, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 79.1, 79.1, 79.1, 79.1, 79.1, 79.1, 79.1, 79.1, 79.1, 79.1, 90.5, 90.5, 90.5, 90.5, 90.5, 90.5, 90.5, 90.5, 90.5, 90.5, 101.9, 101.9, 101.9, 101.9, 101.9, 101.9, 101.9, 101.9, 101.9, 101.9, 113.1, 113.1, 113.1, 113.1, 113.1, 113.1, 113.1, 113.1, 113.1, 113.1, 124.3, 124.3, 124.3, 124.3, 124.3 };
-        
+        double[] arrayChiCuadrado = new double[] { 3.84, 5.99, 7.81, 9.49, 11.1, 12.6, 14.1, 15.5, 16.9, 18.3, 19.7, 21.0, 22.4, 23.7, 25.0, 26.3, 27.6,
+                                                   28.9, 30.1, 31.4, 32.7, 33.9, 35.2, 36.4, 37.7, 38.9, 40.1, 41.3, 42.6, 43.8, 43.8, 43.8, 43.8, 43.8,
+                                                   43.8, 55.8, 55.8, 55.8, 55.8, 55.8, 55.8, 55.8, 55.8, 55.8, 55.8, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 
+                                                   67.5, 67.5, 67.5, 67.5, 79.1, 79.1, 79.1, 79.1, 79.1, 79.1, 79.1, 79.1, 79.1, 79.1, 90.5, 90.5, 90.5, 
+                                                   90.5, 90.5, 90.5, 90.5, 90.5, 90.5, 90.5, 101.9, 101.9, 101.9, 101.9, 101.9, 101.9, 101.9, 101.9, 101.9, 
+                                                   101.9, 113.1, 113.1, 113.1, 113.1, 113.1, 113.1, 113.1, 113.1, 113.1, 113.1, 124.3, 124.3, 124.3, 124.3, 124.3 };
+        double[] arrayKs = new double[] { 0.97500, 0.70760, 0.84189, 0.62394, 0.56328, 0.51926, 0.48342, 0.45427, 0.43001, 0.40925, 0.39122, 0.37543,
+                                          0.36143, 0.34890, 0.33750, 0.32733, 0.31796, 0.30936, 0.30143, 0.29408, 0.28724, 0.28087, 0.2749, 0.26931,
+                                          0.26404, 0.25908, 0.25438, 0.24993, 0.24571, 0.24170, 0.23788, 0.23424, 0.23076, 0.22743, 0.22425};
+
 
         public ControllerBondadAjuste(BondadAjuste interfaz)
         {
             this.interfaz = interfaz;
-            
         }
 
         private void calcularFrecuencias(int N)
         {
             if (interfaz.getDistribucionSeleccionada() == "Distribucion Poisson")
-            {
                 frecuencias_observadas = calcularFoP();
-            }
             else
-            {
                 frecuencias_observadas = calcularFo();
-            }
-
 
             frecuencias_esperadas = distribucion.calcularFe(N, probabilidades);
         }
@@ -74,31 +71,23 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         private void realizarTestChiCuadrado(int cantIntervalos, int N)
         {
             if (interfaz.getDistribucionSeleccionada() == "Distribucion Poisson")
-            {
                 frecuencias_observadas = calcularFoP();
-            }
             else
-            {
                 frecuencias_observadas = calcularFo();
-            }
-            
 
             frecuencias_esperadas = distribucion.calcularFe(N, probabilidades);
-
             acumular();
 
             double[] estadisticos = calcularEstadisticoMuestreo(frecuencias_esperadas, frecuencias_observadas);
             double[] estadisticos_acum = estadisticos_acumulados(estadisticos);
             interfaz.llenarTablaChiCuadrado(listaIntervalos, frecuencias_observadas, frecuencias_esperadas, estadisticos, estadisticos_acum);
             int gradosLibertad = (listaIntervalos.Count) - 1 - parametros_empiricos;
-
             if (estadisticos_acum[estadisticos_acum.Length - 2] < arrayChiCuadrado[gradosLibertad])
             {
                 string mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 1] + " < " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad] + " con " + gradosLibertad + " grados de libertad\n" +
                     "\t La hipotesis no se rechaza. Nivel de significancia 1−∝= 0,95";
                 string hex = "#0096c7";
                 Color color = System.Drawing.ColorTranslator.FromHtml(hex);
-                //Color color = Color.BlueViolet;
                 interfaz.mostrarResultadoHipotesis(mensaje, color);
             }
             else
@@ -108,21 +97,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 Color color = Color.DarkRed;
                 interfaz.mostrarResultadoHipotesis(mensaje, color);
             }
-            //listaNrosAleatorios = this.generarNrosAleatorios(N);
-            //interfaz.cargarListaNrosAleatorios(listaNrosAleatorios);
         }
 
         private void acumular()
         {
-            double ultAcumFE = 0;
-            int ultAcumFO = 0;
-            double valorFE = 0;
-            int valorFO = 0;
-            int desde = 0;
-            int hasta = 0;
             List<double> frecuencias_esperadas_acumuladas = new List<double>();
             List<int> frecuencias_observadas_acumuladas = new List<int>();
-            List<double> lista_intervalos_acumulados = new List<double>();
             int indice = 0;
             frecuencias_esperadas_acumuladas.Add(frecuencias_esperadas[0]);
             frecuencias_observadas_acumuladas.Add(frecuencias_observadas[0]);
@@ -147,29 +127,27 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                     listaIntervalosArtificiales.Add(listaIntervalos[i]);
                 }
             }
+            if (interfaz.getDistribucionSeleccionada() != "Distribucion Uniforme")
+                listaIntervalosArtificiales.Add(listaIntervalos[listaIntervalos.Count - 1]);
 
-            if (frecuencias_esperadas_acumuladas[indice] <= 5)
+            if (frecuencias_esperadas_acumuladas[indice] < 5)
             {
                 frecuencias_esperadas_acumuladas[indice-1] += frecuencias_esperadas_acumuladas[indice];
                 frecuencias_observadas_acumuladas[indice - 1] += frecuencias_observadas_acumuladas[indice];
 
                 frecuencias_esperadas_acumuladas.RemoveAt(indice);
                 frecuencias_observadas_acumuladas.RemoveAt(indice);
-                listaIntervalosArtificiales.RemoveAt(indice);
+                listaIntervalosArtificiales.RemoveAt(indice - 1);
             }
-
             frecuencias_esperadas = frecuencias_esperadas_acumuladas.ToArray();
             frecuencias_observadas = frecuencias_observadas_acumuladas.ToArray();
             listaIntervalos = listaIntervalosArtificiales;
-
-            
         }
 
         private void generarNrosConDistribucion(int N, int cantIntervalos)
         {
             switch (interfaz.getDistribucionSeleccionada())
             {
-                //para asignarle los valores que tiene cada distribucion
                 case "Distribucion Normal (Box-Muller)":
                     double mediaBox = interfaz.getMediaNormal();
                     double desvEstandarBox = interfaz.getDesvEstandarNormal();
@@ -178,54 +156,34 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                     generarIntervalos(cantIntervalos, listaNrosConDistribucion);
                     probabilidades = distribucion.calcularProbabilidades(listaIntervalos);
                     parametros_empiricos = 2;
-                    //crear un nuevo controlador de tipo Normal Box-Muller
-                    //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
                     break;
-
                 case "Distribucion Normal (Convolucion)":
                     double mediaConv = interfaz.getMediaNormal();
                     double desvEstandarConv = interfaz.getDesvEstandarNormal();
                     distribucion = new Normal(desvEstandarConv, mediaConv, 2);
                     listaNrosConDistribucion = distribucion.generarNrosAleatorios(N);
-
                     generarIntervalos(cantIntervalos, listaNrosConDistribucion);
-
                     probabilidades = distribucion.calcularProbabilidades(listaIntervalos);
                     parametros_empiricos = 2;
-                    //calcular
-                    //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
                     break;
-
                 case "Distribucion Exponencial Neg.":
-                    //calcular
-                    //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
                     double lambda = interfaz.getLambdaExponencial();
-                    //verificar si lambda es =! 0 en el metodo verificar pruebas
                     distribucion = new ExponencialNegativa(lambda);
                     listaNrosConDistribucion = distribucion.generarNrosAleatorios(N);
-
                     generarIntervalos(cantIntervalos, listaNrosConDistribucion);
-
                     probabilidades = distribucion.calcularProbabilidades(listaIntervalos);
                     parametros_empiricos = 1;
-
-
                     break;
                 case "Distribucion Uniforme":
                     double A = interfaz.getAUniforme();
                     double B = interfaz.getBUniforme();
                     distribucion = new Uniforme(A, B);
                     listaNrosConDistribucion = distribucion.generarNrosAleatorios(N);
-
-                    generarIntervalos(cantIntervalos, listaNrosConDistribucion);
-
+                    generarIntervalos(cantIntervalos, listaNrosConDistribucion, A, B);
                     probabilidades = listaIntervalos;
                     parametros_empiricos = 0; //VER CUANTOS
                     break;
-
                 case "Distribucion Poisson": //No se le hace el K-S
-                    //calcular
-                    //retornar: setear lista de numeros con esta distribucion en la lista q se llama listaNrosConDistribucion
                     double lambdaPoisson = interfaz.getLambdaPoisson();
                     distribucion = new Poisson(lambdaPoisson);
                     listaNrosConDistribucion = distribucion.generarNrosAleatorios(N);
@@ -236,7 +194,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                     //no puede usar calcularFo porque no tiene intervalos
                     parametros_empiricos = 1;
                     break;
-
                 default:
                     break;
             }
@@ -259,14 +216,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             {
                 valor_tabulado = arrayKs[gradosLibertadKs];
             }
-            //double maximo = interfaz.getMax();
             if ( maxDifAcum[maxDifAcum.Length-2] < valor_tabulado)
             {
                 string mensaje = " Estadístico de prueba: " + maxDifAcum[maxDifAcum.Length-1] + " < " + " Valor tabulado: " + valor_tabulado + " con " + gradosLibertadKs + " grados de libertad\n" +
                     "\t La hipotesis no se rechaza. Nivel de significancia 1−∝= 0,95";
                 string hex = "#0096c7";
                 Color color = System.Drawing.ColorTranslator.FromHtml(hex);
-                //Color color = Color.BlueViolet;
                 interfaz.mostrarResultadoHipotesisKs(mensaje, color);
             }
             else
@@ -276,57 +231,43 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 Color color = Color.DarkRed;
                 interfaz.mostrarResultadoHipotesisKs(mensaje, color);
             }
-            //if (true) //ver condicion
-            //{
-            //    string mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 2] + " < " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad] + " con " + gradosLibertad + " grados de libertad\n" +
-            //        "\t La hipotesis no se rechaza. Nivel de significancia 1−∝= 0,95";
-            //    string hex = "#0096c7";
-            //    Color color = System.Drawing.ColorTranslator.FromHtml(hex);
-            //    //Color color = Color.BlueViolet;
-            //    interfaz.mostrarResultadoHipotesis(mensaje, color);
-            //}
-            //else
-            //{
-            //    string mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 2] + " > " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad] + " con " + gradosLibertad + " grados de libertad\n" +
-            //        "\t La hipotesis se rechaza. Nivel de significancia 1−∝= 0,95";
-            //    Color color = Color.DarkRed;
-            //    interfaz.mostrarResultadoHipotesis(mensaje, color);
-            //}
         }
 
         /// <summary>
         /// Método que permite definir los intervalos de nuestra distribución, a partir
         /// de la cantidad de intervalos seleccionada.
         /// </summary>
-        private void generarIntervalos(int cantIntervalos, List<double> listaNrosAleatorios)
+        private void generarIntervalos(int cantIntervalos, List<double> listaNrosAleatorios, double a = 1, double b = 0)
         {
             listaIntervalos = new List<double>();
-            double maximo = listaNrosAleatorios.Max();
-            double minimo = listaNrosAleatorios.Min();
+            double minimo;
+            double maximo;
+            if (a > b)
+            {
+                minimo = listaNrosAleatorios.Min();
+                maximo = listaNrosAleatorios.Max();
+            }
+            else
+            {
+                minimo = a;
+                maximo = b;
+            }
             double intervalo = ( (maximo - minimo)/ (double)cantIntervalos);
             double acum = minimo;
-            //listaIntervalos.Add(Math.Round(minimo, 3));
-
-            for (int i = 0; i < cantIntervalos+1; i++)
+            for (int i = 0; i <= cantIntervalos; i++)
             {
                 listaIntervalos.Add(Math.Round(acum, 3));
                 acum += intervalo;
                 acum = (Math.Truncate(acum * 10000) / 10000);
             }
-            
-            //listaIntervalos.Add(1);
         }
 
         public void mostrarSerie()
         {
             if (this.listaNrosConDistribucion != null)
-            {
                 interfaz.MostrarNumeros(listaNrosConDistribucion);
-            }
             else
-            {
                 MessageBox.Show("No hay números generados.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
         }
 
         /// <summary>
@@ -341,8 +282,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             int contador = 0;
             for (int i = 0; i < listaIntervalos.Count; i++)
             {
-                //contador = listaNrosAleat.Count(x => x >= listaIntervalos[i] && x < listaIntervalos[i + 1]);
-                //contadoresFo[i] = contador;
                 if (i == (listaIntervalos.Count - 1))
                 {
                     contador = listaNrosConDistribucion.Count(x => x >= listaIntervalos[i - 1] && x < listaIntervalos[listaIntervalos.Count - 1]);
@@ -355,11 +294,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 }
             }
             return contadoresFo;
-            //foreach (double intervalo in listaIntervalos)
-            //{
-            //    contador = listaNrosAleat.Count(x => x >= intervalo && x < listaIntervalos.);
-            //    contadoresFo[i] = contador;
-            //}
         }
 
         private int[] calcularFoP()
@@ -373,7 +307,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                
             }
             return contadoresFo;
-            
         }
 
         /// <summary>
@@ -403,7 +336,6 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             for (int i = 0; i <= frecuencias_esperadas.Length - 1; i++)
             {
                 c_acum[i] = estadisticos[i] + aux;
-                //c_acum[i] += estadisticos[i];
                 aux = c_acum[i];
             }
             return c_acum;
@@ -472,51 +404,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             for (int i = 1; i < listaIntervalos.Count - 1; i++)
             {
                 if (maxDif[i - 1] < difAcum[i])
-                {
                     maxDif[i] = difAcum[i];
-                }
                 else
-                {
                     maxDif[i] = maxDif[i - 1];
-                }
             }
             return maxDif;
         }
 
-        double[] arrayKs = new double[] { 0.97500,
-                                          0.70760,
-                                          0.84189,
-                                          0.62394,
-                                          0.56328,
-                                          0.51926,
-                                          0.48342,
-                                          0.45427,
-                                          0.43001,
-                                          0.40925,
-                                          0.39122,
-                                          0.37543,
-                                          0.36143,
-                                          0.34890,
-                                          0.33750,
-                                          0.32733,
-                                          0.31796,
-                                          0.30936,
-                                          0.30143,
-                                          0.29408,
-                                          0.28724,
-                                          0.28087,
-                                          0.2749,
-                                          0.26931,
-                                          0.26404,
-                                          0.25908,
-                                          0.25438,
-                                          0.24993,
-                                          0.24571,
-                                          0.24170,
-                                          0.23788,
-                                          0.23424,
-                                          0.23076,
-                                          0.22743,
-                                          0.22425, };
     }
 }
