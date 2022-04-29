@@ -81,13 +81,14 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             double[] estadisticos = calcularEstadisticoMuestreo(frecuencias_esperadas, frecuencias_observadas);
             double[] estadisticos_acum = estadisticos_acumulados(estadisticos);
             interfaz.llenarTablaChiCuadrado(listaIntervalos, frecuencias_observadas, frecuencias_esperadas, estadisticos, estadisticos_acum);
-            int gradosLibertad = (listaIntervalos.Count) - 1 - parametros_empiricos;
-            if (estadisticos_acum[estadisticos_acum.Length - 2] < arrayChiCuadrado[gradosLibertad])
+            int k = listaIntervalos.Count - 1;
+            int gradosLibertad = k - 1 - parametros_empiricos;
+            if (estadisticos_acum[estadisticos_acum.Length - 1] < arrayChiCuadrado[gradosLibertad - 1])
             {
-                string mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 1] + " < " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad] + " con " + gradosLibertad + " grados de libertad\n" +
+                string mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 1] + " < " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad - 1] + " con " + gradosLibertad + " grados de libertad\n" +
     "\t La hipotesis no se rechaza. Nivel de significancia 1−∝= 0,95";
                 if (interfaz.getDistribucionSeleccionada() == "Distribucion Uniforme")
-                    mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 2] + " < " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad] + " con " + gradosLibertad + " grados de libertad\n" +
+                    mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 2] + " < " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad - 1] + " con " + gradosLibertad + " grados de libertad\n" +
     "\t La hipotesis no se rechaza. Nivel de significancia 1−∝= 0,95";
 
                 string hex = "#0096c7";
@@ -96,10 +97,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             }
             else
             {
-                string mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 1] + " > " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad] + " con " + gradosLibertad + " grados de libertad\n" +
+                string mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 1] + " > " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad - 1] + " con " + gradosLibertad + " grados de libertad\n" +
                     "\t La hipotesis se rechaza. Nivel de significancia 1−∝= 0,95";
                 if (interfaz.getDistribucionSeleccionada() == "Distribucion Uniforme")
-                    mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 2] + " > " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad] + " con " + gradosLibertad + " grados de libertad\n" +
+                    mensaje = " Estadístico de prueba: " + estadisticos_acum[estadisticos_acum.Length - 2] + " > " + " Valor tabulado: " + arrayChiCuadrado[gradosLibertad - 1] + " con " + gradosLibertad + " grados de libertad\n" +
                     "\t La hipotesis se rechaza. Nivel de significancia 1−∝= 0,95";
                 Color color = Color.DarkRed;
                 interfaz.mostrarResultadoHipotesis(mensaje, color);
@@ -217,11 +218,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             double[] diferenciaAcum = calcularDiferenciaAcum(probabilidadAcum, probabilidadEAcum);
             double[] maxDifAcum = calcularMaxDifAcum(diferenciaAcum);
             interfaz.llenarTablaKS(listaIntervalos, frecuencias_observadas, frecuencias_esperadas, probabilidades, probabilidad, probabilidadAcum, probabilidadE, probabilidadEAcum, diferenciaAcum, maxDifAcum);
-            int gradosLibertadKs = N - 1 - parametros_empiricos;
+            int gradosLibertadKs = N;
             double valor_tabulado = 1.36 / (Math.Sqrt(listaNrosConDistribucion.Count));
             if (gradosLibertadKs < 35)
             {
-                valor_tabulado = arrayKs[gradosLibertadKs];
+                valor_tabulado = arrayKs[gradosLibertadKs - 1];
             }
             if ( maxDifAcum.Max() < valor_tabulado)
             {
