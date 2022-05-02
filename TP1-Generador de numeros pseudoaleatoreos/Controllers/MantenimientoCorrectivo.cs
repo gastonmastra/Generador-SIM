@@ -29,11 +29,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 actual = new double[]{ ciclo, dia, rnd, enCuantoAveria, diaDeAveria, ko, costoAcum};
                 if (ciclo >= desde && filasMostradas <= 400)
                 {
-                    controller.MostrarFila(actual);
+                    controller.MostrarFilaCorrectiva(actual);
                     filasMostradas++;
                 }
             }
-            controller.MostrarFila(actual);
+            controller.MostrarFilaCorrectiva(actual);
+            controller.setearAcumuladoCorrectiva(costoAcum);
         }
 
         public double obtenerDiaAveria(double rnd)
