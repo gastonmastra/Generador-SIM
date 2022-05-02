@@ -76,7 +76,9 @@
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7});
             this.dataGridView2.Location = new System.Drawing.Point(39, 314);
+            this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView2.Size = new System.Drawing.Size(748, 165);
             this.dataGridView2.TabIndex = 26;
             // 
@@ -153,7 +155,9 @@
             this.CostoTotal,
             this.CostoAcumulado});
             this.dgvCorrectiva.Location = new System.Drawing.Point(39, 119);
+            this.dgvCorrectiva.MultiSelect = false;
             this.dgvCorrectiva.Name = "dgvCorrectiva";
+            this.dgvCorrectiva.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCorrectiva.Size = new System.Drawing.Size(748, 165);
             this.dgvCorrectiva.TabIndex = 18;
             // 
