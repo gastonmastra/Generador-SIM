@@ -8,21 +8,35 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
 {
     class MantenimientoCorrectivo
     {
-        public void simular(int n, int desde, int ko)
+        ControllerMontecarlo controller;
+        public MantenimientoCorrectivo(ControllerMontecarlo controller) {
+            this.controller = controller;
+        }
+        public void simular(int cantidadCiclos, int desde, int ko)
         {
-            int[] actual = new int[8];
-            Random rnd = new Random();
-            int costo = 0;
-            for (int i = 1; i <= n; i++)
+            Random random = new Random();
+            double rnd = random.NextDouble();
+            double[] actual = new double[7] { 1, 1, rnd, obtenerDiaAveria(rnd), 1 + obtenerDiaAveria(rnd), 0, 0 };
+            int costoAcum = 0;
+            double filasMostradas = 0;
+            for (int ciclo = 2; ciclo <= cantidadCiclos; ciclo++)
             {
-                double rnd1 = rnd.NextDouble();
-                int diaAveria = obtenerDiaAveria(rnd1);
-                actual = actual[diaAveria, rnd1];
-                
-            }    
+                double dia = actual[4];
+                rnd = random.NextDouble();
+                double enCuantoAveria = obtenerDiaAveria(rnd);
+                double diaDeAveria = dia + enCuantoAveria;
+                costoAcum += ko;
+                actual = new double[]{ ciclo, dia, rnd, enCuantoAveria, diaDeAveria, ko, costoAcum};
+                if (ciclo >= desde && filasMostradas <= 400)
+                {
+                    controller.MostrarFila(actual);
+                    filasMostradas++;
+                }
+            }
+            controller.MostrarFila(actual);
         }
 
-        public int obtenerDiaAveria(double rnd)
+        public double obtenerDiaAveria(double rnd)
         {
             
             if(rnd > 0 && rnd < 0.25)
