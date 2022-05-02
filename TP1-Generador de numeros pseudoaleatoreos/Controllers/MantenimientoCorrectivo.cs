@@ -17,7 +17,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             {
                 double rnd1 = rnd.NextDouble();
                 int diaAveria = obtenerDiaAveria(rnd1);
-                actual = actual[diaAveria, rnd1,  ]
+                actual = actual[diaAveria, rnd1];
                 
             }    
         }
