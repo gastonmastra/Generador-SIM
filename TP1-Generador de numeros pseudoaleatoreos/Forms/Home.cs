@@ -28,5 +28,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             Generador generador = new Generador();
             generador.ShowDialog();
         }
+
+        private void abrirMontecarlo(object sender, EventArgs e)
+        {
+            Montecarlo montecarlo = new Montecarlo();
+            montecarlo.ShowDialog();
+        }
     }
 }
