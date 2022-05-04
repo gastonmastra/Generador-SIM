@@ -37,17 +37,11 @@
             this.txtKo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvCorrectiva = new System.Windows.Forms.DataGridView();
-            this.Reloj = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiasParaAveria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiaDeAveria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CostoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CostoAcumulado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.txtDesde = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtN = new System.Windows.Forms.TextBox();
+            this.lblEstrategia = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DiaPreventiva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rndPreventiva = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,13 +51,26 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblEstrategia = new System.Windows.Forms.Label();
+            this.cantidadAveriasPreventivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidadRevisiones = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.costoPromPreventivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reloj = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiasParaAveria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiaDeAveria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CostoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CostoAcumulado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidadAverias = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.costoProm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPreventiva)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCorrectiva)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvPreventiva
             // 
+            this.dgvPreventiva.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPreventiva.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPreventiva.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPreventiva.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -75,7 +82,10 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7});
+            this.dataGridViewTextBoxColumn7,
+            this.cantidadAveriasPreventivo,
+            this.cantidadRevisiones,
+            this.costoPromPreventivo});
             this.dgvPreventiva.Location = new System.Drawing.Point(39, 314);
             this.dgvPreventiva.MultiSelect = false;
             this.dgvPreventiva.Name = "dgvPreventiva";
@@ -85,6 +95,8 @@
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(36, 298);
             this.label6.Name = "label6";
@@ -94,6 +106,7 @@
             // 
             // btnCalcular
             // 
+            this.btnCalcular.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCalcular.Location = new System.Drawing.Point(712, 90);
             this.btnCalcular.Name = "btnCalcular";
             this.btnCalcular.Size = new System.Drawing.Size(75, 23);
@@ -104,6 +117,8 @@
             // 
             // txtKm
             // 
+            this.txtKm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtKm.Location = new System.Drawing.Point(386, 62);
             this.txtKm.Name = "txtKm";
             this.txtKm.Size = new System.Drawing.Size(39, 20);
@@ -111,6 +126,8 @@
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(263, 65);
             this.label5.Name = "label5";
@@ -120,6 +137,8 @@
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(281, 26);
             this.label4.Name = "label4";
@@ -129,6 +148,8 @@
             // 
             // txtKo
             // 
+            this.txtKo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtKo.Location = new System.Drawing.Point(386, 23);
             this.txtKo.Name = "txtKo";
             this.txtKo.Size = new System.Drawing.Size(39, 20);
@@ -136,6 +157,8 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(36, 103);
             this.label3.Name = "label3";
@@ -145,6 +168,8 @@
             // 
             // dgvCorrectiva
             // 
+            this.dgvCorrectiva.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCorrectiva.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCorrectiva.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCorrectiva.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -154,7 +179,9 @@
             this.DiasParaAveria,
             this.DiaDeAveria,
             this.CostoTotal,
-            this.CostoAcumulado});
+            this.CostoAcumulado,
+            this.cantidadAverias,
+            this.costoProm});
             this.dgvCorrectiva.Location = new System.Drawing.Point(39, 119);
             this.dgvCorrectiva.MultiSelect = false;
             this.dgvCorrectiva.Name = "dgvCorrectiva";
@@ -162,47 +189,10 @@
             this.dgvCorrectiva.Size = new System.Drawing.Size(748, 165);
             this.dgvCorrectiva.TabIndex = 18;
             // 
-            // Reloj
-            // 
-            this.Reloj.HeaderText = "Reloj (Ciclo)";
-            this.Reloj.Name = "Reloj";
-            // 
-            // Dia
-            // 
-            this.Dia.HeaderText = "Dia";
-            this.Dia.Name = "Dia";
-            this.Dia.ReadOnly = true;
-            // 
-            // Rnd
-            // 
-            this.Rnd.HeaderText = "Rnd";
-            this.Rnd.Name = "Rnd";
-            this.Rnd.ReadOnly = true;
-            // 
-            // DiasParaAveria
-            // 
-            this.DiasParaAveria.HeaderText = "Dias para Averia";
-            this.DiasParaAveria.Name = "DiasParaAveria";
-            this.DiasParaAveria.ReadOnly = true;
-            // 
-            // DiaDeAveria
-            // 
-            this.DiaDeAveria.HeaderText = "Dia en el que hay averia";
-            this.DiaDeAveria.Name = "DiaDeAveria";
-            this.DiaDeAveria.ReadOnly = true;
-            // 
-            // CostoTotal
-            // 
-            this.CostoTotal.HeaderText = "Costo Total";
-            this.CostoTotal.Name = "CostoTotal";
-            // 
-            // CostoAcumulado
-            // 
-            this.CostoAcumulado.HeaderText = "Costo Acumulado";
-            this.CostoAcumulado.Name = "CostoAcumulado";
-            // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(108, 62);
             this.label2.Name = "label2";
@@ -212,6 +202,8 @@
             // 
             // txtDesde
             // 
+            this.txtDesde.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtDesde.Location = new System.Drawing.Point(147, 59);
             this.txtDesde.Name = "txtDesde";
             this.txtDesde.Size = new System.Drawing.Size(100, 20);
@@ -219,6 +211,8 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(36, 26);
             this.label1.Name = "label1";
@@ -228,10 +222,22 @@
             // 
             // txtN
             // 
+            this.txtN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtN.Location = new System.Drawing.Point(147, 23);
             this.txtN.Name = "txtN";
             this.txtN.Size = new System.Drawing.Size(100, 20);
             this.txtN.TabIndex = 14;
+            // 
+            // lblEstrategia
+            // 
+            this.lblEstrategia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblEstrategia.AutoSize = true;
+            this.lblEstrategia.Location = new System.Drawing.Point(36, 500);
+            this.lblEstrategia.Name = "lblEstrategia";
+            this.lblEstrategia.Size = new System.Drawing.Size(0, 13);
+            this.lblEstrategia.TabIndex = 27;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -286,19 +292,75 @@
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
             // 
-            // lblEstrategia
+            // cantidadAveriasPreventivo
             // 
-            this.lblEstrategia.AutoSize = true;
-            this.lblEstrategia.Location = new System.Drawing.Point(36, 500);
-            this.lblEstrategia.Name = "lblEstrategia";
-            this.lblEstrategia.Size = new System.Drawing.Size(0, 13);
-            this.lblEstrategia.TabIndex = 27;
+            this.cantidadAveriasPreventivo.HeaderText = "Cantidad Averias";
+            this.cantidadAveriasPreventivo.Name = "cantidadAveriasPreventivo";
+            // 
+            // cantidadRevisiones
+            // 
+            this.cantidadRevisiones.HeaderText = "Cantidad Revisiones";
+            this.cantidadRevisiones.Name = "cantidadRevisiones";
+            // 
+            // costoPromPreventivo
+            // 
+            this.costoPromPreventivo.HeaderText = "Costo Total dia 5";
+            this.costoPromPreventivo.Name = "costoPromPreventivo";
+            // 
+            // Reloj
+            // 
+            this.Reloj.HeaderText = "Reloj (Ciclo)";
+            this.Reloj.Name = "Reloj";
+            // 
+            // Dia
+            // 
+            this.Dia.HeaderText = "Dia";
+            this.Dia.Name = "Dia";
+            this.Dia.ReadOnly = true;
+            // 
+            // Rnd
+            // 
+            this.Rnd.HeaderText = "Rnd";
+            this.Rnd.Name = "Rnd";
+            this.Rnd.ReadOnly = true;
+            // 
+            // DiasParaAveria
+            // 
+            this.DiasParaAveria.HeaderText = "Dias para Averia";
+            this.DiasParaAveria.Name = "DiasParaAveria";
+            this.DiasParaAveria.ReadOnly = true;
+            // 
+            // DiaDeAveria
+            // 
+            this.DiaDeAveria.HeaderText = "Dia en el que hay averia";
+            this.DiaDeAveria.Name = "DiaDeAveria";
+            this.DiaDeAveria.ReadOnly = true;
+            // 
+            // CostoTotal
+            // 
+            this.CostoTotal.HeaderText = "Costo Total";
+            this.CostoTotal.Name = "CostoTotal";
+            // 
+            // CostoAcumulado
+            // 
+            this.CostoAcumulado.HeaderText = "Costo Acumulado";
+            this.CostoAcumulado.Name = "CostoAcumulado";
+            // 
+            // cantidadAverias
+            // 
+            this.cantidadAverias.HeaderText = "Cantidad Averias";
+            this.cantidadAverias.Name = "cantidadAverias";
+            // 
+            // costoProm
+            // 
+            this.costoProm.HeaderText = "Costo Total dia 5";
+            this.costoProm.Name = "costoProm";
             // 
             // Montecarlo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(831, 614);
+            this.ClientSize = new System.Drawing.Size(837, 554);
             this.Controls.Add(this.lblEstrategia);
             this.Controls.Add(this.dgvPreventiva);
             this.Controls.Add(this.label6);
@@ -313,7 +375,7 @@
             this.Controls.Add(this.txtDesde);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtN);
-            this.MinimumSize = new System.Drawing.Size(847, 559);
+            this.MinimumSize = new System.Drawing.Size(853, 593);
             this.Name = "Montecarlo";
             this.Text = "Montecarlo";
             ((System.ComponentModel.ISupportInitialize)(this.dgvPreventiva)).EndInit();
@@ -338,13 +400,7 @@
         private System.Windows.Forms.TextBox txtDesde;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Reloj;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Dia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DiasParaAveria;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DiaDeAveria;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CostoTotal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CostoAcumulado;
+        private System.Windows.Forms.Label lblEstrategia;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn DiaPreventiva;
         private System.Windows.Forms.DataGridViewTextBoxColumn rndPreventiva;
@@ -354,6 +410,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.Label lblEstrategia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidadAveriasPreventivo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidadRevisiones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn costoPromPreventivo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Reloj;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Dia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DiasParaAveria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DiaDeAveria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CostoTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CostoAcumulado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidadAverias;
+        private System.Windows.Forms.DataGridViewTextBoxColumn costoProm;
     }
 }

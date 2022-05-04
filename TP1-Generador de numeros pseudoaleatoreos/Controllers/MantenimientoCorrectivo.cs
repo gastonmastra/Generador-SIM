@@ -16,9 +16,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         {
             Random random = new Random();
             double rnd = random.NextDouble();
-            double[] actual = new double[7] { 1, 1, rnd, obtenerDiaAveria(rnd), 1 + obtenerDiaAveria(rnd), 0, 0 };
+            double[] actual = new double[9] { 1, 1, rnd, obtenerDiaAveria(rnd), 1 + obtenerDiaAveria(rnd), 0, 0, 0, 0};
             int costoAcum = 0;
             double filasMostradas = 0;
+            double cantReparaciones = 1;
+            double costoAveriasEn5 = 0;
             for (int ciclo = 2; ciclo <= cantidadCiclos; ciclo++)
             {
                 double dia = actual[4];
@@ -26,7 +28,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 double enCuantoAveria = obtenerDiaAveria(rnd);
                 double diaDeAveria = dia + enCuantoAveria;
                 costoAcum += ko;
-                actual = new double[]{ ciclo, dia, rnd, enCuantoAveria, diaDeAveria, ko, costoAcum};
+                cantReparaciones++;
+                if (enCuantoAveria == 5)
+                {
+                    costoAveriasEn5 += ko;
+                }
+                actual = new double[]{ ciclo, dia, rnd, enCuantoAveria, diaDeAveria, ko, costoAcum, cantReparaciones, costoAveriasEn5};
                 if (ciclo >= desde && filasMostradas <= 400)
                 {
                     controller.MostrarFilaCorrectiva(actual);

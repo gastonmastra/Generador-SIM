@@ -18,9 +18,12 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         {
             Random random = new Random();
             double rnd = random.NextDouble();
-            double[] actual = new double[9] {1, 1, rnd, obtenerDiaAveria(rnd), 1 + obtenerDiaAveria(rnd), 0, 0, 0, 0};
+            double[] actual = new double[12] {1, 1, rnd, obtenerDiaAveria(rnd), 1 + obtenerDiaAveria(rnd), 0, 0, 0, 0, 0, 0, 0};
             double costoAcum = 0;
             double filasMostradas = 0;
+            double cantReparaciones = 0;
+            double cantRevisiones = 0;
+            double costoEnDia5 = 0;
             for (int ciclo = 2; ciclo <= cantidadCiclos; ciclo++)
             {
                 double dia = actual[4];
@@ -28,15 +31,22 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
                 double enCuantoAveria = obtenerDiaAveria(rnd);
                 if (enCuantoAveria > 5)
                 {
+                    costoEnDia5 += km;
+                    cantRevisiones++;
                     double diaDeAveria = dia + 5;
                     costoAcum = actual[8] + km;
-                    actual = new double[] { ciclo, dia, rnd, enCuantoAveria, diaDeAveria, km, 0, km, costoAcum };
+                    actual = new double[] { ciclo, dia, rnd, enCuantoAveria, diaDeAveria, km, 0, km, costoAcum, cantReparaciones, cantRevisiones, costoEnDia5};
                 }
                 else
                 {
+                    if (enCuantoAveria == 5)
+                    {
+                        costoEnDia5 += ko;
+                    }
+                    cantReparaciones++;
                     double diaDeAveria = dia + enCuantoAveria;
                     costoAcum = actual[8] + ko;
-                    actual = new double[] { ciclo, dia, rnd, enCuantoAveria, diaDeAveria, 0, ko, ko, costoAcum };
+                    actual = new double[] { ciclo, dia, rnd, enCuantoAveria, diaDeAveria, 0, ko, ko, costoAcum, cantReparaciones, cantRevisiones, costoEnDia5};
                 }
                
                 if (ciclo >= desde && filasMostradas <= 400)
