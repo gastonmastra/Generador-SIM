@@ -31,13 +31,13 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
 
         private bool validarDatos()
         {
-            if (txtN.Text =="" && txtDesde.Text == "" &&
-               txtKm.Text == "" && txtKo.Text == ""){
+            if (txtN.Text =="" || txtDesde.Text == "" ||
+               txtKm.Text == "" || txtKo.Text == ""){
                 MessageBox.Show("Ingrese todos los valores", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
-            if (int.Parse(txtN.Text) <= 0 && int.Parse(txtDesde.Text) <= 0 &&
-                int.Parse(txtKm.Text) <= 0 && int.Parse(txtKo.Text) <= 0){
+            if (int.Parse(txtN.Text) <= 0 || int.Parse(txtDesde.Text) <= 0 ||
+                int.Parse(txtKm.Text) <= 0 || int.Parse(txtKo.Text) <= 0){
                 MessageBox.Show("Debe ingresar valores positivos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }

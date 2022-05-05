@@ -66,11 +66,11 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             string mensaje;
             if(costoAcumCorrectivo < costoAcumPreventivo)
             {
-                mensaje = "El valor del Costo Acumulado del Correctivo es igual a $" + costoAcumCorrectivo + ", mientras que el de la estrategia Preventiva es $" + costoAcumPreventivo + ". De esta forma, se decide de que la mejor estrategia es la Correctiva.";
+                mensaje = "El valor del Costo Acumulado del Correctivo es igual a $" + costoAcumCorrectivo + ", mientras que el de la estrategia Preventiva es $" + costoAcumPreventivo + ".\nDe esta forma, se decide de que la mejor estrategia es la Correctiva.";
             }
             else
             {
-                mensaje = "El valor del Costo Acumulado del Correctivo es igual a $" + costoAcumCorrectivo + ", mientras que el de la estrategia Preventiva es $" + costoAcumPreventivo + ". De esta forma, se decide de que la mejor estrategia es la Preventiva.";
+                mensaje = "El valor del Costo Acumulado del Correctivo es igual a $" + costoAcumCorrectivo + ", mientras que el de la estrategia Preventiva es $" + costoAcumPreventivo + ".\nDe esta forma, se decide de que la mejor estrategia es la Preventiva.";
             }
             Interfaz.mostrarMensaje(mensaje);
         }
