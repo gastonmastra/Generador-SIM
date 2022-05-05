@@ -19,25 +19,30 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             InitializeComponent();
         }
 
-        private void calcular(object sender, EventArgs e)
+        private void CalcularMontecarlo()
         {
             controller = new ControllerMontecarlo(this);
             dgvCorrectiva.Rows.Clear();
             dgvPreventiva.Rows.Clear();
-            if(validarDatos())
+            if (validarDatos())
                 controller.ingresarDatos(int.Parse(txtN.Text), int.Parse(txtDesde.Text), int.Parse(txtKo.Text), int.Parse(txtKm.Text));
+        }
+
+        private void calcular(object sender, EventArgs e)
+        {
+            this.CalcularMontecarlo();
 
         }
 
         private bool validarDatos()
         {
-            if (txtN.Text =="" && txtDesde.Text == "" &&
-               txtKm.Text == "" && txtKo.Text == ""){
+            if (txtN.Text =="" || txtDesde.Text == "" ||
+               txtKm.Text == "" || txtKo.Text == ""){
                 MessageBox.Show("Ingrese todos los valores", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
-            if (int.Parse(txtN.Text) <= 0 && int.Parse(txtDesde.Text) <= 0 &&
-                int.Parse(txtKm.Text) <= 0 && int.Parse(txtKo.Text) <= 0){
+            if (int.Parse(txtN.Text) <= 0 || int.Parse(txtDesde.Text) <= 0 ||
+                int.Parse(txtKm.Text) <= 0 || int.Parse(txtKo.Text) <= 0){
                 MessageBox.Show("Debe ingresar valores positivos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
@@ -76,6 +81,14 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         {
             this.costoMensualPromPreventiva.Text = "Costo mensual promedio Preventiva: $" + costoPreventiva.ToString();
             this.costoMensualPromCorrectiva.Text = "Costo mensual promedio Correctiva: $" + costoCorrectiva.ToString();
+        }
+
+        private void TeclaSoltada(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                this.CalcularMontecarlo();
+            }
         }
     }
 }

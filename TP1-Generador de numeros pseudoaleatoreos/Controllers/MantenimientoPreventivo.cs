@@ -25,6 +25,9 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             double cantRevisiones = 0;
             double costoEnDia5 = 0;
             double dia = 0;
+            if (desde == 1)
+                controller.MostrarFilaPreventiva(actual);
+
             for (int ciclo = 2; ciclo <= cantidadCiclos; ciclo++)
             {
                 dia = actual[4];

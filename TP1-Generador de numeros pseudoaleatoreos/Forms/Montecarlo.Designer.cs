@@ -95,7 +95,7 @@
             this.dgvPreventiva.Name = "dgvPreventiva";
             this.dgvPreventiva.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPreventiva.Size = new System.Drawing.Size(748, 165);
-            this.dgvPreventiva.TabIndex = 26;
+            this.dgvPreventiva.TabIndex = 6;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -182,10 +182,11 @@
             this.btnCalcular.Location = new System.Drawing.Point(712, 90);
             this.btnCalcular.Name = "btnCalcular";
             this.btnCalcular.Size = new System.Drawing.Size(75, 23);
-            this.btnCalcular.TabIndex = 24;
+            this.btnCalcular.TabIndex = 4;
             this.btnCalcular.Text = "Calcular";
             this.btnCalcular.UseVisualStyleBackColor = true;
             this.btnCalcular.Click += new System.EventHandler(this.calcular);
+            this.btnCalcular.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TeclaSoltada);
             // 
             // txtKm
             // 
@@ -194,7 +195,8 @@
             this.txtKm.Location = new System.Drawing.Point(386, 62);
             this.txtKm.Name = "txtKm";
             this.txtKm.Size = new System.Drawing.Size(39, 20);
-            this.txtKm.TabIndex = 23;
+            this.txtKm.TabIndex = 3;
+            this.txtKm.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TeclaSoltada);
             // 
             // label5
             // 
@@ -225,7 +227,8 @@
             this.txtKo.Location = new System.Drawing.Point(386, 23);
             this.txtKo.Name = "txtKo";
             this.txtKo.Size = new System.Drawing.Size(39, 20);
-            this.txtKo.TabIndex = 20;
+            this.txtKo.TabIndex = 2;
+            this.txtKo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TeclaSoltada);
             // 
             // label3
             // 
@@ -259,7 +262,7 @@
             this.dgvCorrectiva.Name = "dgvCorrectiva";
             this.dgvCorrectiva.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCorrectiva.Size = new System.Drawing.Size(748, 165);
-            this.dgvCorrectiva.TabIndex = 18;
+            this.dgvCorrectiva.TabIndex = 5;
             // 
             // Reloj
             // 
@@ -328,7 +331,8 @@
             this.txtDesde.Location = new System.Drawing.Point(147, 59);
             this.txtDesde.Name = "txtDesde";
             this.txtDesde.Size = new System.Drawing.Size(100, 20);
-            this.txtDesde.TabIndex = 16;
+            this.txtDesde.TabIndex = 1;
+            this.txtDesde.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TeclaSoltada);
             // 
             // label1
             // 
@@ -348,16 +352,16 @@
             this.txtN.Location = new System.Drawing.Point(147, 23);
             this.txtN.Name = "txtN";
             this.txtN.Size = new System.Drawing.Size(100, 20);
-            this.txtN.TabIndex = 14;
+            this.txtN.TabIndex = 0;
+            this.txtN.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TeclaSoltada);
             // 
             // lblEstrategia
             // 
-            this.lblEstrategia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblEstrategia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblEstrategia.AutoSize = true;
             this.lblEstrategia.Location = new System.Drawing.Point(39, 492);
             this.lblEstrategia.Name = "lblEstrategia";
-            this.lblEstrategia.Size = new System.Drawing.Size(0, 13);
+            this.lblEstrategia.Size = new System.Drawing.Size(748, 32);
             this.lblEstrategia.TabIndex = 27;
             // 
             // label7
@@ -382,6 +386,8 @@
             // 
             // costoMensualPromPreventiva
             // 
+            this.costoMensualPromPreventiva.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.costoMensualPromPreventiva.AutoSize = true;
             this.costoMensualPromPreventiva.Location = new System.Drawing.Point(39, 524);
             this.costoMensualPromPreventiva.Name = "costoMensualPromPreventiva";
@@ -390,6 +396,8 @@
             // 
             // costoMensualPromCorrectiva
             // 
+            this.costoMensualPromCorrectiva.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.costoMensualPromCorrectiva.AutoSize = true;
             this.costoMensualPromCorrectiva.Location = new System.Drawing.Point(39, 549);
             this.costoMensualPromCorrectiva.Name = "costoMensualPromCorrectiva";
@@ -422,6 +430,7 @@
             this.MinimumSize = new System.Drawing.Size(853, 593);
             this.Name = "Montecarlo";
             this.Text = "Montecarlo";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TeclaSoltada);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPreventiva)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCorrectiva)).EndInit();
             this.ResumeLayout(false);
