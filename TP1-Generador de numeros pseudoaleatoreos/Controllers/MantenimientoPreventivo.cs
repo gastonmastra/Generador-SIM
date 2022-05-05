@@ -25,7 +25,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             double cantRevisiones = 0;
             double costoEnDia5 = 0;
             double dia = 0;
-            for (int ciclo = 1; ciclo <= cantidadCiclos; ciclo++)
+            for (int ciclo = 2; ciclo <= cantidadCiclos; ciclo++)
             {
                 dia = actual[4];
                 rnd = random.NextDouble();
