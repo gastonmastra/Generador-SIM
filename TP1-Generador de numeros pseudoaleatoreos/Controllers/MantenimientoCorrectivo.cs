@@ -21,9 +21,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             double filasMostradas = 0;
             double cantReparaciones = 1;
             double costoAveriasEn5 = 0;
-            for (int ciclo = 2; ciclo <= cantidadCiclos; ciclo++)
+            double dia = 0;
+            for (int ciclo = 1; ciclo <= cantidadCiclos; ciclo++)
             {
-                double dia = actual[4];
+                dia = actual[4];
                 rnd = random.NextDouble();
                 double enCuantoAveria = obtenerDiaAveria(rnd);
                 double diaDeAveria = dia + enCuantoAveria;
@@ -42,6 +43,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             }
             controller.MostrarFilaCorrectiva(actual);
             controller.setearAcumuladoCorrectiva(costoAcum);
+            controller.SetearCantidadDiasCorrectiva(dia);
         }
 
         public double obtenerDiaAveria(double rnd)

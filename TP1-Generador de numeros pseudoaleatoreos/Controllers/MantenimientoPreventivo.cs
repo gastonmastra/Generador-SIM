@@ -24,9 +24,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             double cantReparaciones = 0;
             double cantRevisiones = 0;
             double costoEnDia5 = 0;
-            for (int ciclo = 2; ciclo <= cantidadCiclos; ciclo++)
+            double dia = 0;
+            for (int ciclo = 1; ciclo <= cantidadCiclos; ciclo++)
             {
-                double dia = actual[4];
+                dia = actual[4];
                 rnd = random.NextDouble();
                 double enCuantoAveria = obtenerDiaAveria(rnd);
                 if (enCuantoAveria > 5)
@@ -57,6 +58,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             }
             controller.MostrarFilaPreventiva(actual);
             controller.setearAcumuladoPreventiva(costoAcum);
+            controller.SetearCantidadDiasPreventiva(dia);
         }
 
         public double obtenerDiaAveria(double rnd)

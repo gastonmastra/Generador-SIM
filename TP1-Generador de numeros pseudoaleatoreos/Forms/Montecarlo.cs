@@ -67,9 +67,15 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 filaAMostrar[4], "$" + filaAMostrar[5].ToString(), "$" + filaAMostrar[6].ToString(), "$" + filaAMostrar[7].ToString(), "$" + filaAMostrar[8].ToString(), filaAMostrar[9].ToString(), filaAMostrar[10].ToString(), filaAMostrar[11].ToString());
         }
 
-        public void mostrarMensaje(string mensaje)
+        public void MostrarMensaje(string mensaje)
         {
             lblEstrategia.Text = mensaje;
+        }
+
+        public void MostrarCostoMensualPromedio(double costoPreventiva, double costoCorrectiva)
+        {
+            this.costoMensualPromPreventiva.Text = "Costo mensual promedio Preventiva: $" + costoPreventiva.ToString();
+            this.costoMensualPromCorrectiva.Text = "Costo mensual promedio Correctiva: $" + costoCorrectiva.ToString();
         }
     }
 }

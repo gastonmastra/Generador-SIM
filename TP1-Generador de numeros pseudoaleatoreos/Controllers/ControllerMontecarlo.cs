@@ -14,8 +14,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
         int ko;
         int km;
         //Costos acumulados
-        double costoAcumCorrectivo;
-        double costoAcumPreventivo;
+        double CostoAcumCorrectivo;
+        double CostoAcumPreventivo;
+        double CantidadDiasPreventiva;
+        double CantidadDiasCorrectiva;
 
 
         Montecarlo Interfaz;
@@ -51,28 +53,42 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Controllers
             Interfaz.MostrarFilaPreventiva(filaAMostrar);
         }
 
+        public void SetearCantidadDiasPreventiva(double dias)
+        {
+            this.CantidadDiasPreventiva = dias;
+        }
+        
+        public void SetearCantidadDiasCorrectiva(double dias)
+        {
+            this.CantidadDiasCorrectiva = dias;
+        }
+
         public void setearAcumuladoCorrectiva(double calculoAcum)
         {
-            this.costoAcumCorrectivo = calculoAcum;
+            this.CostoAcumCorrectivo = calculoAcum;
         }
 
         public void setearAcumuladoPreventiva(double calculoAcum)
         {
-            this.costoAcumPreventivo = calculoAcum;
+            this.CostoAcumPreventivo = calculoAcum;
         }
 
         public void generarConclusion()
         {
             string mensaje;
-            if(costoAcumCorrectivo < costoAcumPreventivo)
+            if(CostoAcumCorrectivo < CostoAcumPreventivo)
             {
-                mensaje = "El valor del Costo Acumulado del Correctivo es igual a $" + costoAcumCorrectivo + ", mientras que el de la estrategia Preventiva es $" + costoAcumPreventivo + ". De esta forma, se decide de que la mejor estrategia es la Correctiva.";
+                mensaje = "El valor del Costo Acumulado del Correctivo es igual a $" + CostoAcumCorrectivo + ", mientras que el de la estrategia Preventiva es $" + CostoAcumPreventivo + ". De esta forma, se decide de que la mejor estrategia es la Correctiva.";
             }
             else
             {
-                mensaje = "El valor del Costo Acumulado del Correctivo es igual a $" + costoAcumCorrectivo + ", mientras que el de la estrategia Preventiva es $" + costoAcumPreventivo + ". De esta forma, se decide de que la mejor estrategia es la Preventiva.";
+                mensaje = "El valor del Costo Acumulado del Correctivo es igual a $" + CostoAcumCorrectivo + ", mientras que el de la estrategia Preventiva es $" + CostoAcumPreventivo + ". De esta forma, se decide de que la mejor estrategia es la Preventiva.";
             }
-            Interfaz.mostrarMensaje(mensaje);
+            Interfaz.MostrarMensaje(mensaje);
+
+            double costoMensualPromedioPreventiva = Math.Truncate((CostoAcumPreventivo / CantidadDiasPreventiva * 30) * 100) / 100;
+            double costoMensualPromedioCorrectiva = Math.Truncate((CostoAcumCorrectivo / CantidadDiasCorrectiva * 30) * 100) / 100;
+            Interfaz.MostrarCostoMensualPromedio(costoMensualPromedioPreventiva, costoMensualPromedioCorrectiva);
         }
     }
 }
