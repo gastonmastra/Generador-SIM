@@ -29,6 +29,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.lblHome = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.btnGenerador = new System.Windows.Forms.Button();
@@ -101,6 +102,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.Controls.Add(this.lblHome);
             this.ForeColor = System.Drawing.Color.LightGray;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(364, 244);
             this.Name = "Home";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

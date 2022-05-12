@@ -29,6 +29,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Generador));
             this.cmbMetodo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -155,7 +156,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.dgvTabla.Location = new System.Drawing.Point(20, 87);
             this.dgvTabla.Name = "dgvTabla";
             this.dgvTabla.ReadOnly = true;
-            this.dgvTabla.Size = new System.Drawing.Size(1406, 712);
+            this.dgvTabla.Size = new System.Drawing.Size(1326, 622);
             this.dgvTabla.TabIndex = 14;
             this.dgvTabla.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTabla_CellContentClick);
             // 
@@ -203,6 +204,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.txtG.Name = "txtG";
             this.txtG.Size = new System.Drawing.Size(49, 20);
             this.txtG.TabIndex = 1;
+            this.txtG.TextChanged += new System.EventHandler(this.txtG_TextChanged);
             // 
             // txtC
             // 
@@ -228,7 +230,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             // btnVolver
             // 
             this.btnVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnVolver.Location = new System.Drawing.Point(20, 801);
+            this.btnVolver.Location = new System.Drawing.Point(20, 711);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(63, 23);
             this.btnVolver.TabIndex = 15;
@@ -241,7 +243,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
-            this.ClientSize = new System.Drawing.Size(1450, 839);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.txtX0);
             this.Controls.Add(this.txtK);
@@ -258,6 +260,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbMetodo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(428, 445);
             this.Name = "Generador";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

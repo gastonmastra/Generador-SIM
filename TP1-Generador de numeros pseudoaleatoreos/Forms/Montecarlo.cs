@@ -90,5 +90,30 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                 this.CalcularMontecarlo();
             }
         }
+
+        private void txtKm_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtKo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDesde_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtN_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Montecarlo_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -33,6 +33,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BondadAjuste));
             this.txtN = new System.Windows.Forms.TextBox();
             this.cmbK = new System.Windows.Forms.ComboBox();
             this.dgvChiCuadrado = new System.Windows.Forms.DataGridView();
@@ -115,6 +116,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.cmbK.Name = "cmbK";
             this.cmbK.Size = new System.Drawing.Size(66, 21);
             this.cmbK.TabIndex = 2;
+            this.cmbK.SelectedIndexChanged += new System.EventHandler(this.cmbK_SelectedIndexChanged);
             this.cmbK.SelectionChangeCommitted += new System.EventHandler(this.cmbK_SelectionChangeCommitted);
             // 
             // dgvChiCuadrado
@@ -643,6 +645,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
             this.Controls.Add(this.cmbK);
             this.Controls.Add(this.txtN);
             this.Controls.Add(this.gbNormal);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(819, 726);
             this.Name = "BondadAjuste";
             this.RightToLeftLayout = true;

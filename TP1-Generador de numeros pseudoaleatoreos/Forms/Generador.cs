@@ -125,5 +125,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
         {
 
         }
+
+        private void txtG_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

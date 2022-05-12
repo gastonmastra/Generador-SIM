@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Montecarlo));
             this.dgvPreventiva = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DiaPreventiva = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -196,6 +197,7 @@
             this.txtKm.Name = "txtKm";
             this.txtKm.Size = new System.Drawing.Size(39, 20);
             this.txtKm.TabIndex = 3;
+            this.txtKm.TextChanged += new System.EventHandler(this.txtKm_TextChanged);
             this.txtKm.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TeclaSoltada);
             // 
             // label5
@@ -228,6 +230,7 @@
             this.txtKo.Name = "txtKo";
             this.txtKo.Size = new System.Drawing.Size(39, 20);
             this.txtKo.TabIndex = 2;
+            this.txtKo.TextChanged += new System.EventHandler(this.txtKo_TextChanged);
             this.txtKo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TeclaSoltada);
             // 
             // label3
@@ -332,6 +335,7 @@
             this.txtDesde.Name = "txtDesde";
             this.txtDesde.Size = new System.Drawing.Size(100, 20);
             this.txtDesde.TabIndex = 1;
+            this.txtDesde.TextChanged += new System.EventHandler(this.txtDesde_TextChanged);
             this.txtDesde.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TeclaSoltada);
             // 
             // label1
@@ -353,6 +357,7 @@
             this.txtN.Name = "txtN";
             this.txtN.Size = new System.Drawing.Size(100, 20);
             this.txtN.TabIndex = 0;
+            this.txtN.TextChanged += new System.EventHandler(this.txtN_TextChanged);
             this.txtN.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TeclaSoltada);
             // 
             // lblEstrategia
@@ -427,9 +432,11 @@
             this.Controls.Add(this.txtDesde);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtN);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(853, 593);
             this.Name = "Montecarlo";
             this.Text = "Montecarlo";
+            this.Load += new System.EventHandler(this.Montecarlo_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TeclaSoltada);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPreventiva)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCorrectiva)).EndInit();

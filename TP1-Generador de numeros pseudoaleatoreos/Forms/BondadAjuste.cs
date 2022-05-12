@@ -344,5 +344,10 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos.Forms
                     break;
             }
         }
+
+        private void cmbK_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
