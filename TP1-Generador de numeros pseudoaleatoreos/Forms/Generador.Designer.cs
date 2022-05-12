@@ -192,7 +192,7 @@ namespace TP1_Generador_de_numeros_pseudoaleatoreos
             this.btnSiguiente.Enabled = false;
             this.btnSiguiente.Location = new System.Drawing.Point(15, 58);
             this.btnSiguiente.Name = "btnSiguiente";
-            this.btnSiguiente.Size = new System.Drawing.Size(100, 23);
+            this.btnSiguiente.Size = new System.Drawing.Size(121, 23);
             this.btnSiguiente.TabIndex = 6;
             this.btnSiguiente.Text = "Siguiente número";
             this.btnSiguiente.UseVisualStyleBackColor = true;
